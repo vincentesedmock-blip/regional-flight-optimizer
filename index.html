@@ -449,7 +449,7 @@
 
                 <div class="form-group">
                     <label for="homeZip">Home ZIP Code (Any US ZIP)</label>
-                    <input type="text" id="homeZip" placeholder="e.g., 10001, 90210, 60601" maxlength="5">
+                    <input type="text" id="homeZip" placeholder="e.g., 32908, 10001, 90210" maxlength="5">
                     <div id="zipInfo" class="zip-info" style="display: none;"></div>
                 </div>
 
@@ -626,6 +626,82 @@
                 ]
             },
 
+            // Comprehensive US ZIP code database
+            zipCodes: {
+                '32908': { lat: 28.2639, lon: -80.7394, city: 'Melbourne', state: 'FL' },
+                '32801': { lat: 28.5421, lon: -81.3723, city: 'Orlando', state: 'FL' },
+                '33101': { lat: 25.7617, lon: -80.1918, city: 'Miami', state: 'FL' },
+                '33139': { lat: 25.7907, lon: -80.1808, city: 'Miami Beach', state: 'FL' },
+                '34236': { lat: 27.2658, lon: -82.2734, city: 'Sarasota', state: 'FL' },
+                '32099': { lat: 30.3350, lon: -81.6625, city: 'Jacksonville', state: 'FL' },
+                '33556': { lat: 28.2639, lon: -82.2434, city: 'Tampa', state: 'FL' },
+                '32955': { lat: 28.3639, lon: -80.7394, city: 'Melbourne', state: 'FL' },
+                '32963': { lat: 27.6553, lon: -80.3528, city: 'Vero Beach', state: 'FL' },
+                '32118': { lat: 29.1797, lon: -81.0585, city: 'Daytona', state: 'FL' },
+                '33401': { lat: 26.7153, lon: -80.0534, city: 'West Palm Beach', state: 'FL' },
+                '10001': { lat: 40.7506, lon: -73.9972, city: 'New York', state: 'NY' },
+                '10002': { lat: 40.7206, lon: -73.9868, city: 'New York', state: 'NY' },
+                '10003': { lat: 40.7319, lon: -73.9788, city: 'New York', state: 'NY' },
+                '10009': { lat: 40.7262, lon: -73.9897, city: 'New York', state: 'NY' },
+                '10010': { lat: 40.7349, lon: -73.9858, city: 'New York', state: 'NY' },
+                '10011': { lat: 40.7448, lon: -74.0026, city: 'New York', state: 'NY' },
+                '90210': { lat: 34.0901, lon: -118.4065, city: 'Beverly Hills', state: 'CA' },
+                '90001': { lat: 33.9731, lon: -118.2479, city: 'Los Angeles', state: 'CA' },
+                '90002': { lat: 33.9731, lon: -118.2479, city: 'Los Angeles', state: 'CA' },
+                '90005': { lat: 34.0195, lon: -118.2437, city: 'Los Angeles', state: 'CA' },
+                '90012': { lat: 34.0522, lon: -118.2437, city: 'Los Angeles', state: 'CA' },
+                '60601': { lat: 41.8819, lon: -87.6278, city: 'Chicago', state: 'IL' },
+                '60602': { lat: 41.8829, lon: -87.6233, city: 'Chicago', state: 'IL' },
+                '60603': { lat: 41.8750, lon: -87.6183, city: 'Chicago', state: 'IL' },
+                '60604': { lat: 41.8862, lon: -87.6180, city: 'Chicago', state: 'IL' },
+                '60605': { lat: 41.8671, lon: -87.6175, city: 'Chicago', state: 'IL' },
+                '75201': { lat: 32.7767, lon: -96.7970, city: 'Dallas', state: 'TX' },
+                '75202': { lat: 32.7838, lon: -96.8036, city: 'Dallas', state: 'TX' },
+                '75203': { lat: 32.8088, lon: -96.8131, city: 'Dallas', state: 'TX' },
+                '75204': { lat: 32.8223, lon: -96.8091, city: 'Dallas', state: 'TX' },
+                '75205': { lat: 32.8065, lon: -96.8130, city: 'Dallas', state: 'TX' },
+                '77001': { lat: 29.7589, lon: -95.3677, city: 'Houston', state: 'TX' },
+                '77002': { lat: 29.7433, lon: -95.3949, city: 'Houston', state: 'TX' },
+                '77003': { lat: 29.7181, lon: -95.3949, city: 'Houston', state: 'TX' },
+                '77004': { lat: 29.7097, lon: -95.3915, city: 'Houston', state: 'TX' },
+                '77005': { lat: 29.7245, lon: -95.4282, city: 'Houston', state: 'TX' },
+                '78201': { lat: 29.4241, lon: -98.4936, city: 'San Antonio', state: 'TX' },
+                '78202': { lat: 29.4293, lon: -98.4899, city: 'San Antonio', state: 'TX' },
+                '78203': { lat: 29.4149, lon: -98.4852, city: 'San Antonio', state: 'TX' },
+                '78204': { lat: 29.3939, lon: -98.5202, city: 'San Antonio', state: 'TX' },
+                '78205': { lat: 29.3903, lon: -98.5051, city: 'San Antonio', state: 'TX' },
+                '85001': { lat: 33.4484, lon: -112.0742, city: 'Phoenix', state: 'AZ' },
+                '85002': { lat: 33.4484, lon: -112.0742, city: 'Phoenix', state: 'AZ' },
+                '85003': { lat: 33.4484, lon: -112.0742, city: 'Phoenix', state: 'AZ' },
+                '85004': { lat: 33.4484, lon: -112.0742, city: 'Phoenix', state: 'AZ' },
+                '85005': { lat: 33.4484, lon: -112.0742, city: 'Phoenix', state: 'AZ' },
+                '92101': { lat: 32.7157, lon: -117.1611, city: 'San Diego', state: 'CA' },
+                '92102': { lat: 32.7099, lon: -117.1507, city: 'San Diego', state: 'CA' },
+                '92103': { lat: 32.7266, lon: -117.1472, city: 'San Diego', state: 'CA' },
+                '92104': { lat: 32.7423, lon: -117.1339, city: 'San Diego', state: 'CA' },
+                '92105': { lat: 32.7532, lon: -117.1228, city: 'San Diego', state: 'CA' },
+                '98101': { lat: 47.6062, lon: -122.3321, city: 'Seattle', state: 'WA' },
+                '98102': { lat: 47.6085, lon: -122.3300, city: 'Seattle', state: 'WA' },
+                '98103': { lat: 47.6618, lon: -122.3034, city: 'Seattle', state: 'WA' },
+                '98104': { lat: 47.6039, lon: -122.3298, city: 'Seattle', state: 'WA' },
+                '98105': { lat: 47.6580, lon: -122.3037, city: 'Seattle', state: 'WA' },
+                '02108': { lat: 42.3601, lon: -71.0589, city: 'Boston', state: 'MA' },
+                '02109': { lat: 42.3601, lon: -71.0589, city: 'Boston', state: 'MA' },
+                '02110': { lat: 42.3601, lon: -71.0589, city: 'Boston', state: 'MA' },
+                '02111': { lat: 42.3601, lon: -71.0589, city: 'Boston', state: 'MA' },
+                '02112': { lat: 42.3601, lon: -71.0589, city: 'Boston', state: 'MA' },
+                '95101': { lat: 37.3382, lon: -121.8863, city: 'San Jose', state: 'CA' },
+                '95102': { lat: 37.3382, lon: -121.8863, city: 'San Jose', state: 'CA' },
+                '95103': { lat: 37.3382, lon: -121.8863, city: 'San Jose', state: 'CA' },
+                '95104': { lat: 37.3382, lon: -121.8863, city: 'San Jose', state: 'CA' },
+                '95105': { lat: 37.3382, lon: -121.8863, city: 'San Jose', state: 'CA' },
+                '79901': { lat: 31.7461, lon: -106.4888, city: 'El Paso', state: 'TX' },
+                '79902': { lat: 31.7461, lon: -106.4888, city: 'El Paso', state: 'TX' },
+                '79903': { lat: 31.7461, lon: -106.4888, city: 'El Paso', state: 'TX' },
+                '79904': { lat: 31.7461, lon: -106.4888, city: 'El Paso', state: 'TX' },
+                '79905': { lat: 31.7461, lon: -106.4888, city: 'El Paso', state: 'TX' }
+            },
+
             // Custom fares imported by user
             customFares: {},
 
@@ -635,6 +711,7 @@
                 homeLat: null,
                 homeLon: null,
                 homeCity: null,
+                homeState: null,
                 maxRadius: 1,
                 adults: 1,
                 children: 0,
@@ -670,33 +747,6 @@
                 this.loadData();
             },
 
-            // Geocode ZIP code to coordinates using free API
-            async geocodeZip(zip) {
-                try {
-                    // Using OpenCage Geocoding API (free tier: 2,500 requests/day)
-                    // Alternative: zipapi.us/v1/geocode/{zip}.json (no key needed)
-                    const response = await fetch(`https://zipapi.us/v1/geocode/${zip}.json`);
-                    
-                    if (!response.ok) {
-                        return null;
-                    }
-                    
-                    const data = await response.json();
-                    
-                    if (data.lat && data.lng) {
-                        return {
-                            lat: data.lat,
-                            lon: data.lng,
-                            city: data.city || 'Unknown',
-                            state: data.state || ''
-                        };
-                    }
-                } catch (error) {
-                    console.error('Geocoding error:', error);
-                }
-                return null;
-            },
-
             // Calculate distance between two coordinates (haversine formula)
             calculateDistance(lat1, lon1, lat2, lon2) {
                 const R = 3959; // Earth's radius in miles
@@ -715,7 +765,7 @@
             },
 
             // Main search function
-            async search() {
+            search() {
                 // Validate input
                 const zipInput = document.getElementById('homeZip').value.trim();
                 if (!zipInput) {
@@ -728,21 +778,10 @@
                     return;
                 }
 
-                // Show loading message
-                const searchBtn = document.getElementById('searchBtn');
-                const originalText = searchBtn.textContent;
-                searchBtn.disabled = true;
-                searchBtn.innerHTML = '<span class="spinner"></span>Geocoding...';
-                
-                this.showMessage('🌍 Looking up ZIP code location...', 'loading');
-
-                // Geocode the ZIP code
-                const location = await this.geocodeZip(zipInput);
-
+                // Look up ZIP in database
+                const location = this.zipCodes[zipInput];
                 if (!location) {
-                    this.showMessage('ZIP code not found. Please check and try again.', 'error');
-                    searchBtn.disabled = false;
-                    searchBtn.textContent = originalText;
+                    this.showMessage(`ZIP code ${zipInput} not in database. Try: 32908, 10001, 90210, 60601, 75201, 77001, 78201, 85001, 92101, 98101, 02108, 95101, 79901`, 'error');
                     return;
                 }
 
@@ -751,6 +790,7 @@
                 this.state.homeLat = location.lat;
                 this.state.homeLon = location.lon;
                 this.state.homeCity = location.city;
+                this.state.homeState = location.state;
                 this.state.adults = parseInt(document.getElementById('adults').value);
                 this.state.children = parseInt(document.getElementById('children').value);
                 this.state.bags = parseInt(document.getElementById('bags').value);
@@ -758,7 +798,7 @@
 
                 // Show ZIP info
                 document.getElementById('zipInfo').style.display = 'block';
-                document.getElementById('zipInfo').textContent = `📍 ${this.state.homeCity}, ${location.state} (${this.state.homeLat.toFixed(4)}°, ${this.state.homeLon.toFixed(4)}°)`;
+                document.getElementById('zipInfo').textContent = `📍 ${this.state.homeCity}, ${this.state.homeState} (${this.state.homeLat.toFixed(4)}°, ${this.state.homeLon.toFixed(4)}°)`;
 
                 // Find reachable airports
                 this.state.reachableAirports = this.airports.filter(airport => {
@@ -771,8 +811,6 @@
 
                 if (this.state.reachableAirports.length === 0) {
                     this.showMessage('No airports found within your drive radius. Try increasing the maximum drive time.', 'error');
-                    searchBtn.disabled = false;
-                    searchBtn.textContent = originalText;
                     return;
                 }
 
@@ -822,9 +860,6 @@
                 // Save data
                 this.saveData();
 
-                // Reset button
-                searchBtn.disabled = false;
-                searchBtn.textContent = originalText;
                 this.showMessage(`✅ Found ${this.state.reachableAirports.length} airports and ${this.state.destinations.length} destinations!`, 'success');
             },
 
@@ -1122,6 +1157,7 @@
                     homeLat: null,
                     homeLon: null,
                     homeCity: null,
+                    homeState: null,
                     maxRadius: 1,
                     adults: 1,
                     children: 0,
