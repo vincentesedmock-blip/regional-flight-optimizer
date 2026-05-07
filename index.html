@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regional Flight Optimizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d4ff;
+            --secondary: #ff6b9d;
+            --bg-dark: #0a0e27;
+            --bg-card: #1a1f3a;
+            --text-light: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border: #2a2f4a;
+            --success: #4ade80;
+            --warning: #fbbf24;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            color: var(--bg-dark);
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: rgba(10, 14, 39, 0.8);
+            font-size: 0.95em;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-btn:hover {
+            color: var(--text-light);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            border-radius: 6px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="file"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #00a8cc);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #ff4757);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn-small {
+            padding: 8px 12px;
+            font-size: 0.85em;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .radius-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .radius-btn {
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border);
+            color: var(--text-light);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .radius-btn.active {
+            background: linear-gradient(135deg, var(--primary), #00a8cc);
+            border-color: var(--primary);
+            color: var(--bg-dark);
+        }
+
+        .radius-btn:hover {
+            border-color: var(--primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        th {
+            background-color: rgba(0, 212, 255, 0.1);
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid var(--primary);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background-color: rgba(0, 212, 255, 0.05);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background-color: rgba(74, 222, 128, 0.2);
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background-color: rgba(251, 191, 36, 0.2);
+            color: var(--warning);
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .message.info {
+            background-color: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .message.success {
+            background-color: rgba(74, 222, 128, 0.1);
+            border-left: 4px solid var(--success);
+            color: var(--success);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state h3 {
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .link-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0;
+            font-size: 0.95em;
+        }
+
+        .link-btn:hover {
+            color: var(--secondary);
+        }
+
+        .search-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), #00a8cc);
+            color: var(--bg-dark);
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .search-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background-color: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            .tabs {
+                gap: 5px;
+            }
+
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+
+            table {
+                font-size: 0.85em;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+
+            .radius-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✈️ Regional Flight Optimizer</h1>
+            <p>Find the best airport and flight based on drive time and total trip cost</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="search">Search</button>
+            <button class="tab-btn" data-tab="airports">Reachable Airports</button>
+            <button class="tab-btn" data-tab="destinations">Destination Universe</button>
+            <button class="tab-btn" data-tab="results">Optimized Results</button>
+            <button class="tab-btn" data-tab="import">Import Fares</button>
+        </div>
+
+        <!-- SEARCH TAB -->
+        <div id="search" class="tab-content active">
+            <div class="card">
+                <h2 style="margin-bottom: 20px; color: var(--primary);">Trip Optimizer</h2>
+
+                <div class="form-group">
+                    <label for="homeZip">Home ZIP Code</label>
+                    <input type="text" id="homeZip" placeholder="e.g., 32801" maxlength="5">
+                </div>
+
+                <div class="form-group">
+                    <label>Max Drive Radius</label>
+                    <div class="radius-buttons">
+                        <button class="radius-btn active" data-radius="1">1 hour</button>
+                        <button class="radius-btn" data-radius="1.5">1.5 hours</button>
+                        <button class="radius-btn" data-radius="2.5">2.5 hours</button>
+                        <button class="radius-btn" data-radius="3.5">3.5 hours</button>
+                        <button class="radius-btn" data-radius="5">5 hours</button>
+                    </div>
+                </div>
+
+                <h3 style="margin: 25px 0 15px; color: var(--primary);">Travelers</h3>
+
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="adults">Adults</label>
+                        <input type="number" id="adults" value="1" min="1" max="9">
+                    </div>
+                    <div class="form-group">
+                        <label for="children">Children</label>
+                        <input type="number" id="children" value="0" min="0" max="9">
+                    </div>
+                    <div class="form-group">
+                        <label for="bags">Bags</label>
+                        <input type="number" id="bags" value="1" min="0" max="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="tripDays">Trip Days</label>
+                        <input type="number" id="tripDays" value="3" min="1" max="30">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="app.search()">🔍 Optimize Trip</button>
+                    <button class="btn-secondary" onclick="app.reset()">🔄 Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AIRPORTS TAB -->
+        <div id="airports" class="tab-content">
+            <div class="card">
+                <h2 style="margin-bottom: 20px; color: var(--primary);">Reachable Airports</h2>
+                <div id="airportsTable"></div>
+                <div id="airportsEmpty" class="empty-state">
+                    <h3>No airports found</h3>
+                    <p>Run a search to see reachable airports</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESTINATIONS TAB -->
+        <div id="destinations" class="tab-content">
+            <div class="card">
+                <h2 style="margin-bottom: 20px; color: var(--primary);">Destination Universe</h2>
+                <div id="destinationsTable"></div>
+                <div id="destinationsEmpty" class="empty-state">
+                    <h3>No destinations found</h3>
+                    <p>Run a search to see available destinations</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS TAB -->
+        <div id="results" class="tab-content">
+            <div class="card">
+                <h2 style="margin-bottom: 20px; color: var(--primary);">Optimized Results</h2>
+                <div id="resultsStats"></div>
+                <div id="resultsTable"></div>
+                <div id="resultsEmpty" class="empty-state">
+                    <h3>No results yet</h3>
+                    <p>Run a search to see optimized flight options</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- IMPORT TAB -->
+        <div id="import" class="tab-content">
+            <div class="card">
+                <h2 style="margin-bottom: 20px; color: var(--primary);">Import Custom Fares</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Upload a CSV file with format: destination,airport,fare</p>
+
+                <div class="form-group">
+                    <label for="csvFile">Select CSV File</label>
+                    <input type="file" id="csvFile" accept=".csv">
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="app.importFares()">📤 Import Fares</button>
+                    <button class="btn-secondary" onclick="app.downloadTemplate()">📥 Download Template</button>
+                </div>
+
+                <div id="importMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app = {
+            // Airport database with coordinates for drive time calculation
+            airports: [
+                { code: 'MLB', name: 'Melbourne Orlando', lat: 28.1029, lon: -80.6465, parking: 8 },
+                { code: 'VRB', name: 'Vero Beach', lat: 27.9553, lon: -80.3528, parking: 6 },
+                { code: 'MCO', name: 'Orlando', lat: 28.4294, lon: -81.3089, parking: 12 },
+                { code: 'SFB', name: 'Orlando Sanford', lat: 28.7755, lon: -81.2317, parking: 7 },
+                { code: 'DAB', name: 'Daytona Beach', lat: 29.1797, lon: -81.0585, parking: 7 },
+                { code: 'TPA', name: 'Tampa', lat: 27.9755, lon: -82.5338, parking: 10 },
+                { code: 'JAX', name: 'Jacksonville', lat: 30.4941, lon: -81.6879, parking: 8 },
+                { code: 'MIA', name: 'Miami', lat: 25.7959, lon: -80.2870, parking: 14 },
+                { code: 'FLL', name: 'Fort Lauderdale', lat: 26.0726, lon: -80.1527, parking: 12 },
+                { code: 'PBI', name: 'Palm Beach', lat: 26.6832, lon: -80.0956, parking: 10 }
+            ],
+
+            // Sample routes by airport
+            routes: {
+                'MCO': [
+                    { dest: 'New York', airline: 'Delta', nonstop: true, fare: 120 },
+                    { dest: 'Boston', airline: 'JetBlue', nonstop: true, fare: 110 },
+                    { dest: 'Chicago', airline: 'United', nonstop: true, fare: 95 },
+                    { dest: 'Los Angeles', airline: 'Southwest', nonstop: false, fare: 140 },
+                    { dest: 'Denver', airline: 'Southwest', nonstop: false, fare: 105 },
+                    { dest: 'Las Vegas', airline: 'Spirit', nonstop: true, fare: 85 },
+                    { dest: 'San Francisco', airline: 'United', nonstop: false, fare: 150 },
+                    { dest: 'Seattle', airline: 'Delta', nonstop: false, fare: 135 }
+                ],
+                'TPA': [
+                    { dest: 'New York', airline: 'Southwest', nonstop: true, fare: 115 },
+                    { dest: 'Boston', airline: 'Spirit', nonstop: false, fare: 95 },
+                    { dest: 'Chicago', airline: 'JetBlue', nonstop: false, fare: 105 },
+                    { dest: 'Denver', airline: 'Southwest', nonstop: false, fare: 100 },
+                    { dest: 'Las Vegas', airline: 'Southwest', nonstop: true, fare: 90 }
+                ],
+                'MIA': [
+                    { dest: 'New York', airline: 'JetBlue', nonstop: true, fare: 125 },
+                    { dest: 'Boston', airline: 'JetBlue', nonstop: true, fare: 115 },
+                    { dest: 'Caribbean', airline: 'Spirit', nonstop: true, fare: 75 },
+                    { dest: 'Mexico City', airline: 'Frontier', nonstop: true, fare: 90 }
+                ],
+                'FLL': [
+                    { dest: 'New York', airline: 'Southwest', nonstop: true, fare: 120 },
+                    { dest: 'Boston', airline: 'Southwest', nonstop: false, fare: 105 },
+                    { dest: 'Caribbean', airline: 'Spirit', nonstop: true, fare: 70 }
+                ],
+                'JAX': [
+                    { dest: 'New York', airline: 'Delta', nonstop: false, fare: 130 },
+                    { dest: 'Chicago', airline: 'United', nonstop: false, fare: 110 },
+                    { dest: 'Denver', airline: 'Southwest', nonstop: false, fare: 115 }
+                ],
+                'SFB': [
+                    { dest: 'New York', airline: 'Frontier', nonstop: false, fare: 105 },
+                    { dest: 'Boston', airline: 'Spirit', nonstop: false, fare: 90 },
+                    { dest: 'Chicago', airline: 'Frontier', nonstop: false, fare: 85 }
+                ],
+                'DAB': [
+                    { dest: 'New York', airline: 'Spirit', nonstop: false, fare: 100 },
+                    { dest: 'Boston', airline: 'Frontier', nonstop: false, fare: 85 }
+                ],
+                'VRB': [
+                    { dest: 'New York', airline: 'Frontier', nonstop: false, fare: 110 },
+                    { dest: 'Boston', airline: 'Spirit', nonstop: false, fare: 95 }
+                ],
+                'MLB': [
+                    { dest: 'New York', airline: 'Spirit', nonstop: false, fare: 115 },
+                    { dest: 'Boston', airline: 'Frontier', nonstop: false, fare: 100 }
+                ],
+                'PBI': [
+                    { dest: 'New York', airline: 'Southwest', nonstop: false, fare: 125 },
+                    { dest: 'Boston', airline: 'Southwest', nonstop: false, fare: 110 }
+                ]
+            },
+
+            // Zip code to coordinate mapping (sample Florida zips)
+            zipCodes: {
+                '32801': { lat: 28.5421, lon: -81.3723, city: 'Orlando' }, // Orlando
+                '33101': { lat: 25.7617, lon: -80.1918, city: 'Miami' }, // Miami
+                '33139': { lat: 25.7907, lon: -80.1808, city: 'Miami Beach' },
+                '34236': { lat: 27.2658, lon: -82.2734, city: 'Sarasota' },
+                '32099': { lat: 30.3350, lon: -81.6625, city: 'Jacksonville' },
+                '33556': { lat: 28.2639, lon: -82.2434, city: 'Tampa' },
+                '32955': { lat: 28.3639, lon: -80.7394, city: 'Melbourne' },
+                '32963': { lat: 27.6553, lon: -80.3528, city: 'Vero Beach' },
+                '32118': { lat: 29.1797, lon: -81.0585, city: 'Daytona' },
+                '33401': { lat: 26.7153, lon: -80.0534, city: 'West Palm Beach' }
+            },
+
+            // Custom fares imported by user
+            customFares: {},
+
+            // State
+            state: {
+                homeZip: null,
+                maxRadius: 1,
+                adults: 1,
+                children: 0,
+                bags: 1,
+                tripDays: 3,
+                reachableAirports: [],
+                destinations: [],
+                optimizedResults: []
+            },
+
+            // Initialize event listeners
+            init() {
+                // Tab switching
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+                        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        document.getElementById(e.target.dataset.tab).classList.add('active');
+                    });
+                });
+
+                // Radius buttons
+                document.querySelectorAll('.radius-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.radius-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.state.maxRadius = parseFloat(e.target.dataset.radius);
+                    });
+                });
+
+                // Load saved data
+                this.loadData();
+            },
+
+            // Calculate distance between two coordinates (haversine formula)
+            calculateDistance(lat1, lon1, lat2, lon2) {
+                const R = 3959; // Earth's radius in miles
+                const dLat = (lat2 - lat1) * Math.PI / 180;
+                const dLon = (lon2 - lon1) * Math.PI / 180;
+                const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                          Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                          Math.sin(dLon/2) * Math.sin(dLon/2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                return R * c;
+            },
+
+            // Estimate drive time from distance (average 65 mph)
+            estimateDriveTime(distance) {
+                return distance / 65;
+            },
+
+            // Main search function
+            search() {
+                // Validate input
+                const zipInput = document.getElementById('homeZip').value.trim();
+                if (!zipInput) {
+                    alert('Please enter a home ZIP code');
+                    return;
+                }
+
+                if (!this.zipCodes[zipInput]) {
+                    alert('ZIP code not found in database. Try: 32801, 33101, 34236, 32099, 33556, 32955, 32963, 32118, 33401');
+                    return;
+                }
+
+                // Update state
+                this.state.homeZip = zipInput;
+                this.state.adults = parseInt(document.getElementById('adults').value);
+                this.state.children = parseInt(document.getElementById('children').value);
+                this.state.bags = parseInt(document.getElementById('bags').value);
+                this.state.tripDays = parseInt(document.getElementById('tripDays').value);
+
+                // Get home coordinates
+                const home = this.zipCodes[zipInput];
+
+                // Find reachable airports
+                this.state.reachableAirports = this.airports.filter(airport => {
+                    const distance = this.calculateDistance(home.lat, home.lon, airport.lat, airport.lon);
+                    const driveTime = this.estimateDriveTime(distance);
+                    airport.distance = distance;
+                    airport.driveTime = driveTime;
+                    return driveTime <= this.state.maxRadius;
+                });
+
+                if (this.state.reachableAirports.length === 0) {
+                    alert('No airports found within your drive radius. Try increasing the maximum drive time.');
+                    return;
+                }
+
+                // Get all destinations
+                this.state.destinations = [];
+                const destSet = new Set();
+                this.state.reachableAirports.forEach(airport => {
+                    const routes = this.routes[airport.code] || [];
+                    routes.forEach(route => {
+                        if (!destSet.has(route.dest)) {
+                            destSet.add(route.dest);
+                            this.state.destinations.push({
+                                name: route.dest,
+                                airports: []
+                            });
+                        }
+                    });
+                });
+
+                // Build destination/airport map
+                this.state.destinations.forEach(dest => {
+                    this.state.reachableAirports.forEach(airport => {
+                        const route = (this.routes[airport.code] || []).find(r => r.dest === dest.name);
+                        if (route) {
+                            dest.airports.push({
+                                code: airport.code,
+                                ...route,
+                                parking: airport.parking,
+                                driveTime: airport.driveTime,
+                                distance: airport.distance
+                            });
+                        }
+                    });
+                });
+
+                // Calculate optimized results
+                this.calculateOptimizedResults();
+
+                // Render all tables
+                this.renderAirportsTable();
+                this.renderDestinationsTable();
+                this.renderResultsTable();
+
+                // Switch to results tab
+                document.querySelector('[data-tab="results"]').click();
+
+                // Save data
+                this.saveData();
+            },
+
+            // Calculate total trip cost
+            calculateTotalCost(airfare, parking, driveTime, nonstop) {
+                const totalTravelers = this.state.adults + this.state.children;
+                const airfareCost = airfare * totalTravelers;
+                const parkingCost = parking * this.state.tripDays;
+                const driveCost = driveTime * 0.585; // IRS mileage rate approximation
+                const bagFees = this.state.bags * 30; // $30 per bag round-trip
+                const frictionPenalty = nonstop ? 0 : 50; // $50 penalty for connections
+
+                return airfareCost + parkingCost + driveCost + bagFees + frictionPenalty;
+            },
+
+            // Build optimized results
+            calculateOptimizedResults() {
+                this.state.optimizedResults = [];
+
+                this.state.destinations.forEach(dest => {
+                    dest.airports.forEach(option => {
+                        const customKey = `${dest.name}|${option.code}`;
+                        const customFare = this.customFares[customKey];
+                        const airfare = customFare || option.fare;
+
+                        const totalCost = this.calculateTotalCost(
+                            airfare,
+                            option.parking,
+                            option.distance,
+                            option.nonstop
+                        );
+
+                        this.state.optimizedResults.push({
+                            destination: dest.name,
+                            airport: option.code,
+                            airportName: option.code === 'MCO' ? 'Orlando' : option.code,
+                            airline: option.airline,
+                            nonstop: option.nonstop,
+                            airfare: airfare,
+                            driveTime: option.driveTime,
+                            distance: option.distance,
+                            parking: option.parking,
+                            totalCost: totalCost
+                        });
+                    });
+                });
+
+                // Sort by total cost
+                this.state.optimizedResults.sort((a, b) => a.totalCost - b.totalCost);
+
+                // Add rank
+                this.state.optimizedResults.forEach((result, index) => {
+                    result.rank = index + 1;
+                });
+            },
+
+            // Render airports table
+            renderAirportsTable() {
+                const container = document.getElementById('airportsTable');
+                const empty = document.getElementById('airportsEmpty');
+
+                if (this.state.reachableAirports.length === 0) {
+                    container.innerHTML = '';
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                empty.style.display = 'none';
+                const html = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Airport</th>
+                                <th>Code</th>
+                                <th>Distance</th>
+                                <th>Drive Time</th>
+                                <th>Daily Parking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${this.state.reachableAirports.map(airport => `
+                                <tr>
+                                    <td>${airport.name}</td>
+                                    <td><span class="highlight">${airport.code}</span></td>
+                                    <td>${airport.distance.toFixed(1)} mi</td>
+                                    <td>${airport.driveTime.toFixed(2)} hrs</td>
+                                    <td>$${airport.parking}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                container.innerHTML = html;
+            },
+
+            // Render destinations table
+            renderDestinationsTable() {
+                const container = document.getElementById('destinationsTable');
+                const empty = document.getElementById('destinationsEmpty');
+
+                if (this.state.destinations.length === 0) {
+                    container.innerHTML = '';
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                empty.style.display = 'none';
+                const html = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Available Airports</th>
+                                <th>Airlines</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${this.state.destinations.map(dest => {
+                                const airports = [...new Set(dest.airports.map(a => a.code))].join(', ');
+                                const airlines = [...new Set(dest.airports.map(a => a.airline))].join(', ');
+                                return `
+                                    <tr>
+                                        <td>${dest.name}</td>
+                                        <td>${airports}</td>
+                                        <td>${airlines}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                `;
+                container.innerHTML = html;
+            },
+
+            // Render optimized results table
+            renderResultsTable() {
+                const container = document.getElementById('resultsTable');
+                const statsContainer = document.getElementById('resultsStats');
+                const empty = document.getElementById('resultsEmpty');
+
+                if (this.state.optimizedResults.length === 0) {
+                    container.innerHTML = '';
+                    statsContainer.innerHTML = '';
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                empty.style.display = 'none';
+
+                // Calculate stats
+                const minCost = Math.min(...this.state.optimizedResults.map(r => r.totalCost));
+                const maxCost = Math.max(...this.state.optimizedResults.map(r => r.totalCost));
+                const avgCost = this.state.optimizedResults.reduce((sum, r) => sum + r.totalCost, 0) / this.state.optimizedResults.length;
+
+                const statsHtml = `
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-value">$${minCost.toFixed(0)}</div>
+                            <div class="stat-label">Best Price</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">$${avgCost.toFixed(0)}</div>
+                            <div class="stat-label">Average Price</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">$${maxCost.toFixed(0)}</div>
+                            <div class="stat-label">Max Price</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${this.state.optimizedResults.length}</div>
+                            <div class="stat-label">Options</div>
+                        </div>
+                    </div>
+                `;
+                statsContainer.innerHTML = statsHtml;
+
+                const html = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Destination</th>
+                                <th>Airport</th>
+                                <th>Airline</th>
+                                <th>Nonstop</th>
+                                <th>Airfare/pp</th>
+                                <th>Drive Time</th>
+                                <th>Parking</th>
+                                <th>Total Cost</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${this.state.optimizedResults.map(result => `
+                                <tr>
+                                    <td><span class="badge badge-success">#${result.rank}</span></td>
+                                    <td>${result.destination}</td>
+                                    <td><span class="highlight">${result.airport}</span></td>
+                                    <td>${result.airline}</td>
+                                    <td>${result.nonstop ? '✅ Yes' : '⏱️ No'}</td>
+                                    <td>$${result.airfare}</td>
+                                    <td>${result.driveTime.toFixed(2)}h</td>
+                                    <td>$${result.parking * this.state.tripDays}</td>
+                                    <td><span class="highlight">$${result.totalCost.toFixed(0)}</span></td>
+                                    <td>
+                                        <a href="${this.buildGoogleFlightsUrl(result)}" target="_blank" class="search-link">Search</a>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                container.innerHTML = html;
+            },
+
+            // Build Google Flights search URL
+            buildGoogleFlightsUrl(result) {
+                const departure = result.airport;
+                const destination = result.destination.toLowerCase().replace(/ /g, '');
+                return `https://www.google.com/flights?fsrc=1&mode=search&q=${departure}%20to%20${destination}`;
+            },
+
+            // Import fares from CSV
+            importFares() {
+                const fileInput = document.getElementById('csvFile');
+                const file = fileInput.files[0];
+
+                if (!file) {
+                    this.showImportMessage('Please select a CSV file', 'error');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const content = e.target.result;
+                    const lines = content.split('\n').filter(line => line.trim());
+                    let count = 0;
+
+                    lines.forEach((line, index) => {
+                        if (index === 0) return; // Skip header
+                        const [destination, airport, fare] = line.split(',').map(s => s.trim());
+                        if (destination && airport && fare) {
+                            const key = `${destination}|${airport}`;
+                            this.customFares[key] = parseFloat(fare);
+                            count++;
+                        }
+                    });
+
+                    this.saveData();
+                    this.showImportMessage(`✅ Imported ${count} fares successfully!`, 'success');
+                    fileInput.value = '';
+                };
+                reader.readAsText(file);
+            },
+
+            // Download CSV template
+            downloadTemplate() {
+                const csv = 'destination,airport,fare\nNew York,MCO,120\nBoston,TPA,110\n';
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'fares_template.csv';
+                a.click();
+            },
+
+            // Show import message
+            showImportMessage(message, type) {
+                const container = document.getElementById('importMessage');
+                container.className = `message ${type}`;
+                container.textContent = message;
+                setTimeout(() => { container.innerHTML = ''; }, 5000);
+            },
+
+            // Reset form
+            reset() {
+                document.getElementById('homeZip').value = '';
+                document.getElementById('adults').value = '1';
+                document.getElementById('children').value = '0';
+                document.getElementById('bags').value = '1';
+                document.getElementById('tripDays').value = '3';
+                document.querySelector('.radius-btn').click();
+
+                this.state = {
+                    homeZip: null,
+                    maxRadius: 1,
+                    adults: 1,
+                    children: 0,
+                    bags: 1,
+                    tripDays: 3,
+                    reachableAirports: [],
+                    destinations: [],
+                    optimizedResults: []
+                };
+
+                document.getElementById('airportsTable').innerHTML = '';
+                document.getElementById('destinationsTable').innerHTML = '';
+                document.getElementById('resultsTable').innerHTML = '';
+                document.getElementById('resultsStats').innerHTML = '';
+                document.getElementById('airportsEmpty').style.display = 'block';
+                document.getElementById('destinationsEmpty').style.display = 'block';
+                document.getElementById('resultsEmpty').style.display = 'block';
+            },
+
+            // Save data to localStorage
+            saveData() {
+                localStorage.setItem('rfo-state', JSON.stringify(this.state));
+                localStorage.setItem('rfo-customFares', JSON.stringify(this.customFares));
+            },
+
+            // Load data from localStorage
+            loadData() {
+                const saved = localStorage.getItem('rfo-state');
+                const fares = localStorage.getItem('rfo-customFares');
+                if (saved) this.state = JSON.parse(saved);
+                if (fares) this.customFares = JSON.parse(fares);
+            }
+        };
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => app.init());
+    </script>
+</body>
+</html>
