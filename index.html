@@ -164,6 +164,12 @@
             box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
         }
 
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .btn-secondary {
             background: linear-gradient(135deg, var(--secondary), #ff4757);
             color: white;
@@ -280,6 +286,18 @@
             color: var(--success);
         }
 
+        .message.error {
+            background-color: rgba(255, 107, 157, 0.1);
+            border-left: 4px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .message.loading {
+            background-color: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid var(--warning);
+            color: var(--warning);
+        }
+
         .empty-state {
             text-align: center;
             padding: 40px 20px;
@@ -349,6 +367,30 @@
             font-size: 0.85em;
         }
 
+        .zip-info {
+            padding: 10px;
+            background-color: rgba(0, 212, 255, 0.05);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-top: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.5em;
@@ -406,8 +448,9 @@
                 <h2 style="margin-bottom: 20px; color: var(--primary);">Trip Optimizer</h2>
 
                 <div class="form-group">
-                    <label for="homeZip">Home ZIP Code</label>
-                    <input type="text" id="homeZip" placeholder="e.g., 32801" maxlength="5">
+                    <label for="homeZip">Home ZIP Code (Any US ZIP)</label>
+                    <input type="text" id="homeZip" placeholder="e.g., 10001, 90210, 60601" maxlength="5">
+                    <div id="zipInfo" class="zip-info" style="display: none;"></div>
                 </div>
 
                 <div class="form-group">
@@ -443,9 +486,11 @@
                 </div>
 
                 <div class="button-group">
-                    <button class="btn-primary" onclick="app.search()">🔍 Optimize Trip</button>
+                    <button class="btn-primary" id="searchBtn" onclick="app.search()">🔍 Optimize Trip</button>
                     <button class="btn-secondary" onclick="app.reset()">🔄 Reset</button>
                 </div>
+
+                <div id="searchMessage"></div>
             </div>
         </div>
 
@@ -581,26 +626,15 @@
                 ]
             },
 
-            // Zip code to coordinate mapping (sample Florida zips)
-            zipCodes: {
-                '32801': { lat: 28.5421, lon: -81.3723, city: 'Orlando' }, // Orlando
-                '33101': { lat: 25.7617, lon: -80.1918, city: 'Miami' }, // Miami
-                '33139': { lat: 25.7907, lon: -80.1808, city: 'Miami Beach' },
-                '34236': { lat: 27.2658, lon: -82.2734, city: 'Sarasota' },
-                '32099': { lat: 30.3350, lon: -81.6625, city: 'Jacksonville' },
-                '33556': { lat: 28.2639, lon: -82.2434, city: 'Tampa' },
-                '32955': { lat: 28.3639, lon: -80.7394, city: 'Melbourne' },
-                '32963': { lat: 27.6553, lon: -80.3528, city: 'Vero Beach' },
-                '32118': { lat: 29.1797, lon: -81.0585, city: 'Daytona' },
-                '33401': { lat: 26.7153, lon: -80.0534, city: 'West Palm Beach' }
-            },
-
             // Custom fares imported by user
             customFares: {},
 
             // State
             state: {
                 homeZip: null,
+                homeLat: null,
+                homeLon: null,
+                homeCity: null,
                 maxRadius: 1,
                 adults: 1,
                 children: 0,
@@ -636,6 +670,33 @@
                 this.loadData();
             },
 
+            // Geocode ZIP code to coordinates using free API
+            async geocodeZip(zip) {
+                try {
+                    // Using OpenCage Geocoding API (free tier: 2,500 requests/day)
+                    // Alternative: zipapi.us/v1/geocode/{zip}.json (no key needed)
+                    const response = await fetch(`https://zipapi.us/v1/geocode/${zip}.json`);
+                    
+                    if (!response.ok) {
+                        return null;
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.lat && data.lng) {
+                        return {
+                            lat: data.lat,
+                            lon: data.lng,
+                            city: data.city || 'Unknown',
+                            state: data.state || ''
+                        };
+                    }
+                } catch (error) {
+                    console.error('Geocoding error:', error);
+                }
+                return null;
+            },
+
             // Calculate distance between two coordinates (haversine formula)
             calculateDistance(lat1, lon1, lat2, lon2) {
                 const R = 3959; // Earth's radius in miles
@@ -654,32 +715,54 @@
             },
 
             // Main search function
-            search() {
+            async search() {
                 // Validate input
                 const zipInput = document.getElementById('homeZip').value.trim();
                 if (!zipInput) {
-                    alert('Please enter a home ZIP code');
+                    this.showMessage('Please enter a home ZIP code', 'error');
                     return;
                 }
 
-                if (!this.zipCodes[zipInput]) {
-                    alert('ZIP code not found in database. Try: 32801, 33101, 34236, 32099, 33556, 32955, 32963, 32118, 33401');
+                if (!/^\d{5}$/.test(zipInput)) {
+                    this.showMessage('Please enter a valid 5-digit ZIP code', 'error');
+                    return;
+                }
+
+                // Show loading message
+                const searchBtn = document.getElementById('searchBtn');
+                const originalText = searchBtn.textContent;
+                searchBtn.disabled = true;
+                searchBtn.innerHTML = '<span class="spinner"></span>Geocoding...';
+                
+                this.showMessage('🌍 Looking up ZIP code location...', 'loading');
+
+                // Geocode the ZIP code
+                const location = await this.geocodeZip(zipInput);
+
+                if (!location) {
+                    this.showMessage('ZIP code not found. Please check and try again.', 'error');
+                    searchBtn.disabled = false;
+                    searchBtn.textContent = originalText;
                     return;
                 }
 
                 // Update state
                 this.state.homeZip = zipInput;
+                this.state.homeLat = location.lat;
+                this.state.homeLon = location.lon;
+                this.state.homeCity = location.city;
                 this.state.adults = parseInt(document.getElementById('adults').value);
                 this.state.children = parseInt(document.getElementById('children').value);
                 this.state.bags = parseInt(document.getElementById('bags').value);
                 this.state.tripDays = parseInt(document.getElementById('tripDays').value);
 
-                // Get home coordinates
-                const home = this.zipCodes[zipInput];
+                // Show ZIP info
+                document.getElementById('zipInfo').style.display = 'block';
+                document.getElementById('zipInfo').textContent = `📍 ${this.state.homeCity}, ${location.state} (${this.state.homeLat.toFixed(4)}°, ${this.state.homeLon.toFixed(4)}°)`;
 
                 // Find reachable airports
                 this.state.reachableAirports = this.airports.filter(airport => {
-                    const distance = this.calculateDistance(home.lat, home.lon, airport.lat, airport.lon);
+                    const distance = this.calculateDistance(this.state.homeLat, this.state.homeLon, airport.lat, airport.lon);
                     const driveTime = this.estimateDriveTime(distance);
                     airport.distance = distance;
                     airport.driveTime = driveTime;
@@ -687,7 +770,9 @@
                 });
 
                 if (this.state.reachableAirports.length === 0) {
-                    alert('No airports found within your drive radius. Try increasing the maximum drive time.');
+                    this.showMessage('No airports found within your drive radius. Try increasing the maximum drive time.', 'error');
+                    searchBtn.disabled = false;
+                    searchBtn.textContent = originalText;
                     return;
                 }
 
@@ -736,6 +821,18 @@
 
                 // Save data
                 this.saveData();
+
+                // Reset button
+                searchBtn.disabled = false;
+                searchBtn.textContent = originalText;
+                this.showMessage(`✅ Found ${this.state.reachableAirports.length} airports and ${this.state.destinations.length} destinations!`, 'success');
+            },
+
+            // Show search message
+            showMessage(text, type) {
+                const container = document.getElementById('searchMessage');
+                container.className = `message ${type}`;
+                container.textContent = text;
             },
 
             // Calculate total trip cost
@@ -1016,10 +1113,15 @@
                 document.getElementById('children').value = '0';
                 document.getElementById('bags').value = '1';
                 document.getElementById('tripDays').value = '3';
+                document.getElementById('zipInfo').style.display = 'none';
+                document.getElementById('searchMessage').innerHTML = '';
                 document.querySelector('.radius-btn').click();
 
                 this.state = {
                     homeZip: null,
+                    homeLat: null,
+                    homeLon: null,
+                    homeCity: null,
                     maxRadius: 1,
                     adults: 1,
                     children: 0,
