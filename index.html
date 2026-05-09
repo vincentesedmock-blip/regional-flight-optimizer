@@ -12,20 +12,24 @@
         }
 
         :root {
-            --primary: #00d4ff;
-            --secondary: #ff6b9d;
-            --bg-dark: #0a0e27;
-            --bg-card: #1a1f3a;
-            --text-light: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --border: #2a2f4a;
-            --success: #4ade80;
-            --warning: #fbbf24;
+            --primary: #0f766e;
+            --primary-soft: #d9f2ef;
+            --secondary: #e05d42;
+            --accent: #f4b23f;
+            --bg-dark: #f7f3ec;
+            --bg-card: #ffffff;
+            --text-light: #21302f;
+            --text-muted: #64716f;
+            --border: #ded8ce;
+            --success: #16803d;
+            --warning: #b7791f;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: var(--bg-dark);
+            background:
+                linear-gradient(180deg, rgba(15, 118, 110, 0.08), rgba(247, 243, 236, 0) 280px),
+                var(--bg-dark);
             color: var(--text-light);
             line-height: 1.6;
         }
@@ -37,52 +41,64 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 30px 20px;
-            text-align: center;
+            background:
+                linear-gradient(135deg, rgba(15, 118, 110, 0.96), rgba(224, 93, 66, 0.88)),
+                url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 42px 28px;
+            text-align: left;
             margin-bottom: 30px;
-            border-radius: 10px;
+            border-radius: 8px;
+            box-shadow: 0 18px 40px rgba(33, 48, 47, 0.14);
         }
 
         header h1 {
-            color: var(--bg-dark);
-            font-size: 2em;
-            margin-bottom: 5px;
+            color: #ffffff;
+            font-size: 2.4em;
+            margin-bottom: 8px;
+            letter-spacing: 0;
         }
 
         header p {
-            color: rgba(10, 14, 39, 0.8);
-            font-size: 0.95em;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05em;
+            max-width: 720px;
         }
 
         .tabs {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 30px;
             flex-wrap: wrap;
-            border-bottom: 2px solid var(--border);
             overflow-x: auto;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px;
         }
 
         .tab-btn {
-            padding: 12px 20px;
+            padding: 10px 16px;
             background: transparent;
             color: var(--text-muted);
-            border: none;
+            border: 1px solid transparent;
             cursor: pointer;
-            font-size: 1em;
-            border-bottom: 3px solid transparent;
+            font-size: 0.94em;
             transition: all 0.3s;
             white-space: nowrap;
+            border-radius: 6px;
         }
 
         .tab-btn.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+            color: #ffffff;
+            background: var(--primary);
+            border-color: var(--primary);
         }
 
         .tab-btn:hover {
-            color: var(--text-light);
+            color: var(--primary);
+            border-color: rgba(15, 118, 110, 0.25);
         }
 
         .tab-content {
@@ -97,8 +113,9 @@
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 28px rgba(33, 48, 47, 0.08);
         }
 
         .form-group {
@@ -116,10 +133,11 @@
         input[type="number"],
         input[type="file"],
         input[type="date"],
+        textarea,
         select {
             width: 100%;
             padding: 12px;
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: #fbfaf7;
             border: 1px solid var(--border);
             color: var(--text-light);
             border-radius: 6px;
@@ -131,14 +149,15 @@
         input[type="number"]:focus,
         input[type="file"]:focus,
         input[type="date"]:focus,
+        textarea:focus,
         select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
         }
 
         input[type="date"] {
-            color-scheme: dark;
+            color-scheme: light;
         }
 
         .button-group {
@@ -156,18 +175,17 @@
             font-size: 1em;
             font-weight: 600;
             transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), #00a8cc);
-            color: var(--bg-dark);
+            background: var(--primary);
+            color: #ffffff;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+            box-shadow: 0 8px 16px rgba(15, 118, 110, 0.24);
         }
 
         .btn-primary:disabled {
@@ -177,13 +195,13 @@
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, var(--secondary), #ff4757);
+            background: var(--secondary);
             color: white;
         }
 
         .btn-secondary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(255, 107, 157, 0.3);
+            box-shadow: 0 8px 16px rgba(224, 93, 66, 0.22);
         }
 
         .btn-small {
@@ -207,7 +225,7 @@
 
         .radius-btn {
             padding: 12px;
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: #fbfaf7;
             border: 2px solid var(--border);
             color: var(--text-light);
             border-radius: 6px;
@@ -217,9 +235,9 @@
         }
 
         .radius-btn.active {
-            background: linear-gradient(135deg, var(--primary), #00a8cc);
+            background: var(--primary);
             border-color: var(--primary);
-            color: var(--bg-dark);
+            color: #ffffff;
         }
 
         .radius-btn:hover {
@@ -228,13 +246,14 @@
 
         table {
             width: 100%;
+            min-width: 980px;
             border-collapse: collapse;
             margin-top: 20px;
             font-size: 0.95em;
         }
 
         th {
-            background-color: rgba(0, 212, 255, 0.1);
+            background-color: var(--primary-soft);
             padding: 12px;
             text-align: left;
             border-bottom: 2px solid var(--primary);
@@ -248,7 +267,7 @@
         }
 
         tr:hover {
-            background-color: rgba(0, 212, 255, 0.05);
+            background-color: rgba(15, 118, 110, 0.06);
         }
 
         .badge {
@@ -260,12 +279,12 @@
         }
 
         .badge-success {
-            background-color: rgba(74, 222, 128, 0.2);
+            background-color: rgba(22, 128, 61, 0.12);
             color: var(--success);
         }
 
         .badge-warning {
-            background-color: rgba(251, 191, 36, 0.2);
+            background-color: rgba(183, 121, 31, 0.14);
             color: var(--warning);
         }
 
@@ -281,25 +300,25 @@
         }
 
         .message.info {
-            background-color: rgba(0, 212, 255, 0.1);
+            background-color: rgba(15, 118, 110, 0.09);
             border-left: 4px solid var(--primary);
             color: var(--primary);
         }
 
         .message.success {
-            background-color: rgba(74, 222, 128, 0.1);
+            background-color: rgba(22, 128, 61, 0.09);
             border-left: 4px solid var(--success);
             color: var(--success);
         }
 
         .message.error {
-            background-color: rgba(255, 107, 157, 0.1);
+            background-color: rgba(224, 93, 66, 0.09);
             border-left: 4px solid var(--secondary);
             color: var(--secondary);
         }
 
         .message.loading {
-            background-color: rgba(251, 191, 36, 0.1);
+            background-color: rgba(244, 178, 63, 0.13);
             border-left: 4px solid var(--warning);
             color: var(--warning);
         }
@@ -331,19 +350,20 @@
 
         .search-link {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary), #00a8cc);
-            color: var(--bg-dark);
+            background: var(--primary);
+            color: #ffffff;
             padding: 6px 12px;
             border-radius: 4px;
             text-decoration: none;
             font-size: 0.85em;
             font-weight: 600;
             transition: all 0.3s;
+            margin: 2px;
         }
 
         .search-link:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(15, 118, 110, 0.24);
         }
 
         .stats {
@@ -353,9 +373,13 @@
             margin-bottom: 20px;
         }
 
+        .card {
+            overflow-x: auto;
+        }
+
         .stat-card {
-            background-color: rgba(0, 212, 255, 0.1);
-            border: 1px solid var(--primary);
+            background-color: #fbfaf7;
+            border: 1px solid var(--border);
             border-radius: 6px;
             padding: 15px;
             text-align: center;
@@ -375,11 +399,88 @@
 
         .zip-info {
             padding: 10px;
-            background-color: rgba(0, 212, 255, 0.05);
+            background-color: rgba(15, 118, 110, 0.07);
             border-radius: 6px;
             margin-bottom: 15px;
             font-size: 0.9em;
             color: var(--text-muted);
+        }
+
+        .assistant-layout {
+            display: grid;
+            grid-template-columns: minmax(240px, 0.85fr) minmax(280px, 1.15fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .assistant-output {
+            background: #fbfaf7;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 180px;
+        }
+
+        .assistant-output h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .assistant-output ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .assistant-output li {
+            margin-bottom: 8px;
+        }
+
+        .assistant-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .assistant-chip,
+        .inline-action {
+            background: #fbfaf7;
+            border: 1px solid var(--border);
+            color: var(--primary);
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 0.86em;
+        }
+
+        .assistant-chip:hover,
+        .inline-action:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(15, 118, 110, 0.12);
+        }
+
+        .inline-action {
+            display: inline-block;
+            margin-top: 6px;
+            border-radius: 6px;
+        }
+
+        .source-note {
+            color: var(--text-muted);
+            font-size: 0.88em;
+            max-width: 220px;
+        }
+
+        .assistant-message {
+            border-bottom: 1px solid var(--border);
+            padding: 10px 0;
+        }
+
+        .assistant-message:last-child {
+            border-bottom: none;
+        }
+
+        .assistant-message strong {
+            color: var(--primary);
         }
 
         .spinner {
@@ -398,16 +499,37 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+
+            header {
+                padding: 28px 18px;
+                margin-bottom: 18px;
+            }
+
             header h1 {
                 font-size: 1.5em;
             }
 
+            header p {
+                font-size: 0.95em;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
             .tabs {
                 gap: 5px;
+                flex-wrap: nowrap;
+                margin-bottom: 18px;
+                -webkit-overflow-scrolling: touch;
             }
 
             .tab-btn {
-                padding: 10px 15px;
+                flex: 0 0 auto;
+                padding: 9px 12px;
                 font-size: 0.9em;
             }
 
@@ -430,6 +552,38 @@
             .radius-buttons {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 12px 8px;
+            }
+
+            .stat-value {
+                font-size: 1.25em;
+                word-break: break-word;
+            }
+
+            .assistant-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .assistant-actions {
+                flex-direction: column;
+            }
+
+            .assistant-chip,
+            .inline-action {
+                width: 100%;
+            }
+
+            .search-link {
+                padding: 7px 9px;
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
@@ -437,7 +591,7 @@
     <div class="container">
         <header>
             <h1>✈️ Regional Flight Optimizer</h1>
-            <p>Find the best airport and flight based on drive time and total trip cost</p>
+            <p>Compare nearby airports, flexible dates, and domestic or international destination ideas in one planning view.</p>
         </header>
 
         <div class="tabs">
@@ -446,7 +600,9 @@
             <button class="tab-btn" data-tab="destinations">Destination Universe</button>
             <button class="tab-btn" data-tab="results">Flight List</button>
             <button class="tab-btn" data-tab="vacationOptimizer">Vacation Optimizer</button>
+            <button class="tab-btn" data-tab="assistant">Trip Assistant</button>
             <button class="tab-btn" data-tab="import">Import Fares</button>
+            <button class="tab-btn" data-tab="diagnostics">Diagnostics</button>
         </div>
 
         <!-- SEARCH TAB -->
@@ -511,13 +667,23 @@
 
                 <div class="form-group">
                     <label for="destinationTarget">Specific Destination</label>
-                    <input type="text" id="destinationTarget" placeholder="Optional: Dallas, DFW, Boston, PVD" list="destinationOptions">
+                    <input type="text" id="destinationTarget" placeholder="Optional: Vietnam, Hanoi, SGN, London, LHR" list="destinationOptions">
                     <datalist id="destinationOptions"></datalist>
                 </div>
 
                 <div class="form-group">
                     <label for="destinationFilter">Idea Filter</label>
-                    <input type="text" id="destinationFilter" placeholder="Optional: beach, mountains, Texas, Allegiant">
+                    <input type="text" id="destinationFilter" placeholder="Optional: Vietnam, Asia, Africa, islands, Europe, passport">
+                </div>
+
+                <div class="form-group">
+                    <label for="groundModePreference">Airport Transportation</label>
+                    <select id="groundModePreference">
+                        <option value="auto">Use cheapest ground option</option>
+                        <option value="park">Drive and park</option>
+                        <option value="rideshare">Ride-share or taxi</option>
+                        <option value="dropoff">Drop-off / pickup</option>
+                    </select>
                 </div>
 
                 <div class="button-group">
@@ -579,11 +745,40 @@
             </div>
         </div>
 
+        <!-- ASSISTANT TAB -->
+        <div id="assistant" class="tab-content">
+            <div class="card">
+                <h2 style="margin-bottom: 20px; color: var(--primary);">Trip Assistant</h2>
+                <div class="assistant-layout">
+                    <div>
+                        <div class="message info">
+                            This assistant reviews the results already loaded in your browser. If the private proxy is running, it can use AI; otherwise it falls back to the local trip analyst.
+                        </div>
+                        <div class="assistant-actions">
+                            <button class="assistant-chip" onclick="app.runTripAssistant('Find my cheapest verified deals and tell me where they came from')">Cheapest deals</button>
+                            <button class="assistant-chip" onclick="app.runTripAssistant('Compare the best airports for this trip')">Compare airports</button>
+                            <button class="assistant-chip" onclick="app.runTripAssistant('Show international ideas and price risks')">International ideas</button>
+                            <button class="assistant-chip" onclick="app.runTripAssistant('Explain ground transportation tradeoffs')">Ground costs</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="assistantQuestion">Ask About This Search</label>
+                            <textarea id="assistantQuestion" rows="6" placeholder="Examples: cheapest Vietnam trip, compare MCO and MLB, show domestic options, explain the best ground choice"></textarea>
+                        </div>
+                        <button class="btn-primary" onclick="app.runTripAssistant()">Ask Assistant</button>
+                    </div>
+                    <div id="assistantOutput" class="assistant-output">
+                        <h3>Ready when results are loaded</h3>
+                        <p>Run a search, then ask for cheapest trips, airport comparisons, international ideas, domestic options, or ground transportation tradeoffs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- IMPORT TAB -->
         <div id="import" class="tab-content">
             <div class="card">
                 <h2 style="margin-bottom: 20px; color: var(--primary);">Import Custom Fares</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Upload a CSV file with format: destination,airport,fare</p>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Upload verified fares from Google Flights, Expedia, or airline searches. CSV format: destination,airport,depart,return,fare,source</p>
 
                 <div class="form-group">
                     <label for="csvFile">Select CSV File</label>
@@ -596,6 +791,25 @@
                 </div>
 
                 <div id="importMessage"></div>
+            </div>
+        </div>
+
+        <!-- DIAGNOSTICS TAB -->
+        <div id="diagnostics" class="tab-content">
+            <div class="card">
+                <h2 style="margin-bottom: 20px; color: var(--primary);">Diagnostics</h2>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="app.runDiagnostics()">Run Checks</button>
+                    <button class="btn-secondary" onclick="app.exportFeedback()">Export Feedback</button>
+                    <button class="btn-secondary" onclick="app.showSavedFeedback()">Show Saved Feedback</button>
+                </div>
+                <div class="form-group">
+                    <label for="feedbackNotes">Feedback Notes</label>
+                    <textarea id="feedbackNotes" rows="5" placeholder="Paste user feedback, price mismatches, or trip ideas to review later."></textarea>
+                </div>
+                <div id="diagnosticsOutput" class="message info">
+                    Run checks after making changes to verify core optimizer behavior.
+                </div>
             </div>
         </div>
     </div>
@@ -751,37 +965,69 @@
             destinationCodes: {
                 'Allentown': 'ABE',
                 'Asheville': 'AVL',
+                'Amsterdam': 'AMS',
                 'Atlanta': 'ATL',
                 'Austin': 'AUS',
+                'Bangkok': 'BKK',
+                'Barcelona': 'BCN',
                 'Boston': 'BOS',
+                'Buenos Aires': 'EZE',
+                'Cancun': 'CUN',
+                'Cape Town': 'CPT',
                 'Charlotte': 'CLT',
                 'Chicago': 'CHI',
                 'Cincinnati': 'CVG',
+                'Costa Rica': 'SJO',
+                'Dublin': 'DUB',
                 'Dallas': 'DFW',
                 'Denver': 'DEN',
+                'Dubai': 'DXB',
+                'Frankfurt': 'FRA',
                 'Grand Rapids': 'GRR',
+                'Guatemala City': 'GUA',
                 'Hartford': 'BDL',
+                'Hanoi': 'HAN',
+                'Ho Chi Minh City': 'SGN',
                 'Houston': 'HOU',
                 'Indianapolis': 'IND',
+                'Istanbul': 'IST',
+                'Johannesburg': 'JNB',
                 'Key West': 'EYW',
                 'Knoxville': 'TYS',
+                'Lima': 'LIM',
                 'Las Vegas': 'LAS',
+                'London': 'LHR',
                 'Los Angeles': 'LAX',
+                'Madrid': 'MAD',
+                'Manila': 'MNL',
                 'Mexico City': 'MEX',
+                'Montreal': 'YUL',
                 'Nashville': 'BNA',
                 'New Haven': 'HVN',
                 'New Orleans': 'MSY',
                 'New York': 'NYC',
+                'Paris': 'CDG',
                 'Philadelphia': 'PHL',
                 'Pittsburgh': 'PIT',
                 'Phoenix': 'PHX',
                 'Portland': 'PDX',
+                'Punta Cana': 'PUJ',
                 'Providence': 'PVD',
+                'Reykjavik': 'KEF',
+                'Rio de Janeiro': 'GIG',
+                'Rome': 'FCO',
                 'San Diego': 'SAN',
                 'San Francisco': 'SFO',
                 'San Juan': 'SJU',
                 'San Antonio': 'SAT',
+                'Santiago': 'SCL',
+                'Sao Paulo': 'GRU',
                 'Seattle': 'SEA',
+                'Seoul': 'ICN',
+                'Singapore': 'SIN',
+                'Sydney': 'SYD',
+                'Tokyo': 'HND',
+                'Toronto': 'YYZ',
                 'Washington DC': 'WAS',
                 'White Plains': 'HPN'
             },
@@ -814,8 +1060,58 @@
                 { dest: 'Portland', tags: 'food outdoors' },
                 { dest: 'Key West', tags: 'beach island breeze' },
                 { dest: 'San Juan', tags: 'beach island caribbean' },
-                { dest: 'Mexico City', tags: 'food culture international' }
+                { dest: 'Cancun', tags: 'international mexico beach resort passport' },
+                { dest: 'Mexico City', tags: 'international mexico food culture city passport' },
+                { dest: 'Costa Rica', tags: 'international central america nature beach rainforest passport' },
+                { dest: 'Guatemala City', tags: 'international central america culture volcano passport' },
+                { dest: 'Toronto', tags: 'international canada city weekend passport' },
+                { dest: 'Montreal', tags: 'international canada food culture weekend passport' },
+                { dest: 'London', tags: 'international europe city history passport' },
+                { dest: 'Paris', tags: 'international europe food romance museums passport' },
+                { dest: 'Amsterdam', tags: 'international europe city culture passport' },
+                { dest: 'Dublin', tags: 'international europe ireland weekend passport' },
+                { dest: 'Madrid', tags: 'international europe spain food culture passport' },
+                { dest: 'Barcelona', tags: 'international europe spain beach culture passport' },
+                { dest: 'Rome', tags: 'international europe italy food history passport' },
+                { dest: 'Frankfurt', tags: 'international europe germany gateway passport' },
+                { dest: 'Reykjavik', tags: 'international europe iceland nature passport' },
+                { dest: 'Istanbul', tags: 'international europe asia culture food passport' },
+                { dest: 'Punta Cana', tags: 'international caribbean beach resort passport' },
+                { dest: 'Hanoi', tags: 'international asia vietnam food culture passport' },
+                { dest: 'Ho Chi Minh City', tags: 'international asia vietnam food city passport' },
+                { dest: 'Bangkok', tags: 'international asia thailand food beach culture passport' },
+                { dest: 'Singapore', tags: 'international asia food city passport' },
+                { dest: 'Seoul', tags: 'international asia korea food culture passport' },
+                { dest: 'Tokyo', tags: 'international asia japan food culture passport' },
+                { dest: 'Manila', tags: 'international asia philippines island beach passport' },
+                { dest: 'Dubai', tags: 'international middle east luxury desert passport' },
+                { dest: 'Cape Town', tags: 'international africa beach nature wine passport' },
+                { dest: 'Johannesburg', tags: 'international africa safari gateway passport' },
+                { dest: 'Lima', tags: 'international south america peru food culture passport' },
+                { dest: 'Buenos Aires', tags: 'international south america argentina food culture passport' },
+                { dest: 'Sao Paulo', tags: 'international south america brazil city passport' },
+                { dest: 'Rio de Janeiro', tags: 'international south america brazil beach passport' },
+                { dest: 'Santiago', tags: 'international south america chile wine mountains passport' },
+                { dest: 'Sydney', tags: 'international oceania australia beach city passport' }
             ],
+
+            countryNames: {
+                AE: 'United Arab Emirates Dubai Abu Dhabi', AG: 'Antigua and Barbuda', AR: 'Argentina',
+                AT: 'Austria', AU: 'Australia', AW: 'Aruba', BB: 'Barbados', BE: 'Belgium',
+                BS: 'Bahamas', BR: 'Brazil', BZ: 'Belize', CA: 'Canada', CH: 'Switzerland',
+                CL: 'Chile', CN: 'China', CO: 'Colombia', CR: 'Costa Rica', CU: 'Cuba',
+                DE: 'Germany', DO: 'Dominican Republic', EC: 'Ecuador', EG: 'Egypt',
+                ES: 'Spain', ET: 'Ethiopia', FJ: 'Fiji', FR: 'France', GB: 'United Kingdom England Scotland Wales',
+                GH: 'Ghana', GR: 'Greece', GT: 'Guatemala', HN: 'Honduras', ID: 'Indonesia Bali',
+                IE: 'Ireland', IL: 'Israel', IN: 'India', IS: 'Iceland', IT: 'Italy',
+                JM: 'Jamaica', JP: 'Japan', KE: 'Kenya', KR: 'South Korea Korea', MA: 'Morocco',
+                MX: 'Mexico', MY: 'Malaysia', NI: 'Nicaragua', NL: 'Netherlands Holland',
+                NZ: 'New Zealand', PA: 'Panama', PE: 'Peru', PF: 'French Polynesia Tahiti Bora Bora',
+                PH: 'Philippines', PR: 'Puerto Rico', PT: 'Portugal', QA: 'Qatar',
+                SA: 'Saudi Arabia', SG: 'Singapore', SV: 'El Salvador', TC: 'Turks and Caicos',
+                TH: 'Thailand', TR: 'Turkey', TZ: 'Tanzania', US: 'United States America USA',
+                UY: 'Uruguay', VI: 'US Virgin Islands', VN: 'Vietnam Viet Nam', ZA: 'South Africa'
+            },
 
             // Comprehensive US ZIP code database
             zipCodes: {
@@ -915,12 +1211,14 @@
                 flexDays: 15,
                 destinationTarget: '',
                 destinationFilter: '',
+                groundModePreference: 'auto',
                 scanStart: null,
                 scanEnd: null,
                 reachableAirports: [],
                 destinations: [],
                 optimizedResults: [],
-                vacationIdeas: []
+                vacationIdeas: [],
+                assistantHistory: []
             },
 
             // Initialize event listeners
@@ -966,6 +1264,15 @@
             // Estimate drive time from distance (average 65 mph)
             estimateDriveTime(distance) {
                 return distance / 65;
+            },
+
+            escapeHtml(value) {
+                return String(value ?? '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
             },
 
             parseCsvLine(line) {
@@ -1022,7 +1329,7 @@
                             const country = row[index.iso_country];
                             const scheduled = row[index.scheduled_service];
 
-                            if (country !== 'US' || scheduled !== 'yes' || !code) return;
+                            if (scheduled !== 'yes' || !code) return;
                             if (!['large_airport', 'medium_airport', 'small_airport'].includes(type)) return;
 
                             const lat = parseFloat(row[index.latitude_deg]);
@@ -1034,6 +1341,7 @@
                                 name: row[index.name].replace(/\s+Airport$/, ''),
                                 city: row[index.municipality] || row[index.name].replace(/\s+Airport$/, ''),
                                 state: (row[index.iso_region] || '').replace('US-', ''),
+                                country,
                                 type,
                                 lat,
                                 lon,
@@ -1071,7 +1379,8 @@
                 this.airports.forEach(airport => {
                     if (!airport.code) return;
                     const name = airport.city || airport.name;
-                    options.set(`${name}|${airport.code}`, `${name} (${airport.code})`);
+                    const country = this.getCountryName(airport.country);
+                    options.set(`${name}|${airport.code}`, country ? `${name} (${airport.code}) - ${country}` : `${name} (${airport.code})`);
                 });
 
                 datalist.innerHTML = [...options.values()]
@@ -1139,6 +1448,7 @@
                 document.getElementById('flexDays').value = this.state.flexDays ?? 15;
                 document.getElementById('destinationTarget').value = this.state.destinationTarget || '';
                 document.getElementById('destinationFilter').value = this.state.destinationFilter || '';
+                document.getElementById('groundModePreference').value = this.state.groundModePreference || 'auto';
             },
 
             buildVacationWindows(start, end, tripDays) {
@@ -1188,6 +1498,9 @@
                     route.dest,
                     destinationCode,
                     route.airline,
+                    route.country || '',
+                    this.getCountryName(route.country),
+                    route.region || '',
                     route.tags || ''
                 ].join(' ').toLowerCase();
 
@@ -1200,7 +1513,8 @@
             estimateFallbackFare(originAirport, destinationName) {
                 const destinationCode = this.destinationCodes[destinationName];
                 const destinationAirport = this.airports.find(airport => airport.code === destinationCode);
-                const defaultFare = 140;
+                const catalogDestination = this.destinationCatalog.find(destination => destination.dest === destinationName);
+                const defaultFare = catalogDestination && catalogDestination.tags.includes('international') ? 750 : 140;
 
                 if (!destinationAirport) return defaultFare;
 
@@ -1211,7 +1525,85 @@
                     destinationAirport.lon
                 );
 
-                return Math.round(Math.max(120, Math.min(650, 95 + distance * 0.18)));
+                const international = destinationAirport.country && destinationAirport.country !== 'US';
+                const longHaulInternational = international && distance > 6000;
+                const mediumHaulInternational = international && distance > 3000 && distance <= 6000;
+                const base = longHaulInternational ? 260 : mediumHaulInternational ? 320 : international ? 220 : 95;
+                const multiplier = longHaulInternational ? 0.18 : mediumHaulInternational ? 0.24 : international ? 0.22 : 0.18;
+                const min = longHaulInternational ? 1450 : international ? 350 : 120;
+                const max = longHaulInternational ? 3900 : international ? 2600 : 650;
+
+                const routeEstimate = base + distance * multiplier;
+                const originFactor = this.getOriginFareFactor(originAirport, international, distance);
+                return Math.round(Math.max(min, Math.min(max, routeEstimate * originFactor)));
+            },
+
+            getOriginFareFactor(originAirport, international, distance) {
+                if (!originAirport) return 1;
+
+                const code = originAirport.code;
+                const internationalGateways = new Set(['MCO', 'MIA', 'FLL', 'TPA', 'JFK', 'EWR', 'BOS', 'LAX', 'SFO', 'SEA', 'ORD', 'DFW', 'IAH', 'ATL', 'IAD']);
+                const strongDomesticHubs = new Set(['CLT', 'DEN', 'PHX', 'MSP', 'DTW', 'PHL', 'BWI', 'AUS', 'SAN']);
+                const regionalAirports = new Set(['MLB', 'VRB', 'DAB', 'SFB', 'PIE', 'PBI', 'SRQ', 'RSW', 'EYW']);
+
+                if (international && distance > 6000) {
+                    if (internationalGateways.has(code)) return 0.82;
+                    if (strongDomesticHubs.has(code)) return 0.94;
+                    if (regionalAirports.has(code)) return code === 'VRB' ? 1.08 : code === 'MLB' ? 1.12 : 1.15;
+                    return originAirport.type === 'large_airport' ? 0.95 : originAirport.type === 'medium_airport' ? 1.08 : 1.18;
+                }
+
+                if (international) {
+                    if (internationalGateways.has(code)) return 0.92;
+                    if (regionalAirports.has(code)) return 1.08;
+                    return originAirport.type === 'large_airport' ? 0.98 : 1.06;
+                }
+
+                const lowCostAlternates = new Set(['SFB', 'PIE', 'AZA', 'BUR', 'LGB', 'OAK', 'DAL', 'MDW', 'VRB']);
+                if (lowCostAlternates.has(code)) return 0.92;
+                if (regionalAirports.has(code)) return 1.02;
+                return 1;
+            },
+
+            getInternationalRegion(country) {
+                if (!country || country === 'US') return 'domestic';
+
+                const regionGroups = [
+                    { countries: ['CA'], label: 'canada north america international' },
+                    { countries: ['MX'], label: 'mexico north america international' },
+                    { countries: ['BZ', 'CR', 'GT', 'HN', 'NI', 'PA', 'SV'], label: 'central america international' },
+                    { countries: ['AG', 'AW', 'BB', 'BS', 'CU', 'DO', 'JM', 'PR', 'TC', 'VI'], label: 'caribbean islands international' },
+                    { countries: ['AR', 'BR', 'CL', 'CO', 'EC', 'PE', 'UY'], label: 'south america international' },
+                    { countries: ['GB', 'IE', 'FR', 'NL', 'DE', 'ES', 'IT', 'IS', 'PT', 'CH', 'AT', 'GR'], label: 'europe international' },
+                    { countries: ['JP', 'KR', 'CN', 'SG', 'TH', 'VN', 'PH', 'ID', 'MY', 'IN'], label: 'asia international' },
+                    { countries: ['AE', 'QA', 'SA', 'IL', 'TR'], label: 'middle east international' },
+                    { countries: ['ZA', 'EG', 'MA', 'KE', 'TZ', 'GH', 'ET'], label: 'africa international' },
+                    { countries: ['AU', 'NZ', 'FJ', 'PF'], label: 'oceania islands south pacific international' }
+                ];
+
+                const match = regionGroups.find(group => group.countries.includes(country));
+                return match ? match.label : 'international worldwide global';
+            },
+
+            getCountryName(country) {
+                return this.countryNames[country] || '';
+            },
+
+            getRegionFromTags(tags = '') {
+                const value = tags.toLowerCase();
+                if (value.includes('central america')) return 'central america international';
+                if (value.includes('south america')) return 'south america international';
+                if (value.includes('africa')) return 'africa international';
+                if (value.includes('asia')) return 'asia international';
+                if (value.includes('middle east')) return 'middle east international';
+                if (value.includes('europe')) return 'europe international';
+                if (value.includes('oceania') || value.includes('australia')) return 'oceania islands south pacific international';
+                if (value.includes('caribbean')) return 'caribbean islands international';
+                if (value.includes('island')) return 'islands international';
+                if (value.includes('canada')) return 'canada north america international';
+                if (value.includes('mexico')) return 'mexico north america international';
+                if (value.includes('international')) return 'international worldwide global';
+                return 'domestic';
             },
 
             getDestinationAirportCandidates(originAirport) {
@@ -1232,7 +1624,10 @@
                             airport.code,
                             airport.name,
                             airport.city || '',
-                            airport.state || ''
+                            airport.state || '',
+                            airport.country || '',
+                            this.getCountryName(airport.country),
+                            this.getInternationalRegion(airport.country)
                         ].join(' ').toLowerCase();
 
                         return filterTerms.some(term => haystack.includes(term));
@@ -1257,15 +1652,18 @@
                         const airport = candidate.airport;
                         const destinationName = airport.city || airport.name;
                         const destinationCode = airport.code;
+                        const international = airport.country && airport.country !== 'US';
 
                         return {
                             dest: destinationName,
                             destinationCode,
                             airline: 'Live search',
                             nonstop: false,
-                            fare: Math.round(Math.max(120, Math.min(700, 95 + candidate.distance * 0.18))),
+                            fare: this.estimateFallbackFare(originAirport, destinationName),
                             source: 'live',
-                            tags: `${airport.code} ${airport.name} ${airport.city || ''} ${airport.state || ''}`
+                            country: airport.country,
+                            region: this.getInternationalRegion(airport.country),
+                            tags: `${airport.code} ${airport.name} ${airport.city || ''} ${airport.state || ''} ${airport.country || ''} ${this.getCountryName(airport.country)} ${this.getInternationalRegion(airport.country)}`
                         };
                     })
                     .filter(route => !existingDestinations.has(`${route.dest}|${route.destinationCode}`))
@@ -1290,6 +1688,10 @@
                         nonstop: false,
                         fare: this.estimateFallbackFare(airport, destination.dest),
                         source: 'live',
+                        country: (this.airports.find(a => a.code === this.destinationCodes[destination.dest]) || {}).country,
+                        region: (this.airports.find(a => a.code === this.destinationCodes[destination.dest]) || {}).country
+                            ? this.getInternationalRegion((this.airports.find(a => a.code === this.destinationCodes[destination.dest]) || {}).country)
+                            : this.getRegionFromTags(destination.tags),
                         tags: destination.tags
                     }))
                     .filter(route => this.matchesDestinationFilter(route))
@@ -1304,6 +1706,34 @@
                 return [...curated.filter(route => this.matchesDestinationFilter(route)), ...fallback];
             },
 
+            getFareOverride(destination, option, departDate, returnDate) {
+                const destinationCode = option.destinationCode || this.destinationCodes[destination] || '';
+                const keys = [
+                    `${destination}|${option.code}|${departDate}|${returnDate}`,
+                    `${destinationCode}|${option.code}|${departDate}|${returnDate}`,
+                    `${destination}|${option.code}`,
+                    `${destinationCode}|${option.code}`
+                ].filter(key => !key.startsWith('|'));
+
+                for (const key of keys) {
+                    if (this.customFares[key]) {
+                        const value = this.customFares[key];
+                        const override = typeof value === 'number'
+                            ? { fare: value, source: 'Verified' }
+                            : value;
+                        const fare = parseFloat(override.fare);
+                        if (Number.isFinite(fare)) {
+                            return {
+                                fare,
+                                source: override.source || 'Verified'
+                            };
+                        }
+                    }
+                }
+
+                return null;
+            },
+
             getDateFare(route, departDate, returnDate) {
                 const departDay = departDate.getDay();
                 const returnDay = returnDate.getDay();
@@ -1315,6 +1745,43 @@
                 const connectionAdjustment = route.nonstop ? 0 : 35;
 
                 return Math.round(route.fare + seasonalAdjustment + weekendAdjustment + connectionAdjustment);
+            },
+
+            getFareRange(fare, route, verified) {
+                if (verified) {
+                    return {
+                        low: fare,
+                        high: fare,
+                        label: `$${fare} verified`,
+                        status: 'Verified'
+                    };
+                }
+
+                return {
+                    low: fare,
+                    high: fare,
+                    label: `$${fare} model`,
+                    status: 'Needs live check'
+                };
+            },
+
+            formatTripCost(result) {
+                if (result.fareVerified) return `$${result.totalCost.toFixed(0)}`;
+                return `$${result.totalCost.toFixed(0)} model`;
+            },
+
+            getDealSourceSummary(result) {
+                if (result.fareVerified) {
+                    return `
+                        <strong>${this.escapeHtml(result.fareSource)}</strong>
+                        <div class="source-note">Cheapest saved fare for this route/date: $${result.airfare.toFixed(0)} per person.</div>
+                    `;
+                }
+
+                return `
+                    <strong>Model estimate</strong>
+                    <div class="source-note">Open live links, then save the lowest fare so this route sorts by the real source.</div>
+                `;
             },
 
             async lookupZipLocation(zipInput) {
@@ -1386,6 +1853,7 @@
                 this.state.flexDays = parseInt(document.getElementById('flexDays').value) || 0;
                 this.state.destinationTarget = document.getElementById('destinationTarget').value.trim();
                 this.state.destinationFilter = document.getElementById('destinationFilter').value.trim();
+                this.state.groundModePreference = document.getElementById('groundModePreference').value;
 
                 const departStartDate = this.parseDateInput(this.state.departStart);
                 const returnEndDate = this.parseDateInput(this.state.returnEnd);
@@ -1471,6 +1939,8 @@
                 this.renderResultsTable();
                 this.renderVacationOptimizer();
 
+                this.runDiagnostics(true);
+
                 // Switch to vacation optimizer tab
                 document.querySelector('[data-tab="vacationOptimizer"]').click();
 
@@ -1494,22 +1964,49 @@
                 container.textContent = text;
             },
 
+            estimateRideShareCost(distance, driveTime) {
+                const oneWay = 14 + distance * 1.85 + driveTime * 18;
+                return Math.round(Math.max(24, oneWay) * 2);
+            },
+
             // Calculate estimated round-trip planning cost.
             calculateCostDetails(airfare, parking, driveDistance, nonstop) {
                 const totalTravelers = this.state.adults + this.state.children;
                 const airfareCost = airfare * totalTravelers;
                 const parkingCost = parking * this.state.tripDays;
-                const driveCost = driveDistance * 2 * 0.67; // Round-trip driving cost estimate.
+                const driveTime = this.estimateDriveTime(driveDistance);
+                const rideShareCost = this.estimateRideShareCost(driveDistance, driveTime);
+                const mileageCost = driveDistance * 2 * 0.22; // Fuel + wear estimate for round-trip self-drive.
+                const dropoffCost = driveDistance * 4 * 0.22; // Two round trips for drop-off and pickup.
+                const parkAndDriveCost = parkingCost + mileageCost;
+                const groundOptions = {
+                    auto: [
+                        { mode: 'Drive + park', cost: parkAndDriveCost },
+                        { mode: 'Ride-share', cost: rideShareCost }
+                    ],
+                    park: [{ mode: 'Drive + park', cost: parkAndDriveCost }],
+                    rideshare: [{ mode: 'Ride-share', cost: rideShareCost }],
+                    dropoff: [{ mode: 'Drop-off', cost: dropoffCost }]
+                };
+                const preference = this.state.groundModePreference || 'auto';
+                const selectedGround = (groundOptions[preference] || groundOptions.auto)
+                    .sort((a, b) => a.cost - b.cost)[0];
                 const bagFees = this.state.bags * 60; // $30 per bag per direction estimate.
                 const frictionPenalty = nonstop ? 0 : 50; // Planning penalty for connections/unknown stops.
 
                 return {
                     airfareCost,
                     parkingCost,
-                    driveCost,
+                    rideShareCost,
+                    dropoffCost,
+                    parkAndDriveCost,
+                    groundCost: selectedGround.cost,
+                    groundMode: selectedGround.mode,
+                    driveCost: mileageCost,
+                    mileageCost,
                     bagFees,
                     frictionPenalty,
-                    totalCost: airfareCost + parkingCost + driveCost + bagFees + frictionPenalty
+                    totalCost: airfareCost + selectedGround.cost + bagFees + frictionPenalty
                 };
             },
 
@@ -1531,13 +2028,26 @@
 
                 this.state.destinations.forEach(dest => {
                     dest.airports.forEach(option => {
-                        const customKey = `${dest.name}|${option.code}`;
-                        const customFare = this.customFares[customKey];
-
                         vacationWindows.forEach(window => {
-                            const airfare = customFare || this.getDateFare(option, window.departDate, window.returnDate);
+                            const departDate = this.formatDateForInput(window.departDate);
+                            const returnDate = this.formatDateForInput(window.returnDate);
+                            const fareOverride = this.getFareOverride(dest.name, option, departDate, returnDate);
+                            const airfare = fareOverride ? fareOverride.fare : this.getDateFare(option, window.departDate, window.returnDate);
+                            const fareRange = this.getFareRange(airfare, option, !!fareOverride);
                             const costDetails = this.calculateCostDetails(
                                 airfare,
+                                option.parking,
+                                option.distance,
+                                option.nonstop
+                            );
+                            const lowCostDetails = this.calculateCostDetails(
+                                fareRange.low,
+                                option.parking,
+                                option.distance,
+                                option.nonstop
+                            );
+                            const highCostDetails = this.calculateCostDetails(
+                                fareRange.high,
                                 option.parking,
                                 option.distance,
                                 option.nonstop
@@ -1550,26 +2060,42 @@
                                 airline: option.airline,
                                 nonstop: option.nonstop,
                                 airfare: airfare,
+                                airfareLow: fareRange.low,
+                                airfareHigh: fareRange.high,
+                                fareLabel: fareRange.label,
+                                fareStatus: fareRange.status,
                                 destinationCode: option.destinationCode,
+                                country: option.country,
+                                region: option.region,
                                 driveTime: option.driveTime,
                                 distance: option.distance,
                                 parking: option.parking,
-                                departDate: this.formatDateForInput(window.departDate),
-                                returnDate: this.formatDateForInput(window.returnDate),
+                                departDate,
+                                returnDate,
                                 source: option.source,
+                                fareSource: fareOverride ? fareOverride.source : 'Estimate',
+                                fareVerified: !!fareOverride,
                                 airfareCost: costDetails.airfareCost,
                                 parkingCost: costDetails.parkingCost,
+                                rideShareCost: costDetails.rideShareCost,
+                                dropoffCost: costDetails.dropoffCost,
+                                parkAndDriveCost: costDetails.parkAndDriveCost,
+                                groundCost: costDetails.groundCost,
+                                groundMode: costDetails.groundMode,
                                 driveCost: costDetails.driveCost,
+                                mileageCost: costDetails.mileageCost,
                                 bagFees: costDetails.bagFees,
                                 frictionPenalty: costDetails.frictionPenalty,
-                                totalCost: costDetails.totalCost
+                                totalCost: costDetails.totalCost,
+                                totalCostLow: lowCostDetails.totalCost,
+                                totalCostHigh: highCostDetails.totalCost
                             });
                         });
                     });
                 });
 
-                // Sort by total cost
-                this.state.optimizedResults.sort((a, b) => a.totalCost - b.totalCost);
+                // Sort by the low end of the trip estimate so cheap possibilities are not hidden.
+                this.state.optimizedResults.sort((a, b) => a.totalCostLow - b.totalCostLow);
 
                 // Add rank
                 this.state.optimizedResults.forEach((result, index) => {
@@ -1592,22 +2118,32 @@
                 const exactDateResults = this.state.optimizedResults;
                 this.calculateOptimizedResults(true);
                 const flexibleResults = this.state.optimizedResults;
-                const bestByDestination = new Map();
+                const bestByDestinationAirport = new Map();
+                const airportCountsByDestination = new Map();
 
                 flexibleResults.forEach(result => {
-                    const current = bestByDestination.get(result.destination);
-                    if (!current || result.totalCost < current.totalCost) {
-                        bestByDestination.set(result.destination, result);
+                    if (!airportCountsByDestination.has(result.destination)) {
+                        airportCountsByDestination.set(result.destination, new Set());
+                    }
+                    airportCountsByDestination.get(result.destination).add(result.airport);
+                });
+
+                flexibleResults.forEach(result => {
+                    const key = `${result.destination}|${result.airport}`;
+                    const current = bestByDestinationAirport.get(key);
+                    if (!current || result.totalCostLow < current.totalCostLow) {
+                        bestByDestinationAirport.set(key, result);
                     }
                 });
 
-                this.state.vacationIdeas = [...bestByDestination.values()]
+                this.state.vacationIdeas = [...bestByDestinationAirport.values()]
                     .map((result, index) => ({
                         ...result,
+                        comparedAirports: airportCountsByDestination.get(result.destination)?.size || 1,
                         vacationScore: this.getVacationScore(result, index)
                     }))
                     .sort((a, b) => {
-                        if (a.totalCost !== b.totalCost) return a.totalCost - b.totalCost;
+                        if (a.totalCostLow !== b.totalCostLow) return a.totalCostLow - b.totalCostLow;
                         return b.vacationScore - a.vacationScore;
                     })
                     .slice(0, 25)
@@ -1676,6 +2212,7 @@
                         <thead>
                             <tr>
                                 <th>Destination</th>
+                                <th>Region</th>
                                 <th>Available Airports</th>
                                 <th>Airlines</th>
                                 <th>Source</th>
@@ -1686,9 +2223,11 @@
                                 const airports = [...new Set(dest.airports.map(a => a.code))].join(', ');
                                 const airlines = [...new Set(dest.airports.map(a => a.airline))].join(', ');
                                 const sources = [...new Set(dest.airports.map(a => a.source === 'live' ? 'Live search' : 'Sample route'))].join(', ');
+                                const regions = [...new Set(dest.airports.map(a => a.region || 'domestic'))].join(', ');
                                 return `
                                     <tr>
                                         <td>${dest.name}</td>
+                                        <td>${regions}</td>
                                         <td>${airports}</td>
                                         <td>${airlines}</td>
                                         <td>${sources}</td>
@@ -1719,13 +2258,13 @@
                 empty.style.display = 'none';
 
                 // Calculate stats
-                const minCost = Math.min(...this.state.optimizedResults.map(r => r.totalCost));
-                const maxCost = Math.max(...this.state.optimizedResults.map(r => r.totalCost));
+                const minCost = Math.min(...this.state.optimizedResults.map(r => r.totalCostLow));
+                const maxCost = Math.max(...this.state.optimizedResults.map(r => r.totalCostLow));
                 const avgCost = this.state.optimizedResults.reduce((sum, r) => sum + r.totalCost, 0) / this.state.optimizedResults.length;
 
                 const statsHtml = `
                     <div class="message info">
-                        Estimates are round-trip planning estimates, not live fares. Rows marked Live search should be confirmed with Check Live.
+                        Unverified ticket fares are calibrated model prices, not live quotes. Use the fare links to confirm live prices, or import verified fares to replace estimates.
                     </div>
                     <div class="stats">
                         <div class="stat-card">
@@ -1738,7 +2277,7 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">$${maxCost.toFixed(0)}</div>
-                            <div class="stat-label">Max Estimate</div>
+                            <div class="stat-label">Highest Estimate</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">${this.state.optimizedResults.length}</div>
@@ -1756,37 +2295,47 @@
                                 <th>Destination</th>
                                 <th>Dates</th>
                                 <th>Airport</th>
+                                <th>Region</th>
                                 <th>Airline</th>
                                 <th>Nonstop</th>
-                                <th>Estimate/pp</th>
+                                <th>Fare/pp</th>
+                                <th>Best Fare Location</th>
                                 <th>Drive Time</th>
                                 <th>Parking</th>
-                                <th>Drive</th>
+                                <th>Mileage</th>
+                                <th>Ride-share</th>
+                                <th>Drop-off</th>
+                                <th>Ground Used</th>
                                 <th>Bags</th>
+                                <th>Penalty</th>
                                 <th>Total Cost</th>
                                 <th>Source</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            ${this.state.optimizedResults.map(result => `
+                            ${this.state.optimizedResults.map((result, index) => `
                                 <tr>
                                     <td><span class="badge badge-success">#${result.rank}</span></td>
                                     <td>${result.destination}</td>
                                     <td>${this.formatDate(this.parseDateInput(result.departDate))} - ${this.formatDate(this.parseDateInput(result.returnDate))}</td>
                                     <td><span class="highlight">${result.airport}</span></td>
+                                    <td>${result.region || 'domestic'}</td>
                                     <td>${result.airline}</td>
                                     <td>${result.nonstop ? '✅ Yes' : '⏱️ No'}</td>
-                                    <td>$${result.airfare}</td>
+                                    <td>${result.fareLabel}</td>
+                                    <td>${this.getDealSourceSummary(result)}</td>
                                     <td>${result.driveTime.toFixed(2)}h</td>
                                     <td>$${result.parkingCost.toFixed(0)}</td>
-                                    <td>$${result.driveCost.toFixed(0)}</td>
+                                    <td>$${result.mileageCost.toFixed(0)}</td>
+                                    <td>$${result.rideShareCost.toFixed(0)}</td>
+                                    <td>$${result.dropoffCost.toFixed(0)}</td>
+                                    <td>${result.groundMode} $${result.groundCost.toFixed(0)}</td>
                                     <td>$${result.bagFees.toFixed(0)}</td>
-                                    <td><span class="highlight">$${result.totalCost.toFixed(0)}</span></td>
+                                    <td>$${result.frictionPenalty.toFixed(0)}</td>
+                                    <td><span class="highlight">${this.formatTripCost(result)}</span></td>
                                     <td>${result.source === 'live' ? 'Live search' : 'Sample'}</td>
-                                    <td>
-                                        <a href="${this.buildGoogleFlightsUrl(result)}" target="_blank" class="search-link">Check Live</a>
-                                    </td>
+                                    <td>${this.renderDealLinks(result, 'optimizedResults', index)}</td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -1815,11 +2364,11 @@
 
                 statsContainer.innerHTML = `
                     <div class="message info">
-                        Vacation ideas scan your preferred dates plus/minus ${this.state.flexDays} days, then keep the lowest estimated trip for each destination.
+                        Vacation ideas scan your preferred dates plus/minus ${this.state.flexDays} days and keep strong options across multiple reachable departure airports.
                     </div>
                     <div class="stats">
                         <div class="stat-card">
-                            <div class="stat-value">$${bestIdea.totalCost.toFixed(0)}</div>
+                            <div class="stat-value">${this.formatTripCost(bestIdea)}</div>
                             <div class="stat-label">Best Trip</div>
                         </div>
                         <div class="stat-card">
@@ -1845,28 +2394,258 @@
                                 <th>Destination</th>
                                 <th>Best Dates</th>
                                 <th>Depart</th>
+                                <th>Region</th>
                                 <th>Estimate</th>
+                                <th>Best Fare Location</th>
+                                <th>Ground</th>
                                 <th>Why It Ranks</th>
                                 <th>Source</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            ${this.state.vacationIdeas.map(idea => `
+                            ${this.state.vacationIdeas.map((idea, index) => `
                                 <tr>
                                     <td><span class="badge badge-success">#${idea.ideaRank}</span></td>
                                     <td>${idea.destination}</td>
                                     <td>${this.formatDate(this.parseDateInput(idea.departDate))} - ${this.formatDate(this.parseDateInput(idea.returnDate))}</td>
                                     <td><span class="highlight">${idea.airport}</span></td>
-                                    <td><span class="highlight">$${idea.totalCost.toFixed(0)}</span></td>
-                                    <td>${idea.nonstop ? 'Nonstop option' : 'Lowest estimate'} via ${idea.airline}; ${idea.driveTime.toFixed(1)}h drive</td>
+                                    <td>${idea.region || 'domestic'}</td>
+                                    <td><span class="highlight">${this.formatTripCost(idea)}</span></td>
+                                    <td>${this.getDealSourceSummary(idea)}</td>
+                                    <td>${idea.groundMode} $${idea.groundCost.toFixed(0)}</td>
+                                    <td>${idea.nonstop ? 'Nonstop option' : 'Lowest estimate'} via ${idea.airline}; ${idea.airport} among ${idea.comparedAirports} airport${idea.comparedAirports === 1 ? '' : 's'}</td>
                                     <td>${idea.source === 'live' ? 'Live search' : 'Sample'}</td>
-                                    <td><a href="${this.buildGoogleFlightsUrl(idea)}" target="_blank" class="search-link">Check Live</a></td>
+                                    <td>${this.renderDealLinks(idea, 'vacationIdeas', index)}</td>
                                 </tr>
                             `).join('')}
                         </tbody>
                     </table>
                 `;
+            },
+
+            getAssistantContext() {
+                const allIdeas = [...this.state.vacationIdeas, ...this.state.optimizedResults]
+                    .sort((a, b) => a.totalCostLow - b.totalCostLow);
+                const unique = new Map();
+                allIdeas.forEach(idea => {
+                    const key = `${idea.destination}|${idea.airport}|${idea.departDate}|${idea.returnDate}`;
+                    if (!unique.has(key) || idea.totalCostLow < unique.get(key).totalCostLow) {
+                        unique.set(key, idea);
+                    }
+                });
+
+                const ideas = [...unique.values()].sort((a, b) => a.totalCostLow - b.totalCostLow);
+                const verifiedDeals = ideas.filter(idea => idea.fareVerified);
+                const domesticCount = ideas.filter(idea => !idea.country || idea.country === 'US' || (idea.region || '') === 'domestic').length;
+
+                return {
+                    settings: {
+                        homeZip: this.state.homeZip,
+                        homeCity: this.state.homeCity,
+                        homeState: this.state.homeState,
+                        departStart: this.state.departStart,
+                        returnEnd: this.state.returnEnd,
+                        scanStart: this.state.scanStart,
+                        scanEnd: this.state.scanEnd,
+                        travelers: (this.state.adults || 0) + (this.state.children || 0),
+                        bags: this.state.bags,
+                        groundModePreference: this.state.groundModePreference
+                    },
+                    counts: {
+                        loadedOptions: ideas.length,
+                        domestic: domesticCount,
+                        international: ideas.length - domesticCount,
+                        verifiedDeals: verifiedDeals.length
+                    },
+                    topIdeas: ideas.slice(0, 12).map(idea => ({
+                        destination: idea.destination,
+                        destinationCode: idea.destinationCode,
+                        airport: idea.airport,
+                        departDate: idea.departDate,
+                        returnDate: idea.returnDate,
+                        totalCost: Math.round(idea.totalCost),
+                        totalCostLow: Math.round(idea.totalCostLow),
+                        airfare: Math.round(idea.airfare),
+                        fareSource: idea.fareSource,
+                        fareVerified: idea.fareVerified,
+                        groundMode: idea.groundMode,
+                        groundCost: Math.round(idea.groundCost),
+                        region: idea.region || 'domestic'
+                    })),
+                    verifiedDeals: verifiedDeals.slice(0, 8).map(idea => ({
+                        destination: idea.destination,
+                        airport: idea.airport,
+                        departDate: idea.departDate,
+                        returnDate: idea.returnDate,
+                        airfare: Math.round(idea.airfare),
+                        source: idea.fareSource,
+                        totalCost: Math.round(idea.totalCost)
+                    }))
+                };
+            },
+
+            getAssistantIdeaPool(question) {
+                const query = question.toLowerCase();
+                const combined = [...this.state.vacationIdeas, ...this.state.optimizedResults];
+                const unique = new Map();
+
+                combined.forEach(result => {
+                    const key = `${result.destination}|${result.airport}|${result.departDate}|${result.returnDate}`;
+                    if (!unique.has(key) || result.totalCostLow < unique.get(key).totalCostLow) {
+                        unique.set(key, result);
+                    }
+                });
+
+                let ideas = [...unique.values()].sort((a, b) => a.totalCostLow - b.totalCostLow);
+                const wantsInternational = /international|passport|asia|africa|europe|island|vietnam|viet nam|sgn|hanoi|south america|central america|canada|mexico|caribbean/.test(query);
+                const wantsDomestic = /domestic|usa|united states|florida|texas|california|dallas|boston|new york|denver|vegas|chicago/.test(query);
+                const airportCodes = [...new Set((question.match(/\b[A-Z]{3}\b/gi) || []).map(code => code.toUpperCase()))];
+
+                if (wantsInternational) {
+                    ideas = ideas.filter(idea => (idea.country && idea.country !== 'US') || (idea.region || '').includes('international'));
+                }
+
+                if (wantsDomestic && !wantsInternational) {
+                    ideas = ideas.filter(idea => !idea.country || idea.country === 'US' || (idea.region || '') === 'domestic');
+                }
+
+                if (airportCodes.length) {
+                    ideas = ideas.filter(idea => airportCodes.includes(idea.airport) || airportCodes.includes(idea.destinationCode));
+                }
+
+                const destinationTerms = ['vietnam', 'viet nam', 'sgn', 'hanoi', 'asia', 'africa', 'europe', 'island', 'caribbean', 'south america', 'central america', 'canada', 'mexico'];
+                const matchedTerm = destinationTerms.find(term => query.includes(term));
+                if (matchedTerm) {
+                    const normalizedTerm = matchedTerm === 'viet nam' ? 'vietnam' : matchedTerm;
+                    ideas = ideas.filter(idea => {
+                        const haystack = [
+                            idea.destination,
+                            idea.destinationCode || '',
+                            idea.country || '',
+                            this.getCountryName(idea.country),
+                            idea.region || ''
+                        ].join(' ').toLowerCase();
+                        return haystack.includes(normalizedTerm) ||
+                            (normalizedTerm === 'vietnam' && haystack.includes('vn')) ||
+                            (normalizedTerm === 'sgn' && haystack.includes('ho chi minh'));
+                    });
+                }
+
+                return ideas;
+            },
+
+            formatAssistantIdea(idea) {
+                const fareType = idea.fareVerified ? 'verified' : 'model';
+                const source = idea.fareVerified ? ` from ${this.escapeHtml(idea.fareSource)}` : ', source not verified yet';
+                return `${this.escapeHtml(idea.destination)} from ${this.escapeHtml(idea.airport)}, ${this.formatDate(this.parseDateInput(idea.departDate))} to ${this.formatDate(this.parseDateInput(idea.returnDate))}: ${this.formatTripCost(idea)} total, $${idea.airfare.toFixed(0)}/person ${fareType}${source}, ${this.escapeHtml(idea.groundMode)} $${idea.groundCost.toFixed(0)}`;
+            },
+
+            buildLocalAssistantAnswer(question) {
+                if (!this.state.optimizedResults.length && !this.state.vacationIdeas.length) {
+                    return `
+                        <h3>No search loaded yet</h3>
+                        <p>Run a search first so the assistant can compare the exact-date flight list, flexible vacation ideas, airport options, fares, and ground transportation.</p>
+                    `;
+                }
+
+                const ideas = this.getAssistantIdeaPool(question || 'cheapest');
+                const topIdeas = ideas.slice(0, 5);
+                const allIdeas = [...this.state.vacationIdeas, ...this.state.optimizedResults].sort((a, b) => a.totalCostLow - b.totalCostLow);
+                const bestOverall = allIdeas[0];
+                const verifiedDeals = allIdeas.filter(idea => idea.fareVerified);
+                const domesticCount = allIdeas.filter(idea => !idea.country || idea.country === 'US' || (idea.region || '') === 'domestic').length;
+                const internationalCount = allIdeas.length - domesticCount;
+                const airportAlternates = new Map();
+
+                ideas.forEach(idea => {
+                    const current = airportAlternates.get(idea.airport);
+                    if (!current || idea.totalCostLow < current.totalCostLow) {
+                        airportAlternates.set(idea.airport, idea);
+                    }
+                });
+
+                const airportSummary = [...airportAlternates.values()]
+                    .sort((a, b) => a.totalCostLow - b.totalCostLow)
+                    .slice(0, 4);
+
+                if (!topIdeas.length) {
+                    return `
+                        <h3>No matching loaded results</h3>
+                        <p>The current search has ${allIdeas.length} loaded options, including ${domesticCount} domestic and ${internationalCount} international ideas, but none matched that assistant question. Try a broader destination filter, such as Asia, Europe, domestic, or cheapest.</p>
+                    `;
+                }
+
+                return `
+                    <h3>Best read from current results</h3>
+                    <p>Lowest loaded option: ${this.formatAssistantIdea(bestOverall)}.</p>
+                    <p>${verifiedDeals.length ? `${verifiedDeals.length} saved live fare${verifiedDeals.length === 1 ? '' : 's'} are being used for sorting.` : 'No saved live fares yet, so these are still calibrated estimates. Click fare links, then use Save Fare to lock in the real source.'}</p>
+                    <h3>Top matches</h3>
+                    <ul>${topIdeas.map(idea => `<li>${this.formatAssistantIdea(idea)}</li>`).join('')}</ul>
+                    <h3>Airport alternates</h3>
+                    <ul>${airportSummary.map(idea => `<li>${idea.airport}: ${idea.destination}, ${this.formatTripCost(idea)} total, fare ${idea.fareLabel}</li>`).join('')}</ul>
+                    <p>Coverage check: ${domesticCount} domestic options and ${internationalCount} international options are loaded for this search. Best fare location will show the saved provider once a real fare is entered.</p>
+                `;
+            },
+
+            renderAssistantMessage(role, html) {
+                return `
+                    <div class="assistant-message">
+                        <strong>${role === 'user' ? 'You' : 'Trip Assistant'}</strong>
+                        <div>${html}</div>
+                    </div>
+                `;
+            },
+
+            renderAssistantHistory() {
+                const output = document.getElementById('assistantOutput');
+                if (!this.state.assistantHistory.length) {
+                    output.innerHTML = '<h3>Ready when results are loaded</h3><p>Run a search, then ask for cheapest trips, airport comparisons, international ideas, domestic options, or ground transportation tradeoffs.</p>';
+                    return;
+                }
+
+                output.innerHTML = this.state.assistantHistory
+                    .slice(-8)
+                    .map(entry => this.renderAssistantMessage(entry.role, entry.html))
+                    .join('');
+            },
+
+            async requestRemoteAssistant(question) {
+                const context = this.getAssistantContext();
+                const response = await fetch('/api/assistant', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question, context })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Assistant proxy returned ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (!data.answer) throw new Error('Assistant proxy returned no answer');
+                return `<h3>AI trip read</h3><p>${this.escapeHtml(data.answer).replace(/\n/g, '<br>')}</p>`;
+            },
+
+            async runTripAssistant(promptOverride = '') {
+                const questionInput = document.getElementById('assistantQuestion');
+                const question = (promptOverride || questionInput.value || 'What are the best deals in this search?').trim();
+                questionInput.value = '';
+                this.state.assistantHistory.push({ role: 'user', html: `<p>${this.escapeHtml(question)}</p>` });
+                this.state.assistantHistory.push({ role: 'assistant', html: '<p><span class="spinner"></span>Reading fares, airports, dates, and saved deal sources...</p>' });
+                this.renderAssistantHistory();
+
+                let answer;
+                try {
+                    answer = await this.requestRemoteAssistant(question);
+                } catch (error) {
+                    answer = this.buildLocalAssistantAnswer(question);
+                }
+
+                this.state.assistantHistory.pop();
+                this.state.assistantHistory.push({ role: 'assistant', html: answer });
+                this.renderAssistantHistory();
+                this.saveData();
             },
 
             // Build Google Flights search URL
@@ -1878,11 +2657,94 @@
                 return `https://www.google.com/travel/flights?q=${query}`;
             },
 
+            buildExpediaFlightsUrl(result) {
+                const departure = result.airport;
+                const destination = result.destinationCode || this.destinationCodes[result.destination] || result.destination;
+                const query = encodeURIComponent(`${departure} to ${destination} ${result.departDate || ''} ${result.returnDate || ''}`.trim());
+                return `https://www.expedia.com/Flights-Search?trip=roundtrip&leg1=from:${departure},to:${destination},departure:${result.departDate || ''}TANYT&leg2=from:${destination},to:${departure},departure:${result.returnDate || ''}TANYT&passengers=adults:${this.state.adults || 1},children:${this.state.children || 0}&mode=search&options=sortby:price&search=${query}`;
+            },
+
+            buildKayakFlightsUrl(result) {
+                const departure = result.airport;
+                const destination = result.destinationCode || this.destinationCodes[result.destination] || result.destination;
+                return `https://www.kayak.com/flights/${departure}-${destination}/${result.departDate || ''}/${result.returnDate || ''}/${this.state.adults || 1}adults?sort=price_a`;
+            },
+
+            buildSkyscannerFlightsUrl(result) {
+                const departure = result.airport.toLowerCase();
+                const destination = (result.destinationCode || this.destinationCodes[result.destination] || result.destination).toLowerCase();
+                const departDate = (result.departDate || '').replace(/-/g, '').slice(2);
+                const returnDate = (result.returnDate || '').replace(/-/g, '').slice(2);
+                return `https://www.skyscanner.com/transport/flights/${departure}/${destination}/${departDate}/${returnDate}/`;
+            },
+
+            buildDealSearchUrl(result, provider) {
+                const departure = result.airport;
+                const destination = result.destinationCode || this.destinationCodes[result.destination] || result.destination;
+                const query = encodeURIComponent(`${provider} cheap flights ${departure} to ${destination} ${result.departDate || ''} ${result.returnDate || ''}`);
+                return `https://www.google.com/search?q=${query}`;
+            },
+
+            renderDealLinks(result, collection = '', index = -1) {
+                const saveButton = collection
+                    ? `<button class="inline-action" onclick="app.saveLiveFareFromResult('${collection}', ${index})">Save lowest fare</button>`
+                    : '';
+                return `
+                    <a href="${this.buildGoogleFlightsUrl(result)}" target="_blank" class="search-link">Google</a>
+                    <a href="${this.buildExpediaFlightsUrl(result)}" target="_blank" class="search-link">Expedia</a>
+                    <a href="${this.buildKayakFlightsUrl(result)}" target="_blank" class="search-link">Kayak</a>
+                    <a href="${this.buildSkyscannerFlightsUrl(result)}" target="_blank" class="search-link">Skyscanner</a>
+                    <a href="${this.buildDealSearchUrl(result, 'Hopper Going flight deals')}" target="_blank" class="search-link">Deals</a>
+                    ${saveButton}
+                `;
+            },
+
             buildAirportExploreUrl(airport) {
                 const departStart = this.state.departStart || this.formatDateForInput(new Date());
                 const returnEnd = this.state.returnEnd || this.formatDateForInput(this.addDays(new Date(), this.state.tripDays || 3));
                 const query = encodeURIComponent(`Flights from ${airport.code} between ${departStart} and ${returnEnd}`);
                 return `https://www.google.com/travel/flights?q=${query}`;
+            },
+
+            saveLiveFareFromResult(collection, index) {
+                const list = this.state[collection] || [];
+                const result = list[index];
+                if (!result) return;
+
+                const fareInput = prompt(`Lowest live fare per person for ${result.airport} to ${result.destination} (${result.departDate} to ${result.returnDate})`, Math.round(result.airfare));
+                if (fareInput === null) return;
+
+                const fare = parseFloat(String(fareInput).replace(/[^0-9.]/g, ''));
+                if (!Number.isFinite(fare) || fare <= 0) {
+                    alert('Please enter a valid fare amount.');
+                    return;
+                }
+
+                const sourceInput = prompt('Where did you find it? Example: Expedia, Google Flights, Kayak, Skyscanner, Airline site', result.fareVerified ? result.fareSource : 'Google Flights');
+                if (sourceInput === null) return;
+                const source = sourceInput.trim() || 'Verified live fare';
+                const destinationCode = result.destinationCode || this.destinationCodes[result.destination] || '';
+                const routeKeys = [
+                    `${result.destination}|${result.airport}|${result.departDate}|${result.returnDate}`,
+                    `${destinationCode}|${result.airport}|${result.departDate}|${result.returnDate}`,
+                    `${result.destination}|${result.airport}`,
+                    `${destinationCode}|${result.airport}`
+                ].filter(key => !key.startsWith('|'));
+
+                routeKeys.forEach(key => {
+                    this.customFares[key] = {
+                        fare,
+                        source,
+                        capturedAt: new Date().toISOString()
+                    };
+                });
+
+                this.calculateOptimizedResults(false);
+                this.calculateVacationIdeas();
+                this.renderResultsTable();
+                this.renderVacationOptimizer();
+                this.saveData();
+                this.showMessage(`Saved ${source} fare for ${result.airport} to ${result.destination}: $${fare.toFixed(0)} per person.`, 'info');
             },
 
             // Import fares from CSV
@@ -1899,20 +2761,35 @@
                 reader.onload = (e) => {
                     const content = e.target.result;
                     const lines = content.split('\n').filter(line => line.trim());
+                    const headers = this.parseCsvLine(lines[0]).map(header => header.trim().toLowerCase());
+                    const headerIndex = Object.fromEntries(headers.map((header, i) => [header, i]));
+                    const hasNamedHeaders = headers.includes('destination') && headers.includes('airport');
                     let count = 0;
 
                     lines.forEach((line, index) => {
                         if (index === 0) return; // Skip header
-                        const [destination, airport, fare] = line.split(',').map(s => s.trim());
-                        if (destination && airport && fare) {
-                            const key = `${destination}|${airport}`;
-                            this.customFares[key] = parseFloat(fare);
+                        const values = this.parseCsvLine(line).map(s => s.trim());
+                        const destination = hasNamedHeaders ? values[headerIndex.destination] : values[0];
+                        const airport = hasNamedHeaders ? values[headerIndex.airport] : values[1];
+                        const depart = hasNamedHeaders ? values[headerIndex.depart] : values[2];
+                        const returnDate = hasNamedHeaders ? values[headerIndex.return] : values[3];
+                        const fare = hasNamedHeaders ? values[headerIndex.fare] : values[4] || values[2];
+                        const source = (hasNamedHeaders ? values[headerIndex.source] : values[5]) || 'Verified';
+                        const parsedFare = parseFloat(fare);
+                        if (destination && airport && Number.isFinite(parsedFare)) {
+                            const key = depart && returnDate
+                                ? `${destination}|${airport}|${depart}|${returnDate}`
+                                : `${destination}|${airport}`;
+                            this.customFares[key] = {
+                                fare: parsedFare,
+                                source
+                            };
                             count++;
                         }
                     });
 
                     this.saveData();
-                    this.showImportMessage(`✅ Imported ${count} fares successfully!`, 'success');
+                    this.showImportMessage(`Imported ${count} verified fares successfully!`, 'success');
                     fileInput.value = '';
                 };
                 reader.readAsText(file);
@@ -1920,7 +2797,7 @@
 
             // Download CSV template
             downloadTemplate() {
-                const csv = 'destination,airport,fare\nNew York,MCO,120\nBoston,TPA,110\n';
+                const csv = 'destination,airport,depart,return,fare,source\nDallas,MLB,2026-07-15,2026-07-20,1800,Expedia\nBoston,MCO,2026-07-15,2026-07-20,220,Google Flights\n';
                 const blob = new Blob([csv], { type: 'text/csv' });
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -1937,6 +2814,155 @@
                 setTimeout(() => { container.innerHTML = ''; }, 5000);
             },
 
+            runDiagnostics(silent = false) {
+                const checks = [];
+                const addCheck = (name, pass, detail) => checks.push({ name, pass, detail });
+
+                try {
+                    const requiredIds = [
+                        'homeZip', 'departStart', 'returnEnd', 'flexDays', 'destinationTarget',
+                        'destinationFilter', 'groundModePreference', 'resultsTable',
+                        'vacationTable', 'assistantQuestion', 'assistantOutput', 'diagnosticsOutput'
+                    ];
+                    addCheck(
+                        'Required UI elements',
+                        requiredIds.every(id => !!document.getElementById(id)),
+                        `${requiredIds.length} core elements checked`
+                    );
+
+                    const preferredDepart = this.parseDateInput('2026-07-15');
+                    const preferredReturn = this.parseDateInput('2026-07-20');
+                    const scanStart = this.addDays(preferredDepart, -15);
+                    const scanEnd = this.addDays(preferredReturn, 15);
+                    const windows = this.buildVacationWindows(scanStart, scanEnd, this.daysBetween(preferredDepart, preferredReturn));
+                    addCheck('Flexible date windows', windows.length === 31, `${windows.length} windows generated`);
+
+                    const originalFares = this.customFares;
+                    this.customFares = {
+                        'Dallas|MLB|2026-07-15|2026-07-20': { fare: 1800, source: 'Expedia' },
+                        'Bad|MLB': { fare: 'not-a-number', source: 'Bad' }
+                    };
+                    const goodOverride = this.getFareOverride('Dallas', { code: 'MLB', destinationCode: 'DFW' }, '2026-07-15', '2026-07-20');
+                    const badOverride = this.getFareOverride('Bad', { code: 'MLB' }, '2026-07-15', '2026-07-20');
+                    addCheck('Verified fare override', goodOverride?.fare === 1800 && badOverride === null, 'Valid fare accepted, invalid fare rejected');
+                    this.customFares = originalFares;
+
+                    const originalState = JSON.parse(JSON.stringify(this.state));
+                    this.state.tripDays = 5;
+                    this.state.departStart = '2026-07-15';
+                    this.state.returnEnd = '2026-07-20';
+                    this.state.scanStart = '2026-07-01';
+                    this.state.scanEnd = '2026-08-04';
+                    this.state.adults = 1;
+                    this.state.children = 0;
+                    this.state.bags = 0;
+                    this.state.groundModePreference = 'auto';
+                    this.state.destinations = [{
+                        name: 'Dallas',
+                        airports: [
+                            { code: 'MLB', dest: 'Dallas', destinationCode: 'DFW', airline: 'Live search', nonstop: false, fare: 300, parking: 8, distance: 20, driveTime: 0.3, source: 'live' },
+                            { code: 'MCO', dest: 'Dallas', destinationCode: 'DFW', airline: 'Live search', nonstop: false, fare: 250, parking: 12, distance: 70, driveTime: 1.1, source: 'live' },
+                            { code: 'VRB', dest: 'Dallas', destinationCode: 'DFW', airline: 'Live search', nonstop: false, fare: 220, parking: 6, distance: 45, driveTime: 0.7, source: 'live' }
+                        ]
+                    }];
+                    this.calculateOptimizedResults(false);
+                    const exactDates = new Set(this.state.optimizedResults.map(result => result.departDate));
+                    this.calculateVacationIdeas();
+                    const airports = new Set(this.state.vacationIdeas.map(idea => idea.airport));
+                    addCheck('Exact flight list dates', exactDates.size === 1 && exactDates.has('2026-07-15'), [...exactDates].join(', '));
+                    addCheck('Multiple airport ideas', airports.size >= 3, [...airports].join(', '));
+                    this.state = originalState;
+
+                    const dealLinks = this.renderDealLinks({ airport: 'MLB', destination: 'Dallas', destinationCode: 'DFW', departDate: '2026-07-15', returnDate: '2026-07-20' });
+                    addCheck('Deal links', ['Google', 'Expedia', 'Kayak', 'Skyscanner', 'Deals'].every(label => dealLinks.includes(label)), 'All fare-check links rendered');
+
+                    const originalAirports = this.airports;
+                    const mlb = this.airports.find(airport => airport.code === 'MLB');
+                    this.airports = [
+                        ...this.airports,
+                        { code: 'SGN', name: 'Ho Chi Minh City', country: 'VN', lat: 10.8188, lon: 106.6520, parking: 10 }
+                    ];
+                    const mco = this.airports.find(airport => airport.code === 'MCO');
+                    const vrb = this.airports.find(airport => airport.code === 'VRB');
+                    const sgnFare = this.estimateFallbackFare(mlb, 'Ho Chi Minh City');
+                    const mcoSgnFare = this.estimateFallbackFare(mco, 'Ho Chi Minh City');
+                    const vrbSgnFare = this.estimateFallbackFare(vrb, 'Ho Chi Minh City');
+                    addCheck('Long-haul international calibration', mcoSgnFare >= 1500 && mcoSgnFare <= 2300, `MCO-SGN model fare $${mcoSgnFare}`);
+                    addCheck('Airport-specific fare variation', new Set([sgnFare, mcoSgnFare, vrbSgnFare]).size === 3 && mcoSgnFare < sgnFare, `MLB $${sgnFare}, MCO $${mcoSgnFare}, VRB $${vrbSgnFare}`);
+                    this.airports = originalAirports;
+
+                    const mcoDallasFare = this.estimateFallbackFare(mco, 'Dallas');
+                    const mcoBostonFare = this.estimateFallbackFare(mco, 'Boston');
+                    addCheck('Domestic fare regression', mcoDallasFare >= 120 && mcoDallasFare <= 650 && mcoBostonFare >= 120 && mcoBostonFare <= 650, `MCO-DFW $${mcoDallasFare}, MCO-BOS $${mcoBostonFare}`);
+                } catch (error) {
+                    addCheck('Diagnostics runtime', false, error.message);
+                }
+
+                const passCount = checks.filter(check => check.pass).length;
+                const result = {
+                    passCount,
+                    total: checks.length,
+                    checks,
+                    createdAt: new Date().toISOString()
+                };
+                localStorage.setItem('rfo-lastDiagnostics', JSON.stringify(result));
+                if (silent) return result;
+
+                const output = document.getElementById('diagnosticsOutput');
+                output.className = passCount === checks.length ? 'message success' : 'message error';
+                output.innerHTML = `
+                    <strong>${passCount}/${checks.length} checks passed</strong>
+                    <table>
+                        <tbody>
+                            ${checks.map(check => `
+                                <tr>
+                                    <td>${check.pass ? 'PASS' : 'FAIL'}</td>
+                                    <td>${check.name}</td>
+                                    <td>${check.detail}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                return result;
+            },
+
+            exportFeedback() {
+                const feedback = document.getElementById('feedbackNotes').value.trim();
+                const payload = {
+                    createdAt: new Date().toISOString(),
+                    feedback,
+                    currentSettings: {
+                        homeZip: document.getElementById('homeZip').value,
+                        destinationTarget: document.getElementById('destinationTarget').value,
+                        destinationFilter: document.getElementById('destinationFilter').value,
+                        departStart: document.getElementById('departStart').value,
+                        returnEnd: document.getElementById('returnEnd').value,
+                        flexDays: document.getElementById('flexDays').value,
+                        groundModePreference: document.getElementById('groundModePreference').value
+                    }
+                };
+                const savedFeedback = JSON.parse(localStorage.getItem('rfo-feedback') || '[]');
+                savedFeedback.push(payload);
+                localStorage.setItem('rfo-feedback', JSON.stringify(savedFeedback));
+
+                const output = document.getElementById('diagnosticsOutput');
+                output.className = 'message info';
+                output.innerHTML = `<p>Feedback saved locally in this browser. It is not sent automatically.</p><pre>${JSON.stringify(payload, null, 2)}</pre>`;
+            },
+
+            showSavedFeedback() {
+                const savedFeedback = JSON.parse(localStorage.getItem('rfo-feedback') || '[]');
+                const lastDiagnostics = JSON.parse(localStorage.getItem('rfo-lastDiagnostics') || 'null');
+                const output = document.getElementById('diagnosticsOutput');
+                output.className = 'message info';
+                output.innerHTML = `
+                    <p>${savedFeedback.length} feedback item${savedFeedback.length === 1 ? '' : 's'} saved locally in this browser.</p>
+                    ${lastDiagnostics ? `<p>Last automatic diagnostics: ${lastDiagnostics.passCount}/${lastDiagnostics.total} checks passed at ${lastDiagnostics.createdAt}.</p>` : '<p>No diagnostics result saved yet.</p>'}
+                    <pre>${JSON.stringify(savedFeedback, null, 2)}</pre>
+                `;
+            },
+
             // Reset form
             reset() {
                 document.getElementById('homeZip').value = '';
@@ -1949,6 +2975,7 @@
                 document.getElementById('flexDays').value = '15';
                 document.getElementById('destinationTarget').value = '';
                 document.getElementById('destinationFilter').value = '';
+                document.getElementById('groundModePreference').value = 'auto';
                 document.getElementById('zipInfo').style.display = 'none';
                 document.getElementById('searchMessage').innerHTML = '';
                 document.querySelector('.radius-btn').click();
@@ -1970,12 +2997,14 @@
                     flexDays: 15,
                     destinationTarget: '',
                     destinationFilter: '',
+                    groundModePreference: 'auto',
                     scanStart: null,
                     scanEnd: null,
                     reachableAirports: [],
                     destinations: [],
                     optimizedResults: [],
-                    vacationIdeas: []
+                    vacationIdeas: [],
+                    assistantHistory: []
                 };
 
                 document.getElementById('airportsTable').innerHTML = '';
@@ -1984,6 +3013,8 @@
                 document.getElementById('resultsStats').innerHTML = '';
                 document.getElementById('vacationTable').innerHTML = '';
                 document.getElementById('vacationStats').innerHTML = '';
+                document.getElementById('assistantQuestion').value = '';
+                this.renderAssistantHistory();
                 document.getElementById('airportsEmpty').style.display = 'block';
                 document.getElementById('destinationsEmpty').style.display = 'block';
                 document.getElementById('resultsEmpty').style.display = 'block';
@@ -2005,6 +3036,7 @@
                 const saved = localStorage.getItem('rfo-state');
                 const fares = localStorage.getItem('rfo-customFares');
                 if (saved) this.state = JSON.parse(saved);
+                if (!Array.isArray(this.state.assistantHistory)) this.state.assistantHistory = [];
                 if (fares) this.customFares = JSON.parse(fares);
             }
         };
