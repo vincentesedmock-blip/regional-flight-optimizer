@@ -12,23 +12,23 @@
         }
 
         :root {
-            --primary: #0f766e;
-            --primary-soft: #d9f2ef;
-            --secondary: #e05d42;
-            --accent: #f4b23f;
-            --bg-dark: #f7f3ec;
+            --primary: #146c94;
+            --primary-soft: #e5f5fb;
+            --secondary: #ef7b45;
+            --accent: #f5b84b;
+            --bg-dark: #f4f8fb;
             --bg-card: #ffffff;
-            --text-light: #21302f;
-            --text-muted: #64716f;
-            --border: #ded8ce;
-            --success: #16803d;
-            --warning: #b7791f;
+            --text-light: #1f3440;
+            --text-muted: #637987;
+            --border: #d6e3ea;
+            --success: #20885a;
+            --warning: #bd7a14;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background:
-                linear-gradient(180deg, rgba(15, 118, 110, 0.08), rgba(247, 243, 236, 0) 280px),
+                linear-gradient(180deg, rgba(20, 108, 148, 0.12), rgba(244, 248, 251, 0) 300px),
                 var(--bg-dark);
             color: var(--text-light);
             line-height: 1.6;
@@ -42,7 +42,7 @@
 
         header {
             background:
-                linear-gradient(135deg, rgba(15, 118, 110, 0.96), rgba(224, 93, 66, 0.88)),
+                linear-gradient(135deg, rgba(20, 108, 148, 0.92), rgba(239, 123, 69, 0.82)),
                 url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
@@ -50,7 +50,7 @@
             text-align: left;
             margin-bottom: 30px;
             border-radius: 8px;
-            box-shadow: 0 18px 40px rgba(33, 48, 47, 0.14);
+            box-shadow: 0 18px 40px rgba(31, 52, 64, 0.15);
         }
 
         header h1 {
@@ -72,7 +72,7 @@
             margin-bottom: 30px;
             flex-wrap: wrap;
             overflow-x: auto;
-            background: rgba(255, 255, 255, 0.72);
+            background: rgba(255, 255, 255, 0.86);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 6px;
@@ -115,7 +115,7 @@
             border-radius: 8px;
             padding: 24px;
             margin-bottom: 22px;
-            box-shadow: 0 10px 28px rgba(33, 48, 47, 0.08);
+            box-shadow: 0 12px 30px rgba(31, 52, 64, 0.08);
         }
 
         .form-group {
@@ -246,7 +246,7 @@
 
         table {
             width: 100%;
-            min-width: 980px;
+            min-width: 600px;
             border-collapse: collapse;
             margin-top: 20px;
             font-size: 0.95em;
@@ -406,19 +406,126 @@
             color: var(--text-muted);
         }
 
-        .assistant-layout {
+        .ai-command-bar {
+            background: rgba(255,255,255,0.96);
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 32px rgba(20, 108, 148, 0.18);
+            margin-bottom: 20px;
+        }
+
+        .ai-command-label {
+            font-size: 0.78em;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .ai-command-row {
             display: grid;
-            grid-template-columns: minmax(240px, 0.85fr) minmax(280px, 1.15fr);
-            gap: 18px;
-            align-items: start;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .ai-command-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1.05em;
+            background: #fafcfe;
+            transition: border-color 0.2s;
+        }
+
+        .ai-command-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            background: #fff;
+        }
+
+        .ai-command-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 24px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.15s, transform 0.1s;
+        }
+
+        .ai-command-btn:hover { background: #0f5a7d; transform: translateY(-1px); }
+        .ai-command-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .ai-command-response {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: var(--primary-soft);
+            border-radius: 8px;
+            font-size: 0.93em;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .ai-command-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .ai-suggestion-chip {
+            background: #f0f7fb;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 5px 14px;
+            font-size: 0.82em;
+            color: var(--primary);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .ai-suggestion-chip:hover { background: var(--primary-soft); border-color: var(--primary); }
+
+        .assistant-bar {
+            background: #ffffff;
+            border: 1px solid rgba(15, 118, 110, 0.18);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 10px 24px rgba(33, 48, 47, 0.08);
+        }
+
+        .assistant-input-row {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .assistant-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary-soft);
+            color: var(--primary);
+            display: grid;
+            place-items: center;
+            font-weight: 800;
         }
 
         .assistant-output {
             background: #fbfaf7;
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 16px;
-            min-height: 180px;
+            padding: 14px;
+            margin-top: 12px;
+            max-height: 320px;
+            overflow-y: auto;
         }
 
         .assistant-output h3 {
@@ -439,7 +546,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 14px;
+            margin-top: 10px;
         }
 
         .assistant-chip,
@@ -464,10 +571,319 @@
             border-radius: 6px;
         }
 
+        .btn-search-primary {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: #fff;
+            text-align: center;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            margin-top: 8px;
+            transition: background 0.15s, transform 0.1s;
+        }
+
+        .btn-search-primary:hover {
+            background: #0f5a7d;
+            transform: translateY(-1px);
+        }
+
+        .btn-search-secondary {
+            display: block;
+            width: 100%;
+            background: #fff;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            text-align: center;
+            padding: 9px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            margin-top: 6px;
+            transition: background 0.15s, transform 0.1s;
+        }
+
+        .btn-search-secondary:hover {
+            background: var(--primary-soft);
+            transform: translateY(-1px);
+        }
+
+        .also-check {
+            font-size: 0.83em;
+            color: var(--text-muted);
+            margin-top: 6px;
+            text-align: center;
+        }
+
+        .also-check a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 3px;
+            font-weight: 500;
+        }
+
+        .also-check a:hover { text-decoration: underline; }
+
+        .trip-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .trip-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: box-shadow 0.2s;
+        }
+
+        .trip-card:hover {
+            box-shadow: 0 4px 18px rgba(20, 108, 148, 0.13);
+        }
+
+        .trip-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .trip-card-dest {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .trip-card-cost {
+            font-size: 1.25em;
+            font-weight: 800;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .trip-card-meta {
+            color: var(--text-muted);
+            font-size: 0.88em;
+            line-height: 1.6;
+        }
+
+        .trip-card-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.88em;
+        }
+
+        .trip-card-detail-pill {
+            background: var(--primary-soft);
+            color: var(--primary);
+            border-radius: 999px;
+            padding: 2px 10px;
+            font-weight: 500;
+        }
+
+        .trip-card-tip {
+            font-size: 0.8em;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 8px;
+            margin-top: 2px;
+        }
+
+        .advanced-toggle {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .advanced-toggle:hover { color: #0f5a7d; }
+
+        .advanced-options {
+            border-top: 1px solid var(--border);
+            padding-top: 18px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .advanced-options.open { display: block; }
+
+        .empty-state-icon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+        }
+
+        .empty-state-hint {
+            margin-top: 14px;
+        }
+
+        .empty-state-hint button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 9px 20px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .empty-state-hint button:hover { background: #0f5a7d; }
+
+        .explore-section-header {
+            margin: 28px 0 6px;
+            color: var(--primary);
+        }
+
+        .explore-section-sub {
+            color: var(--text-muted);
+            font-size: 0.92em;
+            margin-bottom: 16px;
+        }
+
+        .explore-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
+        }
+
+        .explore-card {
+            background: linear-gradient(145deg, #fff, var(--primary-soft));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .explore-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .explore-airport-code {
+            font-size: 1.5em;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .explore-airport-name {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .explore-drive {
+            font-size: 0.82em;
+            color: var(--text-muted);
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 3px 10px;
+        }
+
+        .explore-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.88em;
+            font-weight: 600;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+        }
+
+        .explore-btn-google {
+            background: #4285f4;
+            color: #fff;
+        }
+
+        .explore-btn-kayak {
+            background: #ff690f;
+            color: #fff;
+        }
+
+        .explore-btn-sky {
+            background: #0770e3;
+            color: #fff;
+        }
+
+        .explore-note {
+            font-size: 0.78em;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 4px;
+        }
+
         .source-note {
             color: var(--text-muted);
             font-size: 0.88em;
             max-width: 220px;
+        }
+
+        .deal-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 14px;
+            margin: 16px 0 20px;
+        }
+
+        .deal-card {
+            background: linear-gradient(180deg, #ffffff, #fbfaf7);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .deal-card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .deal-card h3 {
+            color: var(--text-light);
+            font-size: 1.05em;
+            margin-bottom: 2px;
+        }
+
+        .deal-price {
+            color: var(--primary);
+            font-size: 1.4em;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .deal-meta {
+            color: var(--text-muted);
+            font-size: 0.9em;
         }
 
         .assistant-message {
@@ -571,6 +987,14 @@
                 grid-template-columns: 1fr;
             }
 
+            .assistant-input-row {
+                grid-template-columns: 1fr;
+            }
+
+            .assistant-avatar {
+                display: none;
+            }
+
             .assistant-actions {
                 flex-direction: column;
             }
@@ -584,50 +1008,327 @@
                 padding: 7px 9px;
                 font-size: 0.8em;
             }
+
+            .ai-command-row {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-command-btn {
+                width: 100%;
+            }
+
+            .trip-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .explore-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-search-primary,
+            .btn-search-secondary {
+                font-size: 1em;
+                padding: 13px 16px;
+            }
         }
+
+        /* ── Header layout ──────────────────────────────────────────── */
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .header-user-btn {
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            border-radius: 999px;
+            padding: 8px 18px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: background 0.15s;
+        }
+
+        .header-user-btn:hover { background: rgba(255,255,255,0.28); }
+        .header-user-btn.logged-in { background: rgba(255,255,255,0.25); }
+
+        /* ── Auth modal ─────────────────────────────────────────────── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,20,30,0.55);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 420px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.3em;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .modal-close:hover { background: var(--bg-dark); color: var(--text-light); }
+
+        .modal-card h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        .modal-switch {
+            margin-top: 16px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .modal-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 20px 0;
+        }
+
+        /* ── Search progress bar ────────────────────────────────────── */
+        .search-progress {
+            display: none;
+            margin-bottom: 16px;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+
+        .search-progress.active { display: block; }
+        .search-progress.fading { opacity: 0; }
+
+        .progress-steps {
+            display: flex;
+            gap: 0;
+            margin-bottom: 8px;
+        }
+
+        .progress-step {
+            flex: 1;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin: 0 2px;
+            transition: background 0.3s;
+        }
+
+        .progress-step.done { background: var(--primary); }
+        .progress-step.active { background: var(--accent); animation: pulse-bar 0.8s ease-in-out infinite alternate; }
+
+        @keyframes pulse-bar { from { opacity: 0.6; } to { opacity: 1; } }
+
+        .progress-label {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* ── Trip card region accents ───────────────────────────────── */
+        .trip-card {
+            border-top: 4px solid var(--border);
+        }
+
+        .trip-card.region-beach { border-top-color: #0ea5e9; }
+        .trip-card.region-europe { border-top-color: #f59e0b; }
+        .trip-card.region-asia { border-top-color: #ef4444; }
+        .trip-card.region-domestic { border-top-color: var(--primary); }
+        .trip-card.region-caribbean { border-top-color: #06d6a0; }
+        .trip-card.region-international { border-top-color: #8b5cf6; }
+
+        .trip-card-flag {
+            font-size: 1.3em;
+            line-height: 1;
+        }
+
+        /* ── Onboarding banner ──────────────────────────────────────── */
+        .onboarding-banner {
+            background: linear-gradient(135deg, #e5f5fb, #fff8ec);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 22px;
+        }
+
+        .onboarding-banner h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .onboarding-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .onboarding-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9em;
+            color: var(--text-light);
+        }
+
+        .onboarding-step-num {
+            background: var(--primary);
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75em;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .onboarding-dismiss {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.82em;
+            cursor: pointer;
+            padding: 0;
+            text-decoration: underline;
+        }
+
+        .onboarding-dismiss:hover { color: var(--text-light); }
+
+        /* ── API key notice ─────────────────────────────────────────── */
+        .api-key-notice {
+            background: #fff8ec;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.87em;
+            color: #92400e;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .api-key-notice a { color: var(--primary); font-weight: 600; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>✈️ Regional Flight Optimizer</h1>
-            <p>Compare nearby airports, flexible dates, and domestic or international destination ideas in one planning view.</p>
+            <div class="header-inner">
+                <div>
+                    <h1>✈️ Vacation Flight Finder</h1>
+                    <p>Tell us where you want to go — or let us find the best deals from your nearest airports.</p>
+                </div>
+                <button class="header-user-btn" id="userBtn" onclick="app.openAuthModal()">Sign in</button>
+            </div>
         </header>
+
+        <div class="ai-command-bar">
+            <div class="ai-command-label">✨ AI Search — just describe your trip</div>
+            <div class="ai-command-row">
+                <input type="text" class="ai-command-input" id="aiCommandInput"
+                    placeholder='e.g. "Cheap beach trips in Europe in July" or "Family vacation to Japan, 10 days"'
+                    onkeydown="if(event.key==='Enter') app.executeAICommand()">
+                <button class="ai-command-btn" id="aiCommandBtn" onclick="app.executeAICommand()">Search ✈️</button>
+            </div>
+            <div class="ai-command-response" id="aiCommandResponse"></div>
+            <div class="api-key-notice" id="apiKeyNotice">
+                AI search needs an API key. <a href="#" onclick="app.openAuthModal('profile'); return false;">Sign in and add yours</a> — free at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>.
+            </div>
+            <div class="ai-command-suggestions">
+                <span class="ai-suggestion-chip" onclick="app.fillAISuggestion(this)">🏖️ Cheap Caribbean beach trip</span>
+                <span class="ai-suggestion-chip" onclick="app.fillAISuggestion(this)">🗼 Europe trip in summer</span>
+                <span class="ai-suggestion-chip" onclick="app.fillAISuggestion(this)">🌺 Hawaii flights under $600</span>
+                <span class="ai-suggestion-chip" onclick="app.fillAISuggestion(this)">🍜 Asia adventure 2 weeks</span>
+                <span class="ai-suggestion-chip" onclick="app.fillAISuggestion(this)">🎰 Weekend trip anywhere cheap</span>
+            </div>
+        </div>
+
+        <!-- Onboarding banner (dismissed after first search) -->
+        <div class="onboarding-banner" id="onboardingBanner">
+            <h3>👋 How it works</h3>
+            <div class="onboarding-steps">
+                <div class="onboarding-step">
+                    <div class="onboarding-step-num">1</div>
+                    <div>Type your trip idea above <em>or</em> open the Search tab and enter your home location</div>
+                </div>
+                <div class="onboarding-step">
+                    <div class="onboarding-step-num">2</div>
+                    <div>We scan every airport within your drive radius and estimate fares for hundreds of destinations</div>
+                </div>
+                <div class="onboarding-step">
+                    <div class="onboarding-step-num">3</div>
+                    <div>Click <strong>Search Google Flights</strong> or <strong>Kayak</strong> on any card to see live prices and book</div>
+                </div>
+            </div>
+            <button class="onboarding-dismiss" onclick="app.dismissOnboarding()">Got it, hide this</button>
+        </div>
+
+        <!-- Search progress bar -->
+        <div class="search-progress" id="searchProgress">
+            <div class="progress-steps">
+                <div class="progress-step" id="step1"></div>
+                <div class="progress-step" id="step2"></div>
+                <div class="progress-step" id="step3"></div>
+                <div class="progress-step" id="step4"></div>
+            </div>
+            <div class="progress-label" id="progressLabel">Starting…</div>
+        </div>
 
         <div class="tabs">
             <button class="tab-btn active" data-tab="search">Search</button>
-            <button class="tab-btn" data-tab="airports">Reachable Airports</button>
-            <button class="tab-btn" data-tab="destinations">Destination Universe</button>
-            <button class="tab-btn" data-tab="results">Flight List</button>
-            <button class="tab-btn" data-tab="vacationOptimizer">Vacation Optimizer</button>
-            <button class="tab-btn" data-tab="assistant">Trip Assistant</button>
+            <button class="tab-btn" data-tab="vacationOptimizer">Best Trips</button>
+            <button class="tab-btn" data-tab="results">All Options</button>
+            <button class="tab-btn" data-tab="dealRepository">Saved Deals</button>
             <button class="tab-btn" data-tab="import">Import Fares</button>
-            <button class="tab-btn" data-tab="diagnostics">Diagnostics</button>
         </div>
 
         <!-- SEARCH TAB -->
         <div id="search" class="tab-content active">
             <div class="card">
-                <h2 style="margin-bottom: 20px; color: var(--primary);">Trip Optimizer</h2>
-
                 <div class="form-group">
-                    <label for="homeZip">Home ZIP Code (Any US ZIP)</label>
-                    <input type="text" id="homeZip" placeholder="e.g., 32908, 10001, 90210" maxlength="5">
+                    <label for="homeZip">Your Home Location</label>
+                    <input type="text" id="homeZip" placeholder="City, address, ZIP — e.g. Orlando FL, 123 Main St 32905, Chicago">
                     <div id="zipInfo" class="zip-info" style="display: none;"></div>
                 </div>
 
                 <div class="form-group">
-                    <label>Max Drive Radius</label>
+                    <label>How far will you drive to the airport?</label>
                     <div class="radius-buttons">
-                        <button class="radius-btn active" data-radius="1">1 hour</button>
-                        <button class="radius-btn" data-radius="1.5">1.5 hours</button>
-                        <button class="radius-btn" data-radius="2.5">2.5 hours</button>
-                        <button class="radius-btn" data-radius="3.5">3.5 hours</button>
-                        <button class="radius-btn" data-radius="5">5 hours</button>
+                        <button class="radius-btn active" data-radius="1">1 hr</button>
+                        <button class="radius-btn" data-radius="1.5">1.5 hrs</button>
+                        <button class="radius-btn" data-radius="2.5">2.5 hrs</button>
+                        <button class="radius-btn" data-radius="3.5">3.5 hrs</button>
+                        <button class="radius-btn" data-radius="5">5 hrs</button>
                     </div>
                 </div>
-
-                <h3 style="margin: 25px 0 15px; color: var(--primary);">Travelers</h3>
 
                 <div class="input-row">
                     <div class="form-group">
@@ -639,59 +1340,90 @@
                         <input type="number" id="children" value="0" min="0" max="9">
                     </div>
                     <div class="form-group">
-                        <label for="bags">Bags</label>
-                        <input type="number" id="bags" value="1" min="0" max="10">
-                    </div>
-                    <div class="form-group">
-                        <label for="tripDays">Trip Days</label>
+                        <label for="tripDays">Trip Length (days)</label>
                         <input type="number" id="tripDays" value="3" min="1" max="30">
                     </div>
                 </div>
 
-                <h3 style="margin: 25px 0 15px; color: var(--primary);">Vacation Window</h3>
-
                 <div class="input-row">
                     <div class="form-group">
-                        <label for="departStart">Preferred Departure</label>
+                        <label for="departStart">Earliest Departure</label>
                         <input type="date" id="departStart">
                     </div>
                     <div class="form-group">
-                        <label for="returnEnd">Preferred Return</label>
+                        <label for="returnEnd">Latest Return</label>
                         <input type="date" id="returnEnd">
                     </div>
+                </div>
+
+                <button class="advanced-toggle" id="advancedToggle" onclick="app.toggleAdvancedOptions()">
+                    <span id="advancedToggleArrow">▶</span> More options
+                </button>
+                <div class="advanced-options" id="advancedOptions">
                     <div class="form-group">
-                        <label for="flexDays">Flex Days</label>
-                        <input type="number" id="flexDays" value="15" min="0" max="45">
+                        <label for="destinationTarget">Specific Destination (optional)</label>
+                        <input type="text" id="destinationTarget" placeholder="e.g. Vietnam, Hanoi, SGN, London, LHR" list="destinationOptions">
+                        <datalist id="destinationOptions"></datalist>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="destinationTarget">Specific Destination</label>
-                    <input type="text" id="destinationTarget" placeholder="Optional: Vietnam, Hanoi, SGN, London, LHR" list="destinationOptions">
-                    <datalist id="destinationOptions"></datalist>
-                </div>
+                    <div class="form-group">
+                        <label for="destinationFilter">Filter by Destination Type (optional)</label>
+                        <input type="text" id="destinationFilter" placeholder="e.g. Europe, beach, islands, international, passport">
+                    </div>
 
-                <div class="form-group">
-                    <label for="destinationFilter">Idea Filter</label>
-                    <input type="text" id="destinationFilter" placeholder="Optional: Vietnam, Asia, Africa, islands, Europe, passport">
-                </div>
+                    <div class="input-row">
+                        <div class="form-group">
+                            <label for="bags">Checked Bags</label>
+                            <input type="number" id="bags" value="1" min="0" max="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="flexDays">Date Flexibility (days)</label>
+                            <input type="number" id="flexDays" value="15" min="0" max="45">
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="groundModePreference">Airport Transportation</label>
-                    <select id="groundModePreference">
-                        <option value="auto">Use cheapest ground option</option>
-                        <option value="park">Drive and park</option>
-                        <option value="rideshare">Ride-share or taxi</option>
-                        <option value="dropoff">Drop-off / pickup</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="groundModePreference">Airport Transportation</label>
+                        <select id="groundModePreference">
+                            <option value="auto">Use cheapest ground option</option>
+                            <option value="park">Drive and park</option>
+                            <option value="rideshare">Ride-share or taxi</option>
+                            <option value="dropoff">Drop-off / pickup</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="button-group">
-                    <button class="btn-primary" id="searchBtn" onclick="app.search()">🔍 Optimize Trip</button>
+                    <button class="btn-primary" id="searchBtn" onclick="app.search()">🔍 Find Flights</button>
                     <button class="btn-secondary" onclick="app.reset()">🔄 Reset</button>
                 </div>
 
                 <div id="searchMessage"></div>
+            </div>
+
+            <div id="airportExploreSection" style="display:none" class="card">
+                <h2 class="explore-section-header">Explore From Your Airports</h2>
+                <p class="explore-section-sub">See real prices for every destination — no estimates. Each button opens a live price explorer on the booking site.</p>
+                <div id="airportExploreCards" class="explore-cards"></div>
+                <p class="explore-note">Prices and availability shown directly by Google Flights, Kayak, and Skyscanner — updated in real time.</p>
+            </div>
+
+            <div class="assistant-bar">
+                <div class="assistant-input-row">
+                    <div class="assistant-avatar">AI</div>
+                    <input type="text" id="assistantQuestion" placeholder="Ask: find the cheapest trip, compare airports, explain why this ranks first..." onkeydown="if(event.key === 'Enter') app.runTripAssistant()">
+                    <button class="btn-primary" onclick="app.runTripAssistant()">Ask</button>
+                </div>
+                <div class="assistant-actions">
+                    <button class="assistant-chip" onclick="app.runTripAssistant('Find the cheapest deals and tell me where to check first')">Cheapest</button>
+                    <button class="assistant-chip" onclick="app.runTripAssistant('Compare the best airports for this search')">Airports</button>
+                    <button class="assistant-chip" onclick="app.runTripAssistant('Show international ideas and risks')">International</button>
+                    <button class="assistant-chip" onclick="app.runTripAssistant('Explain ground transportation tradeoffs')">Ground costs</button>
+                </div>
+                <div id="assistantOutput" class="assistant-output">
+                    <h3>Ready to help plan</h3>
+                    <p>Run a search and I will summarize the best deal automatically. You can also ask me what to compare.</p>
+                </div>
             </div>
         </div>
 
@@ -722,12 +1454,16 @@
         <!-- FLIGHT LIST TAB -->
         <div id="results" class="tab-content">
             <div class="card">
-                <h2 style="margin-bottom: 20px; color: var(--primary);">Flight List</h2>
+                <h2 style="margin-bottom: 20px; color: var(--primary);">All Options</h2>
                 <div id="resultsStats"></div>
                 <div id="resultsTable"></div>
                 <div id="resultsEmpty" class="empty-state">
+                    <div class="empty-state-icon">✈️</div>
                     <h3>No results yet</h3>
-                    <p>Run a search to see optimized flight options</p>
+                    <p>Describe your trip in the search bar above, or go to the Search tab to fill in details manually.</p>
+                    <div class="empty-state-hint">
+                        <button onclick="document.querySelector('[data-tab=\'search\']').click()">Go to Search →</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -735,41 +1471,33 @@
         <!-- VACATION OPTIMIZER TAB -->
         <div id="vacationOptimizer" class="tab-content">
             <div class="card">
-                <h2 style="margin-bottom: 20px; color: var(--primary);">Vacation Optimizer</h2>
+                <h2 style="margin-bottom: 20px; color: var(--primary);">Best Trips</h2>
                 <div id="vacationStats"></div>
                 <div id="vacationTable"></div>
                 <div id="vacationEmpty" class="empty-state">
-                    <h3>No vacation ideas yet</h3>
-                    <p>Run a search to scan the date window for low-cost vacation ideas</p>
+                    <div class="empty-state-icon">🌍</div>
+                    <h3>Where do you want to go?</h3>
+                    <p>Type a destination or trip idea in the search bar above — or go to Search and enter your home location to see the cheapest deals from nearby airports.</p>
+                    <div class="empty-state-hint">
+                        <button onclick="document.querySelector('[data-tab=\'search\']').click()">Get started →</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ASSISTANT TAB -->
-        <div id="assistant" class="tab-content">
+        <!-- DEAL REPOSITORY TAB -->
+        <div id="dealRepository" class="tab-content">
             <div class="card">
-                <h2 style="margin-bottom: 20px; color: var(--primary);">Trip Assistant</h2>
-                <div class="assistant-layout">
-                    <div>
-                        <div class="message info">
-                            This assistant reviews the results already loaded in your browser. If the private proxy is running, it can use AI; otherwise it falls back to the local trip analyst.
-                        </div>
-                        <div class="assistant-actions">
-                            <button class="assistant-chip" onclick="app.runTripAssistant('Find my cheapest verified deals and tell me where they came from')">Cheapest deals</button>
-                            <button class="assistant-chip" onclick="app.runTripAssistant('Compare the best airports for this trip')">Compare airports</button>
-                            <button class="assistant-chip" onclick="app.runTripAssistant('Show international ideas and price risks')">International ideas</button>
-                            <button class="assistant-chip" onclick="app.runTripAssistant('Explain ground transportation tradeoffs')">Ground costs</button>
-                        </div>
-                        <div class="form-group">
-                            <label for="assistantQuestion">Ask About This Search</label>
-                            <textarea id="assistantQuestion" rows="6" placeholder="Examples: cheapest Vietnam trip, compare MCO and MLB, show domestic options, explain the best ground choice"></textarea>
-                        </div>
-                        <button class="btn-primary" onclick="app.runTripAssistant()">Ask Assistant</button>
-                    </div>
-                    <div id="assistantOutput" class="assistant-output">
-                        <h3>Ready when results are loaded</h3>
-                        <p>Run a search, then ask for cheapest trips, airport comparisons, international ideas, domestic options, or ground transportation tradeoffs.</p>
-                    </div>
+                <h2 style="margin-bottom: 20px; color: var(--primary);">Saved Deals</h2>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="app.renderDealRepository()">Refresh Deals</button>
+                    <button class="btn-secondary" onclick="app.clearDealRepository()">Clear Saved Deals</button>
+                </div>
+                <div id="dealRepositoryStats"></div>
+                <div id="dealRepositoryTable"></div>
+                <div id="dealRepositoryEmpty" class="empty-state">
+                    <h3>No saved deals yet</h3>
+                    <p>Use Save lowest fare from a result after you verify a live fare. Only saved deals are stored here.</p>
                 </div>
             </div>
         </div>
@@ -788,6 +1516,7 @@
                 <div class="button-group">
                     <button class="btn-primary" onclick="app.importFares()">📤 Import Fares</button>
                     <button class="btn-secondary" onclick="app.downloadTemplate()">📥 Download Template</button>
+                    <button class="btn-secondary" onclick="app.clearSavedFares()">Clear Saved Fares</button>
                 </div>
 
                 <div id="importMessage"></div>
@@ -810,6 +1539,64 @@
                 <div id="diagnosticsOutput" class="message info">
                     Run checks after making changes to verify core optimizer behavior.
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth modal -->
+    <div class="modal-overlay" id="authModal" onclick="if(event.target===this)app.closeAuthModal()">
+        <div class="modal-card">
+            <button class="modal-close" onclick="app.closeAuthModal()">✕</button>
+
+            <!-- Login -->
+            <div id="loginView">
+                <h2>Sign in</h2>
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="you@example.com" onkeydown="if(event.key==='Enter')app.login()">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="At least 8 characters" onkeydown="if(event.key==='Enter')app.login()">
+                </div>
+                <button class="btn-primary" style="width:100%" onclick="app.login()">Sign in</button>
+                <div id="loginError" class="message error" style="display:none;margin-top:12px"></div>
+                <p class="modal-switch">No account yet? <button class="link-btn" onclick="app.showAuthView('register')">Create one →</button></p>
+            </div>
+
+            <!-- Register -->
+            <div id="registerView" style="display:none">
+                <h2>Create account</h2>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="you@example.com" onkeydown="if(event.key==='Enter')app.register()">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" placeholder="At least 8 characters" onkeydown="if(event.key==='Enter')app.register()">
+                </div>
+                <button class="btn-primary" style="width:100%" onclick="app.register()">Create account</button>
+                <div id="registerError" class="message error" style="display:none;margin-top:12px"></div>
+                <p class="modal-switch">Already have one? <button class="link-btn" onclick="app.showAuthView('login')">Sign in →</button></p>
+            </div>
+
+            <!-- Profile (logged in) -->
+            <div id="profileView" style="display:none">
+                <h2>My Account</h2>
+                <p style="color:var(--text-muted);margin-bottom:20px">Signed in as <strong id="profileEmail"></strong></p>
+
+                <div class="form-group">
+                    <label for="profileApiKey">Anthropic API Key</label>
+                    <input type="password" id="profileApiKey" placeholder="sk-ant-..." onkeydown="if(event.key==='Enter')app.saveApiKey()">
+                    <small style="color:var(--text-muted);display:block;margin-top:4px">
+                        Get a free key at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a> — stored securely on this server, linked to your account.
+                    </small>
+                </div>
+                <button class="btn-primary" onclick="app.saveApiKey()">Save API Key</button>
+                <div id="profileMessage" class="message" style="display:none;margin-top:12px"></div>
+
+                <hr class="modal-divider">
+                <button class="btn-secondary btn-small" onclick="app.logout()">Sign out</button>
             </div>
         </div>
     </div>
@@ -876,7 +1663,14 @@
                 { code: 'OAK', name: 'Oakland', lat: 37.7126, lon: -122.2197, parking: 14 },
                 { code: 'SJC', name: 'San Jose', lat: 37.3639, lon: -121.9289, parking: 14 },
                 { code: 'SEA', name: 'Seattle-Tacoma', lat: 47.4502, lon: -122.3088, parking: 15 },
-                { code: 'PDX', name: 'Portland', lat: 45.5898, lon: -122.5951, parking: 14 }
+                { code: 'PDX', name: 'Portland', lat: 45.5898, lon: -122.5951, parking: 14 },
+                { code: 'ANC', name: 'Anchorage Ted Stevens', lat: 61.1744, lon: -149.9963, parking: 12 },
+                { code: 'FAI', name: 'Fairbanks', lat: 64.8151, lon: -147.8564, parking: 9 },
+                { code: 'JNU', name: 'Juneau', lat: 58.3550, lon: -134.5762, parking: 10 },
+                { code: 'HNL', name: 'Honolulu Daniel K. Inouye', lat: 21.3187, lon: -157.9225, parking: 12 },
+                { code: 'OGG', name: 'Maui Kahului', lat: 20.8987, lon: -156.4305, parking: 11 },
+                { code: 'KOA', name: 'Kona', lat: 19.7389, lon: -156.0456, parking: 10 },
+                { code: 'LIH', name: 'Kauai Lihue', lat: 21.9760, lon: -159.3388, parking: 10 }
             ],
 
             // Sample routes by airport
@@ -1029,7 +1823,14 @@
                 'Tokyo': 'HND',
                 'Toronto': 'YYZ',
                 'Washington DC': 'WAS',
-                'White Plains': 'HPN'
+                'White Plains': 'HPN',
+                'Anchorage': 'ANC',
+                'Fairbanks': 'FAI',
+                'Juneau': 'JNU',
+                'Honolulu': 'HNL',
+                'Maui': 'OGG',
+                'Kona': 'KOA',
+                'Kauai': 'LIH'
             },
 
             destinationCatalog: [
@@ -1092,25 +1893,83 @@
                 { dest: 'Sao Paulo', tags: 'international south america brazil city passport' },
                 { dest: 'Rio de Janeiro', tags: 'international south america brazil beach passport' },
                 { dest: 'Santiago', tags: 'international south america chile wine mountains passport' },
-                { dest: 'Sydney', tags: 'international oceania australia beach city passport' }
+                { dest: 'Sydney', tags: 'international oceania australia beach city passport' },
+                { dest: 'Anchorage', tags: 'alaska nature outdoors wildlife mountains adventure fishing hunting aurora' },
+                { dest: 'Fairbanks', tags: 'alaska nature outdoors northern lights aurora borealis adventure winter' },
+                { dest: 'Juneau', tags: 'alaska nature glacier cruise port wildlife outdoors hiking' },
+                { dest: 'Honolulu', tags: 'hawaii beach island tropical paradise pacific oahu' },
+                { dest: 'Maui', tags: 'hawaii beach island tropical paradise romantic pacific snorkeling' },
+                { dest: 'Kona', tags: 'hawaii beach island tropical coffee snorkeling diving pacific big island' },
+                { dest: 'Kauai', tags: 'hawaii beach island tropical nature hiking na pali pacific' }
             ],
 
             countryNames: {
-                AE: 'United Arab Emirates Dubai Abu Dhabi', AG: 'Antigua and Barbuda', AR: 'Argentina',
-                AT: 'Austria', AU: 'Australia', AW: 'Aruba', BB: 'Barbados', BE: 'Belgium',
-                BS: 'Bahamas', BR: 'Brazil', BZ: 'Belize', CA: 'Canada', CH: 'Switzerland',
-                CL: 'Chile', CN: 'China', CO: 'Colombia', CR: 'Costa Rica', CU: 'Cuba',
-                DE: 'Germany', DO: 'Dominican Republic', EC: 'Ecuador', EG: 'Egypt',
-                ES: 'Spain', ET: 'Ethiopia', FJ: 'Fiji', FR: 'France', GB: 'United Kingdom England Scotland Wales',
-                GH: 'Ghana', GR: 'Greece', GT: 'Guatemala', HN: 'Honduras', ID: 'Indonesia Bali',
-                IE: 'Ireland', IL: 'Israel', IN: 'India', IS: 'Iceland', IT: 'Italy',
-                JM: 'Jamaica', JP: 'Japan', KE: 'Kenya', KR: 'South Korea Korea', MA: 'Morocco',
-                MX: 'Mexico', MY: 'Malaysia', NI: 'Nicaragua', NL: 'Netherlands Holland',
-                NZ: 'New Zealand', PA: 'Panama', PE: 'Peru', PF: 'French Polynesia Tahiti Bora Bora',
-                PH: 'Philippines', PR: 'Puerto Rico', PT: 'Portugal', QA: 'Qatar',
-                SA: 'Saudi Arabia', SG: 'Singapore', SV: 'El Salvador', TC: 'Turks and Caicos',
-                TH: 'Thailand', TR: 'Turkey', TZ: 'Tanzania', US: 'United States America USA',
-                UY: 'Uruguay', VI: 'US Virgin Islands', VN: 'Vietnam Viet Nam', ZA: 'South Africa'
+                AE: 'United Arab Emirates Dubai Abu Dhabi', AG: 'Antigua Barbuda Caribbean',
+                AL: 'Albania Europe', AM: 'Armenia', AO: 'Angola Africa', AR: 'Argentina South America',
+                AT: 'Austria Europe', AU: 'Australia Oceania', AW: 'Aruba Caribbean',
+                AZ: 'Azerbaijan', BA: 'Bosnia Herzegovina Europe', BB: 'Barbados Caribbean',
+                BD: 'Bangladesh Asia', BE: 'Belgium Europe Brussels', BF: 'Burkina Faso Africa',
+                BG: 'Bulgaria Europe', BH: 'Bahrain Middle East', BO: 'Bolivia South America',
+                BR: 'Brazil South America', BS: 'Bahamas Caribbean', BT: 'Bhutan Asia',
+                BW: 'Botswana Africa', BZ: 'Belize Central America', CA: 'Canada North America',
+                CH: 'Switzerland Europe', CI: 'Ivory Coast Africa', CL: 'Chile South America',
+                CM: 'Cameroon Africa', CN: 'China Asia Beijing Shanghai', CO: 'Colombia South America',
+                CR: 'Costa Rica Central America', CU: 'Cuba Caribbean', CW: 'Curacao Caribbean',
+                CY: 'Cyprus Europe Mediterranean', CZ: 'Czech Republic Prague Europe',
+                DE: 'Germany Europe Berlin Frankfurt Munich', DK: 'Denmark Europe Copenhagen',
+                DO: 'Dominican Republic Caribbean Punta Cana', DZ: 'Algeria Africa',
+                EC: 'Ecuador South America Galapagos', EE: 'Estonia Europe Baltic',
+                EG: 'Egypt Africa Cairo', ES: 'Spain Europe Madrid Barcelona',
+                ET: 'Ethiopia Africa', FI: 'Finland Europe Helsinki Nordic',
+                FJ: 'Fiji Pacific Islands Oceania', FR: 'France Europe Paris',
+                GA: 'Gabon Africa', GB: 'United Kingdom England Scotland Wales Ireland London',
+                GD: 'Grenada Caribbean', GH: 'Ghana Africa', GM: 'Gambia Africa',
+                GR: 'Greece Europe Athens', GT: 'Guatemala Central America',
+                GY: 'Guyana South America', HN: 'Honduras Central America',
+                HR: 'Croatia Europe Adriatic', HU: 'Hungary Budapest Europe',
+                ID: 'Indonesia Asia Bali Jakarta', IE: 'Ireland Europe Dublin',
+                IL: 'Israel Middle East Jerusalem Tel Aviv', IN: 'India Asia Mumbai Delhi',
+                IQ: 'Iraq Middle East', IS: 'Iceland Europe Reykjavik Northern Lights',
+                IT: 'Italy Europe Rome Milan Venice', JM: 'Jamaica Caribbean',
+                JO: 'Jordan Middle East', JP: 'Japan Asia Tokyo Kyoto Osaka',
+                KE: 'Kenya Africa Nairobi Safari', KH: 'Cambodia Asia Angkor Wat',
+                KR: 'South Korea Asia Seoul', KW: 'Kuwait Middle East',
+                KZ: 'Kazakhstan Central Asia', LA: 'Laos Asia', LB: 'Lebanon Middle East',
+                LC: 'Saint Lucia Caribbean', LK: 'Sri Lanka Asia', LT: 'Lithuania Europe Baltic',
+                LV: 'Latvia Europe Baltic Riga', LY: 'Libya Africa',
+                MA: 'Morocco Africa North Africa Marrakech', MD: 'Moldova Europe',
+                ME: 'Montenegro Europe Adriatic', MK: 'North Macedonia Europe',
+                MM: 'Myanmar Burma Asia', MN: 'Mongolia Asia',
+                MO: 'Macau Asia China', MT: 'Malta Europe Mediterranean',
+                MU: 'Mauritius Africa Indian Ocean', MW: 'Malawi Africa',
+                MX: 'Mexico North America Cancun Mexico City', MY: 'Malaysia Asia Kuala Lumpur',
+                MZ: 'Mozambique Africa', NA: 'Namibia Africa', NG: 'Nigeria Africa Lagos',
+                NI: 'Nicaragua Central America', NL: 'Netherlands Europe Amsterdam Holland',
+                NO: 'Norway Europe Nordic Oslo Bergen Northern Lights', NP: 'Nepal Asia Himalayas',
+                NZ: 'New Zealand Oceania Pacific', OM: 'Oman Middle East',
+                PA: 'Panama Central America', PE: 'Peru South America Machu Picchu',
+                PF: 'French Polynesia Tahiti Bora Bora Pacific', PG: 'Papua New Guinea Pacific',
+                PH: 'Philippines Asia Manila', PK: 'Pakistan Asia',
+                PL: 'Poland Europe Warsaw Krakow', PR: 'Puerto Rico Caribbean US Territory',
+                PT: 'Portugal Europe Lisbon Algarve Azores', PY: 'Paraguay South America',
+                QA: 'Qatar Middle East Doha', RO: 'Romania Europe Bucharest Transylvania',
+                RS: 'Serbia Europe Belgrade', RU: 'Russia Europe Asia Moscow St Petersburg',
+                RW: 'Rwanda Africa', SA: 'Saudi Arabia Middle East Riyadh',
+                SE: 'Sweden Europe Stockholm Nordic', SG: 'Singapore Asia',
+                SI: 'Slovenia Europe', SK: 'Slovakia Europe', SL: 'Sierra Leone Africa',
+                SN: 'Senegal Africa Dakar', SR: 'Suriname South America',
+                SV: 'El Salvador Central America', TC: 'Turks Caicos Caribbean',
+                TG: 'Togo Africa', TH: 'Thailand Asia Bangkok Phuket',
+                TJ: 'Tajikistan Central Asia', TN: 'Tunisia Africa Mediterranean',
+                TO: 'Tonga Pacific', TR: 'Turkey Europe Asia Istanbul',
+                TT: 'Trinidad Tobago Caribbean', TZ: 'Tanzania Africa Kilimanjaro Zanzibar',
+                UA: 'Ukraine Europe', UG: 'Uganda Africa', US: 'United States America USA',
+                UY: 'Uruguay South America Montevideo', UZ: 'Uzbekistan Central Asia',
+                VC: 'Saint Vincent Grenadines Caribbean', VE: 'Venezuela South America',
+                VI: 'US Virgin Islands Caribbean', VN: 'Vietnam Asia Hanoi Ho Chi Minh',
+                VU: 'Vanuatu Pacific', WS: 'Samoa Pacific', XK: 'Kosovo Europe',
+                YE: 'Yemen Middle East', ZA: 'South Africa Cape Town Johannesburg',
+                ZM: 'Zambia Africa', ZW: 'Zimbabwe Africa'
             },
 
             // Comprehensive US ZIP code database
@@ -1189,10 +2048,55 @@
                 '79905': { lat: 31.7461, lon: -106.4888, city: 'El Paso', state: 'TX' }
             },
 
+            stateLocations: {
+                AL: { lat: 32.8067, lon: -86.7911, city: 'Alabama', state: 'AL' }, AK: { lat: 61.3707, lon: -152.4044, city: 'Alaska', state: 'AK' },
+                AZ: { lat: 33.7298, lon: -111.4312, city: 'Arizona', state: 'AZ' }, AR: { lat: 34.9697, lon: -92.3731, city: 'Arkansas', state: 'AR' },
+                CA: { lat: 36.1162, lon: -119.6816, city: 'California', state: 'CA' }, CO: { lat: 39.0598, lon: -105.3111, city: 'Colorado', state: 'CO' },
+                CT: { lat: 41.5978, lon: -72.7554, city: 'Connecticut', state: 'CT' }, DE: { lat: 39.3185, lon: -75.5071, city: 'Delaware', state: 'DE' },
+                FL: { lat: 27.7663, lon: -81.6868, city: 'Florida', state: 'FL' }, GA: { lat: 33.0406, lon: -83.6431, city: 'Georgia', state: 'GA' },
+                HI: { lat: 21.0943, lon: -157.4983, city: 'Hawaii', state: 'HI' }, ID: { lat: 44.2405, lon: -114.4788, city: 'Idaho', state: 'ID' },
+                IL: { lat: 40.3495, lon: -88.9861, city: 'Illinois', state: 'IL' }, IN: { lat: 39.8494, lon: -86.2583, city: 'Indiana', state: 'IN' },
+                IA: { lat: 42.0115, lon: -93.2105, city: 'Iowa', state: 'IA' }, KS: { lat: 38.5266, lon: -96.7265, city: 'Kansas', state: 'KS' },
+                KY: { lat: 37.6681, lon: -84.6701, city: 'Kentucky', state: 'KY' }, LA: { lat: 31.1695, lon: -91.8678, city: 'Louisiana', state: 'LA' },
+                ME: { lat: 44.6939, lon: -69.3819, city: 'Maine', state: 'ME' }, MD: { lat: 39.0639, lon: -76.8021, city: 'Maryland', state: 'MD' },
+                MA: { lat: 42.2302, lon: -71.5301, city: 'Massachusetts', state: 'MA' }, MI: { lat: 43.3266, lon: -84.5361, city: 'Michigan', state: 'MI' },
+                MN: { lat: 45.6945, lon: -93.9002, city: 'Minnesota', state: 'MN' }, MS: { lat: 32.7416, lon: -89.6787, city: 'Mississippi', state: 'MS' },
+                MO: { lat: 38.4561, lon: -92.2884, city: 'Missouri', state: 'MO' }, MT: { lat: 46.9219, lon: -110.4544, city: 'Montana', state: 'MT' },
+                NE: { lat: 41.1254, lon: -98.2681, city: 'Nebraska', state: 'NE' }, NV: { lat: 38.3135, lon: -117.0554, city: 'Nevada', state: 'NV' },
+                NH: { lat: 43.4525, lon: -71.5639, city: 'New Hampshire', state: 'NH' }, NJ: { lat: 40.2989, lon: -74.5210, city: 'New Jersey', state: 'NJ' },
+                NM: { lat: 34.8405, lon: -106.2485, city: 'New Mexico', state: 'NM' }, NY: { lat: 42.1657, lon: -74.9481, city: 'New York', state: 'NY' },
+                NC: { lat: 35.6301, lon: -79.8064, city: 'North Carolina', state: 'NC' }, ND: { lat: 47.5289, lon: -99.7840, city: 'North Dakota', state: 'ND' },
+                OH: { lat: 40.3888, lon: -82.7649, city: 'Ohio', state: 'OH' }, OK: { lat: 35.5653, lon: -96.9289, city: 'Oklahoma', state: 'OK' },
+                OR: { lat: 44.5720, lon: -122.0709, city: 'Oregon', state: 'OR' }, PA: { lat: 40.5908, lon: -77.2098, city: 'Pennsylvania', state: 'PA' },
+                RI: { lat: 41.6809, lon: -71.5118, city: 'Rhode Island', state: 'RI' }, SC: { lat: 33.8569, lon: -80.9450, city: 'South Carolina', state: 'SC' },
+                SD: { lat: 44.2998, lon: -99.4388, city: 'South Dakota', state: 'SD' }, TN: { lat: 35.7478, lon: -86.6923, city: 'Tennessee', state: 'TN' },
+                TX: { lat: 31.0545, lon: -97.5635, city: 'Texas', state: 'TX' }, UT: { lat: 40.1500, lon: -111.8624, city: 'Utah', state: 'UT' },
+                VT: { lat: 44.0459, lon: -72.7107, city: 'Vermont', state: 'VT' }, VA: { lat: 37.7693, lon: -78.1700, city: 'Virginia', state: 'VA' },
+                WA: { lat: 47.4009, lon: -121.4905, city: 'Washington', state: 'WA' }, WV: { lat: 38.4912, lon: -80.9545, city: 'West Virginia', state: 'WV' },
+                WI: { lat: 44.2685, lon: -89.6165, city: 'Wisconsin', state: 'WI' }, WY: { lat: 42.7560, lon: -107.3025, city: 'Wyoming', state: 'WY' }
+            },
+
+            stateNameToCode: {
+                alabama: 'AL', alaska: 'AK', arizona: 'AZ', arkansas: 'AR', california: 'CA', colorado: 'CO', connecticut: 'CT', delaware: 'DE',
+                florida: 'FL', georgia: 'GA', hawaii: 'HI', idaho: 'ID', illinois: 'IL', indiana: 'IN', iowa: 'IA', kansas: 'KS',
+                kentucky: 'KY', louisiana: 'LA', maine: 'ME', maryland: 'MD', massachusetts: 'MA', michigan: 'MI', minnesota: 'MN',
+                mississippi: 'MS', missouri: 'MO', montana: 'MT', nebraska: 'NE', nevada: 'NV', 'new hampshire': 'NH', 'new jersey': 'NJ',
+                'new mexico': 'NM', 'new york': 'NY', 'north carolina': 'NC', 'north dakota': 'ND', ohio: 'OH', oklahoma: 'OK',
+                oregon: 'OR', pennsylvania: 'PA', 'rhode island': 'RI', 'south carolina': 'SC', 'south dakota': 'SD', tennessee: 'TN',
+                texas: 'TX', utah: 'UT', vermont: 'VT', virginia: 'VA', washington: 'WA', 'west virginia': 'WV', wisconsin: 'WI', wyoming: 'WY'
+            },
+
             // Custom fares imported by user
             customFares: {},
+            dealRepository: [],
             airportDataLoaded: false,
             airportDataLoadPromise: null,
+
+            // Auth
+            auth: {
+                token: localStorage.getItem('rfo-auth-token') || null,
+                user: null
+            },
 
             // State
             state: {
@@ -1247,6 +2151,10 @@
                 this.hydrateForm();
                 this.setDefaultDates();
                 this.loadAirportData();
+                this.renderAssistantHistory();
+                this.renderDealRepository();
+                this.initAuth();
+                this.initOnboarding();
             },
 
             // Calculate distance between two coordinates (haversine formula)
@@ -1261,9 +2169,9 @@
                 return R * c;
             },
 
-            // Estimate drive time from distance (average 65 mph)
+            // Estimate drive time: straight-line × 1.3 road factor, 55 mph average (accounts for traffic/routing)
             estimateDriveTime(distance) {
-                return distance / 65;
+                return (distance * 1.3) / 55;
             },
 
             escapeHtml(value) {
@@ -1470,22 +2378,47 @@
             },
 
             getDestinationFilterTerms() {
-                return (this.state.destinationFilter || '')
-                    .split(',')
-                    .map(term => term.trim().toLowerCase())
-                    .filter(Boolean);
+                const aliasMap = {
+                    'european': 'europe', 'asian': 'asia', 'african': 'africa',
+                    'caribbean': 'caribbean', 'carribean': 'caribbean', 'carribbean': 'caribbean',
+                    'tropical': 'tropical', 'beaches': 'beach', 'islands': 'island',
+                    'mountains': 'mountain', 'historic': 'history', 'historical': 'history',
+                    'international': 'international', 'abroad': 'international',
+                    'domestic': 'domestic', 'american': 'america',
+                    'latin': 'south america', 'scandinavian': 'europe',
+                    'mediterranean': 'europe', 'middle eastern': 'middle east',
+                    'oceanian': 'oceania', 'australian': 'australia',
+                    'british': 'united kingdom', 'french': 'france', 'italian': 'italy',
+                    'spanish': 'spain', 'german': 'germany', 'japanese': 'japan',
+                    'mexican': 'mexico', 'canadian': 'canada', 'thai': 'thailand',
+                    'balinese': 'indonesia', 'greek': 'greece', 'turkish': 'turkey',
+                    'budget': 'budget', 'cheap': 'budget', 'luxury': 'luxury',
+                    'adventures': 'adventure', 'adventurous': 'adventure',
+                    'romantic': 'romantic', 'families': 'family', 'kids': 'family'
+                };
+                const raw = (this.state.destinationFilter || '').toLowerCase().trim();
+                if (!raw) return [];
+                let normalized = raw;
+                Object.entries(aliasMap).forEach(([alias, canonical]) => {
+                    normalized = normalized.replace(new RegExp(`\\b${alias}\\b`, 'g'), canonical);
+                });
+                return [...new Set(
+                    normalized.split(/[\s,]+/).map(t => t.trim()).filter(t => t.length >= 2)
+                )];
             },
 
             getDestinationTargetTerms() {
                 const raw = (this.state.destinationTarget || '').trim().toLowerCase();
                 if (!raw) return [];
 
-                const terms = [raw];
+                const terms = [raw.replace(/\([a-z]{3}\)/i, '').replace(/\b[a-z]{3}\b/i, '').trim()];
                 const codeMatch = raw.match(/\(([a-z]{3})\)/i);
                 if (codeMatch) terms.push(codeMatch[1].toLowerCase());
+                const looseCodeMatch = raw.match(/\b([a-z]{3})\b/i);
+                if (looseCodeMatch) terms.push(looseCodeMatch[1].toLowerCase());
+                if (/^[a-z]{3}$/i.test(raw)) terms.push(raw);
 
-                raw.split(/[\s,()]+/).filter(Boolean).forEach(part => terms.push(part));
-                return [...new Set(terms)];
+                return [...new Set(terms.filter(Boolean))];
             },
 
             matchesDestinationFilter(route) {
@@ -1494,7 +2427,21 @@
                 if (terms.length === 0 && targetTerms.length === 0) return true;
 
                 const destinationCode = (route.destinationCode || this.destinationCodes[route.dest] || '').toLowerCase();
-                const haystack = [
+                const destinationName = (route.dest || '').toLowerCase();
+                const countryCode = (route.country || '').toLowerCase();
+                const countryName = this.getCountryName(route.country).toLowerCase();
+                const region = (route.region || '').toLowerCase();
+                const tags = (route.tags || '').toLowerCase();
+                const targetMatches = targetTerms.length === 0 || targetTerms.some(term => {
+                    if (term.length === 3 && destinationCode === term) return true;
+                    if (countryCode === term) return true;
+                    if (destinationName === term || destinationName.includes(term)) return true;
+                    if (countryName.includes(term)) return true;
+                    if (region.includes(term)) return true;
+                    return tags.includes(term);
+                });
+
+                const filterHaystack = [
                     route.dest,
                     destinationCode,
                     route.airline,
@@ -1504,14 +2451,13 @@
                     route.tags || ''
                 ].join(' ').toLowerCase();
 
-                const targetMatches = targetTerms.length === 0 || targetTerms.some(term => haystack.includes(term));
-                const filterMatches = terms.length === 0 || terms.some(term => haystack.includes(term));
+                const filterMatches = terms.length === 0 || terms.some(term => filterHaystack.includes(term));
 
                 return targetMatches && filterMatches;
             },
 
-            estimateFallbackFare(originAirport, destinationName) {
-                const destinationCode = this.destinationCodes[destinationName];
+            estimateFallbackFare(originAirport, destinationName, knownCode = null) {
+                const destinationCode = knownCode || this.destinationCodes[destinationName];
                 const destinationAirport = this.airports.find(airport => airport.code === destinationCode);
                 const catalogDestination = this.destinationCatalog.find(destination => destination.dest === destinationName);
                 const defaultFare = catalogDestination && catalogDestination.tags.includes('international') ? 750 : 140;
@@ -1572,13 +2518,13 @@
                     { countries: ['CA'], label: 'canada north america international' },
                     { countries: ['MX'], label: 'mexico north america international' },
                     { countries: ['BZ', 'CR', 'GT', 'HN', 'NI', 'PA', 'SV'], label: 'central america international' },
-                    { countries: ['AG', 'AW', 'BB', 'BS', 'CU', 'DO', 'JM', 'PR', 'TC', 'VI'], label: 'caribbean islands international' },
-                    { countries: ['AR', 'BR', 'CL', 'CO', 'EC', 'PE', 'UY'], label: 'south america international' },
-                    { countries: ['GB', 'IE', 'FR', 'NL', 'DE', 'ES', 'IT', 'IS', 'PT', 'CH', 'AT', 'GR'], label: 'europe international' },
-                    { countries: ['JP', 'KR', 'CN', 'SG', 'TH', 'VN', 'PH', 'ID', 'MY', 'IN'], label: 'asia international' },
-                    { countries: ['AE', 'QA', 'SA', 'IL', 'TR'], label: 'middle east international' },
-                    { countries: ['ZA', 'EG', 'MA', 'KE', 'TZ', 'GH', 'ET'], label: 'africa international' },
-                    { countries: ['AU', 'NZ', 'FJ', 'PF'], label: 'oceania islands south pacific international' }
+                    { countries: ['AG', 'AW', 'BB', 'BS', 'CU', 'CW', 'DO', 'GD', 'JM', 'LC', 'PR', 'TC', 'TT', 'VC', 'VI'], label: 'caribbean islands international' },
+                    { countries: ['AR', 'BO', 'BR', 'CL', 'CO', 'EC', 'GY', 'PE', 'PY', 'SR', 'UY', 'VE'], label: 'south america international' },
+                    { countries: ['AL', 'AT', 'BA', 'BE', 'BG', 'BY', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IS', 'IT', 'LT', 'LV', 'MD', 'ME', 'MK', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RS', 'RU', 'SE', 'SI', 'SK', 'UA', 'XK'], label: 'europe international' },
+                    { countries: ['BD', 'BT', 'CN', 'ID', 'IN', 'JP', 'KH', 'KR', 'LA', 'LK', 'MM', 'MN', 'MO', 'MY', 'NP', 'PH', 'PK', 'SG', 'TH', 'TJ', 'TW', 'UZ', 'VN'], label: 'asia international' },
+                    { countries: ['AE', 'AM', 'AZ', 'BH', 'IL', 'IQ', 'JO', 'KW', 'KZ', 'LB', 'OM', 'QA', 'SA', 'TR', 'YE'], label: 'middle east international' },
+                    { countries: ['AO', 'BF', 'BW', 'CI', 'CM', 'DZ', 'EG', 'ET', 'GA', 'GH', 'GM', 'GY', 'KE', 'LY', 'MA', 'MU', 'MW', 'MZ', 'NA', 'NG', 'RW', 'SL', 'SN', 'TG', 'TN', 'TZ', 'UG', 'ZA', 'ZM', 'ZW'], label: 'africa international' },
+                    { countries: ['AU', 'FJ', 'NZ', 'PF', 'PG', 'TO', 'VU', 'WS'], label: 'oceania islands south pacific international' }
                 ];
 
                 const match = regionGroups.find(group => group.countries.includes(country));
@@ -1610,40 +2556,51 @@
                 const originCodes = new Set(this.state.reachableAirports.map(airport => airport.code));
                 const filterTerms = this.getDestinationFilterTerms();
                 const preferredCodes = new Set(Object.values(this.destinationCodes));
-                const maxCandidates = filterTerms.length > 0 ? 180 : 70;
 
-                return this.airports
-                    .filter(airport => airport.code && !originCodes.has(airport.code))
+                const eligible = this.airports
+                    .filter(airport => airport.code && airport.code !== originAirport.code && !originCodes.has(airport.code))
                     .filter(airport => {
-                        if (airport.code === originAirport.code) return false;
                         if (!filterTerms.length) {
                             return preferredCodes.has(airport.code) || airport.type === 'large_airport';
                         }
-
                         const haystack = [
-                            airport.code,
-                            airport.name,
-                            airport.city || '',
-                            airport.state || '',
-                            airport.country || '',
+                            airport.code, airport.name, airport.city || '',
+                            airport.state || '', airport.country || '',
                             this.getCountryName(airport.country),
                             this.getInternationalRegion(airport.country)
                         ].join(' ').toLowerCase();
-
                         return filterTerms.some(term => haystack.includes(term));
                     })
                     .map(airport => ({
                         airport,
                         distance: this.calculateDistance(originAirport.lat, originAirport.lon, airport.lat, airport.lon)
                     }))
-                    .filter(candidate => candidate.distance > 120)
-                    .sort((a, b) => {
-                        const aPreferred = preferredCodes.has(a.airport.code) ? 0 : 1;
-                        const bPreferred = preferredCodes.has(b.airport.code) ? 0 : 1;
-                        if (aPreferred !== bPreferred) return aPreferred - bPreferred;
-                        return a.distance - b.distance;
-                    })
-                    .slice(0, maxCandidates);
+                    .filter(c => c.distance > 120);
+
+                if (filterTerms.length > 0) {
+                    return eligible.sort((a, b) => a.distance - b.distance).slice(0, 250);
+                }
+
+                // No filter: three balanced pools so international airports always appear
+                const seen = new Set();
+                const pick = (arr) => arr.filter(c => !seen.has(c.airport.code) && (seen.add(c.airport.code) || true));
+
+                const preferred = pick(
+                    eligible.filter(c => preferredCodes.has(c.airport.code))
+                        .sort((a, b) => a.distance - b.distance)
+                );
+                const intlLarge = pick(
+                    eligible.filter(c => c.airport.country !== 'US' && c.airport.type === 'large_airport')
+                        .sort((a, b) => a.distance - b.distance)
+                        .slice(0, 80)
+                );
+                const domesticNear = pick(
+                    eligible.filter(c => c.airport.country === 'US')
+                        .sort((a, b) => a.distance - b.distance)
+                        .slice(0, 60)
+                );
+
+                return [...preferred, ...intlLarge, ...domesticNear];
             },
 
             getDynamicDestinationRoutes(originAirport, existingDestinations) {
@@ -1654,16 +2611,17 @@
                         const destinationCode = airport.code;
                         const international = airport.country && airport.country !== 'US';
 
+                        const region = this.getInternationalRegion(airport.country);
                         return {
                             dest: destinationName,
                             destinationCode,
                             airline: 'Live search',
                             nonstop: false,
-                            fare: this.estimateFallbackFare(originAirport, destinationName),
+                            fare: this.estimateFallbackFare(originAirport, destinationName, destinationCode),
                             source: 'live',
                             country: airport.country,
-                            region: this.getInternationalRegion(airport.country),
-                            tags: `${airport.code} ${airport.name} ${airport.city || ''} ${airport.state || ''} ${airport.country || ''} ${this.getCountryName(airport.country)} ${this.getInternationalRegion(airport.country)}`
+                            region,
+                            tags: `${airport.code} ${airport.name} ${airport.city || ''} ${airport.state || ''} ${airport.country || ''} ${this.getCountryName(airport.country)} ${region}`
                         };
                     })
                     .filter(route => !existingDestinations.has(`${route.dest}|${route.destinationCode}`))
@@ -1678,22 +2636,25 @@
                     source: 'sample'
                 }));
                 const existingDestinations = new Set(curated.map(route => `${route.dest}|${route.destinationCode || ''}`));
-                const fallbackLimit = this.state.destinationFilter ? 180 : 70;
+                const fallbackLimit = this.state.destinationFilter ? 250 : 200;
                 const fallback = this.destinationCatalog
                     .filter(destination => !existingDestinations.has(`${destination.dest}|${this.destinationCodes[destination.dest] || ''}`))
-                    .map(destination => ({
-                        dest: destination.dest,
-                        destinationCode: this.destinationCodes[destination.dest],
-                        airline: 'Live search',
-                        nonstop: false,
-                        fare: this.estimateFallbackFare(airport, destination.dest),
-                        source: 'live',
-                        country: (this.airports.find(a => a.code === this.destinationCodes[destination.dest]) || {}).country,
-                        region: (this.airports.find(a => a.code === this.destinationCodes[destination.dest]) || {}).country
-                            ? this.getInternationalRegion((this.airports.find(a => a.code === this.destinationCodes[destination.dest]) || {}).country)
-                            : this.getRegionFromTags(destination.tags),
-                        tags: destination.tags
-                    }))
+                    .map(destination => {
+                        const destCode = this.destinationCodes[destination.dest];
+                        const destAirport = destCode ? this.airports.find(a => a.code === destCode) : null;
+                        const country = destAirport?.country || null;
+                        return {
+                            dest: destination.dest,
+                            destinationCode: destCode,
+                            airline: 'Live search',
+                            nonstop: false,
+                            fare: this.estimateFallbackFare(airport, destination.dest, destCode),
+                            source: 'live',
+                            country,
+                            region: country ? this.getInternationalRegion(country) : this.getRegionFromTags(destination.tags),
+                            tags: destination.tags
+                        };
+                    })
                     .filter(route => this.matchesDestinationFilter(route))
                     .concat(this.getDynamicDestinationRoutes(airport, existingDestinations))
                     .filter((route, index, routes) => routes.findIndex(candidate => {
@@ -1779,38 +2740,106 @@
                 }
 
                 return `
-                    <strong>Model estimate</strong>
-                    <div class="source-note">Open live links, then save the lowest fare so this route sorts by the real source.</div>
+                    <strong>${this.escapeHtml(this.getSuggestedDealSources(result)[0])}</strong>
+                    <div class="source-note">Recommended first check for this route. The actual cheapest source is only known after a live fare is saved.</div>
                 `;
             },
 
-            async lookupZipLocation(zipInput) {
-                if (this.zipCodes[zipInput]) {
-                    return this.zipCodes[zipInput];
-                }
+            getSuggestedDealSources(result) {
+                const region = (result.region || '').toLowerCase();
+                const international = region.includes('international') || (result.country && result.country !== 'US');
+                const longHaul = region.includes('asia') || region.includes('africa') || region.includes('oceania') || region.includes('middle east');
+                const isSouthwest = (result.airline || '').toLowerCase().includes('southwest');
+                const budgetDomestic = new Set(['SFB', 'PIE', 'VRB', 'MLB', 'DAL', 'MDW', 'OAK', 'BUR', 'LGB']);
+                const airlineUrl = this.getAirlineUrl(result.airline);
 
+                if (result.fareVerified) return [result.fareSource || 'Verified', 'Google Flights', 'Southwest.com'];
+                if (longHaul) return ['Google Flights', 'Skyscanner', 'Kayak'];
+                if (international) return ['Google Flights', 'Skyscanner', 'Kayak'];
+                // Southwest doesn't list on Google Flights — surface it prominently for domestic
+                if (isSouthwest) return ['Southwest.com', 'Google Flights', 'Kayak'];
+                if (budgetDomestic.has(result.airport) && airlineUrl) return [`${result.airline} direct`, 'Google Flights', 'Southwest.com'];
+                return ['Google Flights', 'Southwest.com', 'Kayak'];
+            },
+
+            getAirlineUrl(airline = '') {
+                const normalized = airline.toLowerCase();
+                const airlineSites = [
+                    { match: 'allegiant', url: 'https://www.allegiantair.com/' },
+                    { match: 'breeze', url: 'https://www.flybreeze.com/' },
+                    { match: 'spirit', url: 'https://www.spirit.com/' },
+                    { match: 'frontier', url: 'https://www.flyfrontier.com/' },
+                    { match: 'southwest', url: 'https://www.southwest.com/' },
+                    { match: 'jetblue', url: 'https://www.jetblue.com/' },
+                    { match: 'delta', url: 'https://www.delta.com/' },
+                    { match: 'american', url: 'https://www.aa.com/' },
+                    { match: 'united', url: 'https://www.united.com/' },
+                    { match: 'air canada', url: 'https://www.aircanada.com/' },
+                    { match: 'british airways', url: 'https://www.britishairways.com/' },
+                    { match: 'lufthansa', url: 'https://www.lufthansa.com/' },
+                    { match: 'emirates', url: 'https://www.emirates.com/' },
+                    { match: 'qatar', url: 'https://www.qatarairways.com/' },
+                    { match: 'singapore', url: 'https://www.singaporeair.com/' },
+                    { match: 'vietnam', url: 'https://www.vietnamairlines.com/' }
+                ];
+                const match = airlineSites.find(site => normalized.includes(site.match));
+                return match ? match.url : '';
+            },
+
+            getStateCode(value) {
+                const normalized = value.trim().toLowerCase().replace(/\./g, '');
+                if (/^[a-z]{2}$/i.test(normalized) && this.stateLocations[normalized.toUpperCase()]) return normalized.toUpperCase();
+                return this.stateNameToCode[normalized] || null;
+            },
+
+            async geocodeLocation(query) {
                 try {
-                    const response = await fetch(`https://api.zippopotam.us/us/${encodeURIComponent(zipInput)}`);
+                    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&countrycodes=us&limit=1&addressdetails=1`;
+                    const response = await fetch(url, {
+                        headers: { 'User-Agent': 'RegionalFlightOptimizer/1.0 (local)' }
+                    });
                     if (!response.ok) return null;
+                    const results = await response.json();
+                    if (!results || !results.length) return null;
 
-                    const data = await response.json();
-                    const place = data.places && data.places[0];
-                    if (!place) return null;
+                    const result = results[0];
+                    const addr = result.address || {};
+                    const lat = parseFloat(result.lat);
+                    const lon = parseFloat(result.lon);
+                    if (Number.isNaN(lat) || Number.isNaN(lon)) return null;
 
-                    const location = {
-                        lat: parseFloat(place.latitude),
-                        lon: parseFloat(place.longitude),
-                        city: place['place name'],
-                        state: place['state abbreviation']
-                    };
+                    const city = addr.city || addr.town || addr.village || addr.hamlet || addr.suburb || addr.county || query;
+                    const isoRegion = addr['ISO3166-2-lvl4'] || '';
+                    const state = addr.state_code || (isoRegion.startsWith('US-') ? isoRegion.slice(3) : '') || this.getStateCode(addr.state || '') || '';
 
-                    if (Number.isNaN(location.lat) || Number.isNaN(location.lon)) return null;
-
-                    this.zipCodes[zipInput] = location;
-                    return location;
+                    return { lat, lon, city, state };
                 } catch (error) {
                     return null;
                 }
+            },
+
+            async lookupHomeLocation(rawInput) {
+                const input = rawInput.trim();
+                if (!input) return null;
+
+                // Fast path: check hardcoded ZIP cache
+                const embeddedZip = input.match(/\b\d{5}\b/);
+                if (embeddedZip && this.zipCodes[embeddedZip[0]]) {
+                    return this.zipCodes[embeddedZip[0]];
+                }
+
+                // State-only input: return centroid without API call
+                if (!embeddedZip) {
+                    const stateOnly = this.getStateCode(input);
+                    if (stateOnly) return this.stateLocations[stateOnly];
+                }
+
+                // Nominatim handles addresses, cities, ZIP codes, neighborhoods, everything
+                const result = await this.geocodeLocation(input);
+                if (result && embeddedZip) {
+                    this.zipCodes[embeddedZip[0]] = result;
+                }
+                return result;
             },
 
             // Main search function
@@ -1818,28 +2847,24 @@
                 // Validate input
                 await this.loadAirportData();
 
-                const zipInput = document.getElementById('homeZip').value.trim();
-                if (!zipInput) {
-                    this.showMessage('Please enter a home ZIP code', 'error');
+                const locationInput = document.getElementById('homeZip').value.trim();
+                if (!locationInput) {
+                    this.showMessage('Please enter a home location', 'error');
                     return;
                 }
 
-                if (!/^\d{5}$/.test(zipInput)) {
-                    this.showMessage('Please enter a valid 5-digit ZIP code', 'error');
-                    return;
-                }
+                this.showMessage('', 'loading');
+                this.setProgress(1, '📍 Finding your location…');
 
-                this.showMessage('Looking up ZIP code and building available date-range flights...', 'loading');
-
-                // Look up ZIP locally first, then online for any valid US ZIP.
-                const location = await this.lookupZipLocation(zipInput);
+                const location = await this.lookupHomeLocation(locationInput);
                 if (!location) {
-                    this.showMessage(`Could not look up ZIP code ${zipInput}. Check the ZIP or your internet connection.`, 'error');
+                    this.clearProgress();
+                    this.showMessage(`Could not find "${locationInput}". Try a city name like "Palm Bay FL", a full address, or a ZIP code.`, 'error');
                     return;
                 }
 
                 // Update state
-                this.state.homeZip = zipInput;
+                this.state.homeZip = locationInput;
                 this.state.homeLat = location.lat;
                 this.state.homeLon = location.lon;
                 this.state.homeCity = location.city;
@@ -1875,9 +2900,9 @@
                 this.state.scanStart = this.formatDateForInput(scanStartDate);
                 this.state.scanEnd = this.formatDateForInput(scanEndDate);
 
-                // Show ZIP info
+                // Show resolved location
                 document.getElementById('zipInfo').style.display = 'block';
-                document.getElementById('zipInfo').textContent = `📍 ${this.state.homeCity}, ${this.state.homeState} (${this.state.homeLat.toFixed(4)}°, ${this.state.homeLon.toFixed(4)}°)`;
+                document.getElementById('zipInfo').textContent = `📍 Resolved to: ${this.state.homeCity}, ${this.state.homeState} (${this.state.homeLat.toFixed(4)}°, ${this.state.homeLon.toFixed(4)}°) — if this looks wrong, try a more specific address or ZIP code.`;
 
                 // Find reachable airports
                 this.state.reachableAirports = this.airports.filter(airport => {
@@ -1889,9 +2914,12 @@
                 }).sort((a, b) => a.driveTime - b.driveTime);
 
                 if (this.state.reachableAirports.length === 0) {
+                    this.clearProgress();
                     this.showMessage('No airports found within your drive radius. Try increasing the maximum drive time.', 'error');
                     return;
                 }
+
+                this.setProgress(2, `🛫 Found ${this.state.reachableAirports.length} airports — scanning destinations…`);
 
                 // Get all destinations
                 this.state.destinations = [];
@@ -1926,6 +2954,7 @@
                 });
 
                 // Calculate exact-date flight list and flexible vacation ideas
+                this.setProgress(3, '💰 Estimating fares and ranking trips…');
                 this.calculateOptimizedResults(false);
                 this.calculateVacationIdeas();
 
@@ -1933,21 +2962,29 @@
                     this.showMessage(`No sample routes matched "${this.state.destinationFilter}". Try a broader destination filter or use the airport Explore links for live searches.`, 'error');
                 }
 
+                this.setProgress(4, `✅ Found ${this.state.vacationIdeas.length} trip ideas — showing best results`);
+
                 // Render all tables
                 this.renderAirportsTable();
                 this.renderDestinationsTable();
                 this.renderResultsTable();
                 this.renderVacationOptimizer();
+                this.renderDealRepository();
+                this.renderAirportExploreCards();
+                this.proactiveAssistantSummary();
 
                 this.runDiagnostics(true);
 
                 // Switch to vacation optimizer tab
                 document.querySelector('[data-tab="vacationOptimizer"]').click();
+                this.dismissOnboarding();
 
                 // Save data
                 this.saveData();
+                this.clearProgress();
 
-                this.showMessage(`✅ Found ${this.state.reachableAirports.length} airports and ${this.state.destinations.length} destinations!`, 'success');
+                const airportList = this.state.reachableAirports.map(a => `${a.code} (${(a.driveTime).toFixed(1)}h)`).join(', ');
+                this.showMessage(`✅ Found ${this.state.reachableAirports.length} airports within your drive radius: ${airportList} — and ${this.state.destinations.length} destinations to compare.`, 'success');
             },
 
             // Show search message
@@ -2056,7 +3093,7 @@
                             this.state.optimizedResults.push({
                                 destination: dest.name,
                                 airport: option.code,
-                                airportName: option.code === 'MCO' ? 'Orlando' : option.code,
+                                airportName: option.code,
                                 airline: option.airline,
                                 nonstop: option.nonstop,
                                 airfare: airfare,
@@ -2146,7 +3183,7 @@
                         if (a.totalCostLow !== b.totalCostLow) return a.totalCostLow - b.totalCostLow;
                         return b.vacationScore - a.vacationScore;
                     })
-                    .slice(0, 25)
+                    .slice(0, 60)
                     .map((idea, index) => ({
                         ...idea,
                         ideaRank: index + 1
@@ -2240,6 +3277,29 @@
                 container.innerHTML = html;
             },
 
+            renderDealCards(results, limit = 3) {
+                return `
+                    <div class="deal-cards">
+                        ${results.slice(0, limit).map((result) => {
+                            const primary = this.getSuggestedDealSources(result)[0];
+                            const primaryUrl = this.getSourceUrl(result, primary);
+                            return `
+                            <div class="deal-card">
+                                <div class="deal-card-top">
+                                    <div>
+                                        <h3>${this.escapeHtml(result.destination)}</h3>
+                                        <div class="deal-meta">${this.escapeHtml(result.airport)} · ${this.formatDate(this.parseDateInput(result.departDate))} – ${this.formatDate(this.parseDateInput(result.returnDate))}</div>
+                                    </div>
+                                    <div class="deal-price">~${this.formatTripCost(result)}</div>
+                                </div>
+                                <div class="deal-meta" style="margin-bottom:8px">${result.nonstop ? 'Nonstop' : 'Connecting'} · ${result.groundMode} $${result.groundCost.toFixed(0)}</div>
+                                <a href="${primaryUrl}" target="_blank" class="btn-search-primary" style="font-size:0.88em;padding:8px 12px">🔍 Search ${this.escapeHtml(primary)}</a>
+                            </div>
+                        `}).join('')}
+                    </div>
+                `;
+            },
+
             // Render optimized results table
             renderResultsTable() {
                 const container = document.getElementById('resultsTable');
@@ -2263,8 +3323,8 @@
                 const avgCost = this.state.optimizedResults.reduce((sum, r) => sum + r.totalCost, 0) / this.state.optimizedResults.length;
 
                 const statsHtml = `
-                    <div class="message info">
-                        Unverified ticket fares are calibrated model prices, not live quotes. Use the fare links to confirm live prices, or import verified fares to replace estimates.
+                    <div class="message warning">
+                        ⚠️ <strong>Prices shown are estimates only</strong> — not real fares. Click a search link in each row to check live prices. Save a fare after you verify it to update the ranking.
                     </div>
                     <div class="stats">
                         <div class="stat-card">
@@ -2291,50 +3351,26 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Rank</th>
+                                <th>#</th>
                                 <th>Destination</th>
                                 <th>Dates</th>
                                 <th>Airport</th>
-                                <th>Region</th>
-                                <th>Airline</th>
-                                <th>Nonstop</th>
-                                <th>Fare/pp</th>
-                                <th>Best Fare Location</th>
-                                <th>Drive Time</th>
-                                <th>Parking</th>
-                                <th>Mileage</th>
-                                <th>Ride-share</th>
-                                <th>Drop-off</th>
-                                <th>Ground Used</th>
-                                <th>Bags</th>
-                                <th>Penalty</th>
-                                <th>Total Cost</th>
-                                <th>Source</th>
-                                <th>Action</th>
+                                <th>Est. Fare/person</th>
+                                <th>Ground Transport</th>
+                                <th>Est. Total</th>
+                                <th>Book</th>
                             </tr>
                         </thead>
                         <tbody>
                             ${this.state.optimizedResults.map((result, index) => `
                                 <tr>
                                     <td><span class="badge badge-success">#${result.rank}</span></td>
-                                    <td>${result.destination}</td>
-                                    <td>${this.formatDate(this.parseDateInput(result.departDate))} - ${this.formatDate(this.parseDateInput(result.returnDate))}</td>
-                                    <td><span class="highlight">${result.airport}</span></td>
-                                    <td>${result.region || 'domestic'}</td>
-                                    <td>${result.airline}</td>
-                                    <td>${result.nonstop ? '✅ Yes' : '⏱️ No'}</td>
-                                    <td>${result.fareLabel}</td>
-                                    <td>${this.getDealSourceSummary(result)}</td>
-                                    <td>${result.driveTime.toFixed(2)}h</td>
-                                    <td>$${result.parkingCost.toFixed(0)}</td>
-                                    <td>$${result.mileageCost.toFixed(0)}</td>
-                                    <td>$${result.rideShareCost.toFixed(0)}</td>
-                                    <td>$${result.dropoffCost.toFixed(0)}</td>
-                                    <td>${result.groundMode} $${result.groundCost.toFixed(0)}</td>
-                                    <td>$${result.bagFees.toFixed(0)}</td>
-                                    <td>$${result.frictionPenalty.toFixed(0)}</td>
-                                    <td><span class="highlight">${this.formatTripCost(result)}</span></td>
-                                    <td>${result.source === 'live' ? 'Live search' : 'Sample'}</td>
+                                    <td>${this.escapeHtml(result.destination)}</td>
+                                    <td>${this.formatDate(this.parseDateInput(result.departDate))} – ${this.formatDate(this.parseDateInput(result.returnDate))}</td>
+                                    <td><span class="highlight">${this.escapeHtml(result.airport)}</span></td>
+                                    <td>~$${result.airfare.toFixed(0)}<br><small style="color:var(--text-muted)">${result.nonstop ? 'Nonstop' : 'Connecting'}${result.airline ? ' · ' + this.escapeHtml(result.airline) : ''}</small></td>
+                                    <td>${this.escapeHtml(result.groundMode)} $${result.groundCost.toFixed(0)}</td>
+                                    <td><span class="highlight">~${this.formatTripCost(result)}</span></td>
                                     <td>${this.renderDealLinks(result, 'optimizedResults', index)}</td>
                                 </tr>
                             `).join('')}
@@ -2360,16 +3396,15 @@
 
                 const bestIdea = this.state.vacationIdeas[0];
                 const destinations = this.state.vacationIdeas.length;
-                const liveIdeas = this.state.vacationIdeas.filter(idea => idea.source === 'live').length;
 
                 statsContainer.innerHTML = `
-                    <div class="message info">
-                        Vacation ideas scan your preferred dates plus/minus ${this.state.flexDays} days and keep strong options across multiple reachable departure airports.
+                    <div class="message warning">
+                        ⚠️ <strong>Prices are estimates</strong> — not real fares. Click "Search" on any card to see live prices before booking. Scanning ±${this.state.flexDays} days across all airports within your drive radius.
                     </div>
                     <div class="stats">
                         <div class="stat-card">
                             <div class="stat-value">${this.formatTripCost(bestIdea)}</div>
-                            <div class="stat-label">Best Trip</div>
+                            <div class="stat-label">Best Est. Trip</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">${destinations}</div>
@@ -2380,8 +3415,143 @@
                             <div class="stat-label">Trip Days</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value">${liveIdeas}</div>
-                            <div class="stat-label">Live Search Ideas</div>
+                            <div class="stat-value">${this.state.reachableAirports ? this.state.reachableAirports.length : '—'}</div>
+                            <div class="stat-label">Nearby Airports</div>
+                        </div>
+                    </div>
+                `;
+
+                container.innerHTML = `
+                    <div class="trip-cards">
+                        ${this.state.vacationIdeas.map((idea, index) => {
+                            const sources = this.getSuggestedDealSources(idea);
+                            const [primary, secondary, tertiary] = sources;
+                            const primaryUrl = this.getSourceUrl(idea, primary);
+                            const secondaryUrl = secondary ? this.getSourceUrl(idea, secondary) : null;
+                            const tertiaryLink = tertiary
+                                ? `<a href="${this.getSourceUrl(idea, tertiary)}" target="_blank">${this.escapeHtml(tertiary)}</a>`
+                                : '';
+                            const destCode = idea.destinationCode || this.destinationCodes[idea.destination] || '';
+                            const regionLabel = (idea.region || 'domestic').replace('international', 'Intl').replace('domestic', 'Domestic');
+                            const regClass = this.regionClass(idea);
+                            const destAirport = this.airports.find(a => a.code === destCode);
+                            const flag = destAirport?.country ? this.countryFlag(destAirport.country) : '';
+                            return `
+                                <div class="trip-card ${regClass}">
+                                    <div class="trip-card-header">
+                                        <div>
+                                            <span class="badge badge-success">#${idea.ideaRank}</span>
+                                            <span class="trip-card-dest"> ${flag ? flag + ' ' : ''}${this.escapeHtml(idea.destination)}</span>
+                                        </div>
+                                        <div class="trip-card-cost">~${this.formatTripCost(idea)}</div>
+                                    </div>
+                                    <div class="trip-card-meta">
+                                        📅 ${this.formatDate(this.parseDateInput(idea.departDate))} – ${this.formatDate(this.parseDateInput(idea.returnDate))}
+                                        &nbsp;·&nbsp; ✈️ ${this.escapeHtml(idea.airport)}${destCode ? ' → ' + destCode : ''}
+                                    </div>
+                                    <div class="trip-card-details">
+                                        <span class="trip-card-detail-pill">${idea.nonstop ? 'Nonstop' : 'Connecting'}</span>
+                                        <span class="trip-card-detail-pill">~$${idea.airfare.toFixed(0)}/person est.</span>
+                                        <span class="trip-card-detail-pill">${this.escapeHtml(idea.groundMode)} $${idea.groundCost.toFixed(0)}</span>
+                                        <span class="trip-card-detail-pill">${regionLabel}</span>
+                                    </div>
+                                    <a href="${primaryUrl}" target="_blank" class="btn-search-primary">🔍 Search ${this.escapeHtml(primary)}</a>
+                                    ${secondaryUrl ? `<a href="${secondaryUrl}" target="_blank" class="btn-search-secondary">🔍 ${this.escapeHtml(secondary)}</a>` : ''}
+                                    ${tertiaryLink ? `<div class="also-check">Also: ${tertiaryLink}</div>` : ''}
+                                    <button class="inline-action" onclick="app.saveLiveFareFromResult('vacationIdeas', ${index})">💾 Save fare after you check</button>
+                                    <div class="trip-card-tip">💡 ${this.getSiteReason(primary)}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            },
+
+            makeDealRecord(result, status = 'Candidate') {
+                const key = [
+                    result.destination,
+                    result.airport,
+                    result.departDate,
+                    result.returnDate
+                ].join('|');
+                return {
+                    key,
+                    status: result.fareVerified ? 'Verified' : status,
+                    destination: result.destination,
+                    destinationCode: result.destinationCode,
+                    airport: result.airport,
+                    departDate: result.departDate,
+                    returnDate: result.returnDate,
+                    airfare: Math.round(result.airfare),
+                    totalCost: Math.round(result.totalCost),
+                    groundMode: result.groundMode,
+                    groundCost: Math.round(result.groundCost || 0),
+                    fareSource: result.fareVerified ? result.fareSource : this.getSuggestedDealSources(result)[0],
+                    suggestedSources: this.getSuggestedDealSources(result),
+                    fareVerified: !!result.fareVerified,
+                    region: result.region || 'domestic',
+                    capturedAt: new Date().toISOString()
+                };
+            },
+
+            upsertDealRecord(record) {
+                const index = this.dealRepository.findIndex(deal => deal.key === record.key);
+                if (index >= 0) {
+                    const existing = this.dealRepository[index];
+                    const shouldReplace = record.fareVerified || !existing.fareVerified || record.totalCost < existing.totalCost;
+                    if (shouldReplace) {
+                        this.dealRepository[index] = {
+                            ...existing,
+                            ...record,
+                            capturedAt: existing.capturedAt || record.capturedAt,
+                            updatedAt: new Date().toISOString()
+                        };
+                    }
+                } else {
+                    this.dealRepository.push(record);
+                }
+
+                this.dealRepository.sort((a, b) => {
+                    if (a.fareVerified !== b.fareVerified) return a.fareVerified ? -1 : 1;
+                    return a.totalCost - b.totalCost;
+                });
+                this.dealRepository = this.dealRepository.slice(0, 75);
+            },
+
+            updateDealRepositoryFromSearch() {
+                // Repository is intentionally saved-deals-only. Search candidates stay in results.
+                this.saveData();
+            },
+
+            renderDealRepository() {
+                const container = document.getElementById('dealRepositoryTable');
+                const statsContainer = document.getElementById('dealRepositoryStats');
+                const empty = document.getElementById('dealRepositoryEmpty');
+                if (!container || !statsContainer || !empty) return;
+
+                if (!this.dealRepository.length) {
+                    container.innerHTML = '';
+                    statsContainer.innerHTML = '';
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                empty.style.display = 'none';
+                const verified = this.dealRepository.filter(deal => deal.fareVerified).length;
+                const best = this.dealRepository[0];
+                statsContainer.innerHTML = `
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-value">$${best.totalCost}</div>
+                            <div class="stat-label">Best Stored Deal</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${this.dealRepository.length}</div>
+                            <div class="stat-label">Saved Deals</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${verified}</div>
+                            <div class="stat-label">Verified Fares</div>
                         </div>
                     </div>
                 `;
@@ -2390,38 +3560,44 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Rank</th>
+                                <th>Status</th>
                                 <th>Destination</th>
-                                <th>Best Dates</th>
+                                <th>Dates</th>
                                 <th>Depart</th>
-                                <th>Region</th>
-                                <th>Estimate</th>
-                                <th>Best Fare Location</th>
+                                <th>Best Deal Location</th>
+                                <th>Fare/pp</th>
+                                <th>Total</th>
                                 <th>Ground</th>
-                                <th>Why It Ranks</th>
-                                <th>Source</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            ${this.state.vacationIdeas.map((idea, index) => `
+                            ${this.dealRepository.map(deal => `
                                 <tr>
-                                    <td><span class="badge badge-success">#${idea.ideaRank}</span></td>
-                                    <td>${idea.destination}</td>
-                                    <td>${this.formatDate(this.parseDateInput(idea.departDate))} - ${this.formatDate(this.parseDateInput(idea.returnDate))}</td>
-                                    <td><span class="highlight">${idea.airport}</span></td>
-                                    <td>${idea.region || 'domestic'}</td>
-                                    <td><span class="highlight">${this.formatTripCost(idea)}</span></td>
-                                    <td>${this.getDealSourceSummary(idea)}</td>
-                                    <td>${idea.groundMode} $${idea.groundCost.toFixed(0)}</td>
-                                    <td>${idea.nonstop ? 'Nonstop option' : 'Lowest estimate'} via ${idea.airline}; ${idea.airport} among ${idea.comparedAirports} airport${idea.comparedAirports === 1 ? '' : 's'}</td>
-                                    <td>${idea.source === 'live' ? 'Live search' : 'Sample'}</td>
-                                    <td>${this.renderDealLinks(idea, 'vacationIdeas', index)}</td>
+                                    <td><span class="badge ${deal.fareVerified ? 'badge-success' : 'badge-warning'}">${deal.status}</span></td>
+                                    <td>${this.escapeHtml(deal.destination)}</td>
+                                    <td>${this.escapeHtml(deal.departDate)} - ${this.escapeHtml(deal.returnDate)}</td>
+                                    <td><span class="highlight">${this.escapeHtml(deal.airport)}</span></td>
+                                    <td>
+                                        <strong>${this.escapeHtml(deal.fareSource)}</strong>
+                                        <div class="source-note">${deal.fareVerified ? 'Saved live fare' : `Also check ${deal.suggestedSources.slice(1, 3).join(', ')}`}</div>
+                                    </td>
+                                    <td>$${deal.airfare}${deal.fareVerified ? '' : ' model'}</td>
+                                    <td><span class="highlight">$${deal.totalCost}${deal.fareVerified ? '' : ' model'}</span></td>
+                                    <td>${this.escapeHtml(deal.groundMode)} $${deal.groundCost}</td>
+                                    <td>${this.renderDealLinks(deal)}</td>
                                 </tr>
                             `).join('')}
                         </tbody>
                     </table>
                 `;
+            },
+
+            clearDealRepository() {
+                if (!confirm('Clear the deal repository? This will not reset your current search or imported fares.')) return;
+                this.dealRepository = [];
+                this.saveData();
+                this.renderDealRepository();
             },
 
             getAssistantContext() {
@@ -2481,7 +3657,8 @@
                         airfare: Math.round(idea.airfare),
                         source: idea.fareSource,
                         totalCost: Math.round(idea.totalCost)
-                    }))
+                    })),
+                    dealRepository: this.dealRepository.filter(deal => deal.fareVerified).slice(0, 12)
                 };
             },
 
@@ -2498,9 +3675,18 @@
                 });
 
                 let ideas = [...unique.values()].sort((a, b) => a.totalCostLow - b.totalCostLow);
-                const wantsInternational = /international|passport|asia|africa|europe|island|vietnam|viet nam|sgn|hanoi|south america|central america|canada|mexico|caribbean/.test(query);
+                const wantsInternational = /international|passport|asia|africa|europe|vietnam|viet nam|sgn|hanoi|south america|central america|canada|mexico|caribbean/.test(query);
                 const wantsDomestic = /domestic|usa|united states|florida|texas|california|dallas|boston|new york|denver|vegas|chicago/.test(query);
-                const airportCodes = [...new Set((question.match(/\b[A-Z]{3}\b/gi) || []).map(code => code.toUpperCase()))];
+                const knownAirportCodes = new Set([
+                    ...this.airports.map(airport => airport.code),
+                    ...Object.values(this.destinationCodes)
+                ]);
+                const airportCodes = [...new Set((question.match(/\b[A-Z]{3}\b/gi) || [])
+                    .map(code => code.toUpperCase())
+                    .filter(code => knownAirportCodes.has(code)))];
+                const isoDates = [...new Set(question.match(/\b20\d{2}-\d{2}-\d{2}\b/g) || [])];
+                const preferredDateWords = /preferred|exact|flight list|asked for|selected date/.test(query);
+                const flexibleDateWords = /flex|window|before|after|around|optimizer|vacation/.test(query);
 
                 if (wantsInternational) {
                     ideas = ideas.filter(idea => (idea.country && idea.country !== 'US') || (idea.region || '').includes('international'));
@@ -2512,6 +3698,14 @@
 
                 if (airportCodes.length) {
                     ideas = ideas.filter(idea => airportCodes.includes(idea.airport) || airportCodes.includes(idea.destinationCode));
+                }
+
+                if (isoDates.length) {
+                    ideas = ideas.filter(idea => isoDates.includes(idea.departDate) || isoDates.includes(idea.returnDate));
+                } else if (preferredDateWords && this.state.departStart) {
+                    ideas = ideas.filter(idea => idea.departDate === this.state.departStart);
+                } else if (flexibleDateWords && this.state.scanStart && this.state.scanEnd) {
+                    ideas = ideas.filter(idea => idea.departDate >= this.state.scanStart && idea.returnDate <= this.state.scanEnd);
                 }
 
                 const destinationTerms = ['vietnam', 'viet nam', 'sgn', 'hanoi', 'asia', 'africa', 'europe', 'island', 'caribbean', 'south america', 'central america', 'canada', 'mexico'];
@@ -2543,9 +3737,18 @@
 
             buildLocalAssistantAnswer(question) {
                 if (!this.state.optimizedResults.length && !this.state.vacationIdeas.length) {
+                    const repositoryNote = this.dealRepository.length
+                        ? `I can already see ${this.dealRepository.length} saved deal${this.dealRepository.length === 1 ? '' : 's'}. The best saved one is ${this.escapeHtml(this.dealRepository[0].destination)} from ${this.escapeHtml(this.dealRepository[0].airport)} at $${this.dealRepository[0].totalCost}.`
+                        : 'Saved Deals is empty. Save a live fare from a result when you want it remembered.';
                     return `
-                        <h3>No search loaded yet</h3>
-                        <p>Run a search first so the assistant can compare the exact-date flight list, flexible vacation ideas, airport options, fares, and ground transportation.</p>
+                        <h3>Let us build the first comparison</h3>
+                    <p>Enter a home location, travel dates, and an optional destination like Vietnam, Europe, islands, Dallas, or "international". I will compare nearby airports, exact dates, flexible dates, ground costs, and the best place to start checking live fares.</p>
+                        <p>${repositoryNote}</p>
+                        <ul>
+                            <li>For cheapest airfare: start with a destination filter and keep transportation on "Use cheapest ground option".</li>
+                            <li>For airport tradeoffs: widen the drive radius so MCO, MLB, VRB, SFB, or other alternates can compete.</li>
+                            <li>For live accuracy: open the recommended fare source and save the fare if it beats the model.</li>
+                        </ul>
                     `;
                 }
 
@@ -2576,15 +3779,31 @@
                     `;
                 }
 
+                const intent = /airport|depart|drive|mco|mlb|vrb|sfb|tpa|mia|compare/.test(question.toLowerCase()) ? 'airport'
+                    : /ground|parking|uber|taxi|ride|drop/.test(question.toLowerCase()) ? 'ground'
+                    : /international|passport|asia|europe|africa|vietnam|sgn/.test(question.toLowerCase()) ? 'international'
+                    : /date|when|window|flex|day/.test(question.toLowerCase()) ? 'date'
+                    : /saved|verified|repository|deal/.test(question.toLowerCase()) ? 'saved'
+                    : 'cheapest';
+                const sourceLine = this.getSuggestedDealSources(topIdeas[0]).slice(0, 3).join(', ');
+                const userQuestion = this.escapeHtml(question || 'What are the best deals?');
+                const dateLine = `Preferred dates ${this.escapeHtml(this.state.departStart || 'not set')} to ${this.escapeHtml(this.state.returnEnd || 'not set')}; flexible scan ${this.escapeHtml(this.state.scanStart || 'not set')} to ${this.escapeHtml(this.state.scanEnd || 'not set')}.`;
+                const lead = {
+                    airport: `The strongest airport in this filtered set is ${topIdeas[0].airport}, but I would compare it against ${airportSummary.map(idea => idea.airport).join(', ')} before booking.`,
+                    ground: `${topIdeas[0].groundMode} is currently selected for the top match at $${topIdeas[0].groundCost.toFixed(0)}. Change Airport Transportation on the Search tab if you want to force rideshare, parking, or drop-off.`,
+                    international: `For international searches, I would start checking ${sourceLine}. These are still model fares unless a live fare has been saved.`,
+                    date: `${dateLine} The Flight List should stay on the exact preferred dates, while Vacation Optimizer can move inside the flexible scan window.`,
+                    saved: `${verifiedDeals.length ? `${verifiedDeals.length} saved live fare${verifiedDeals.length === 1 ? ' is' : 's are'} affecting sorting.` : 'No saved live fares are affecting sorting right now.'}`,
+                    cheapest: `The cheapest loaded match is ${topIdeas[0].destination} from ${topIdeas[0].airport}; start checking live fares at ${sourceLine}.`
+                }[intent];
+
                 return `
-                    <h3>Best read from current results</h3>
-                    <p>Lowest loaded option: ${this.formatAssistantIdea(bestOverall)}.</p>
-                    <p>${verifiedDeals.length ? `${verifiedDeals.length} saved live fare${verifiedDeals.length === 1 ? '' : 's'} are being used for sorting.` : 'No saved live fares yet, so these are still calibrated estimates. Click fare links, then use Save Fare to lock in the real source.'}</p>
-                    <h3>Top matches</h3>
-                    <ul>${topIdeas.map(idea => `<li>${this.formatAssistantIdea(idea)}</li>`).join('')}</ul>
-                    <h3>Airport alternates</h3>
-                    <ul>${airportSummary.map(idea => `<li>${idea.airport}: ${idea.destination}, ${this.formatTripCost(idea)} total, fare ${idea.fareLabel}</li>`).join('')}</ul>
-                    <p>Coverage check: ${domesticCount} domestic options and ${internationalCount} international options are loaded for this search. Best fare location will show the saved provider once a real fare is entered.</p>
+                    <h3>${intent === 'cheapest' ? 'Cheapest read' : intent.charAt(0).toUpperCase() + intent.slice(1) + ' read'}</h3>
+                    <p><strong>You asked:</strong> ${userQuestion}</p>
+                    <p>${lead}</p>
+                    <p>Best current match: ${this.formatAssistantIdea(topIdeas[0])}.</p>
+                    <ul>${topIdeas.slice(1, 4).map(idea => `<li>${this.formatAssistantIdea(idea)}</li>`).join('')}</ul>
+                    <p>Coverage: ${domesticCount} domestic and ${internationalCount} international loaded options. ${verifiedDeals.length ? 'Saved fares are labeled by source.' : 'No live source is confirmed until you save a fare.'}</p>
                 `;
             },
 
@@ -2600,7 +3819,7 @@
             renderAssistantHistory() {
                 const output = document.getElementById('assistantOutput');
                 if (!this.state.assistantHistory.length) {
-                    output.innerHTML = '<h3>Ready when results are loaded</h3><p>Run a search, then ask for cheapest trips, airport comparisons, international ideas, domestic options, or ground transportation tradeoffs.</p>';
+                    output.innerHTML = '<h3>Ready to help plan</h3><p>Run a search and I will summarize the best deal automatically. You can also ask me what to compare.</p>';
                     return;
                 }
 
@@ -2610,11 +3829,39 @@
                     .join('');
             },
 
+            proactiveAssistantSummary() {
+                const ideas = [...this.state.vacationIdeas, ...this.state.optimizedResults]
+                    .sort((a, b) => a.totalCostLow - b.totalCostLow);
+                if (!ideas.length) return;
+
+                const best = ideas[0];
+                const bestSources = this.getSuggestedDealSources(best).slice(0, 3).join(', ');
+                const alternatives = ideas
+                    .filter(idea => idea.destination !== best.destination || idea.airport !== best.airport)
+                    .slice(0, 3);
+
+                this.state.assistantHistory = [{
+                    role: 'assistant',
+                    html: `
+                        <h3>I scanned the results</h3>
+                        <p>Best current option: ${this.formatAssistantIdea(best)}.</p>
+                        <p>Start checking live prices at <strong>${this.escapeHtml(bestSources)}</strong>. Saved Deals will only keep fares you save after checking a live source.</p>
+                        ${alternatives.length ? `<ul>${alternatives.map(idea => `<li>${this.formatAssistantIdea(idea)}</li>`).join('')}</ul>` : ''}
+                    `
+                }];
+                this.renderAssistantHistory();
+                this.saveData();
+            },
+
             async requestRemoteAssistant(question) {
+                if (window.location.protocol === 'file:') {
+                    throw new Error('Static file mode uses local assistant');
+                }
+
                 const context = this.getAssistantContext();
                 const response = await fetch('/api/assistant', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: this.authHeaders(),
                     body: JSON.stringify({ question, context })
                 });
 
@@ -2625,6 +3872,284 @@
                 const data = await response.json();
                 if (!data.answer) throw new Error('Assistant proxy returned no answer');
                 return `<h3>AI trip read</h3><p>${this.escapeHtml(data.answer).replace(/\n/g, '<br>')}</p>`;
+            },
+
+            toggleAdvancedOptions() {
+                const panel = document.getElementById('advancedOptions');
+                const arrow = document.getElementById('advancedToggleArrow');
+                const open = panel.classList.toggle('open');
+                arrow.textContent = open ? '▼' : '▶';
+            },
+
+            // ── Auth ─────────────────────────────────────────────────────
+            async initAuth() {
+                if (!this.auth.token) return;
+                try {
+                    const res = await fetch('/api/auth/me', {
+                        headers: { 'Authorization': `Bearer ${this.auth.token}` }
+                    });
+                    if (res.ok) {
+                        this.auth.user = await res.json();
+                        this.updateUserUI();
+                    } else {
+                        this.auth.token = null;
+                        localStorage.removeItem('rfo-auth-token');
+                    }
+                } catch {}
+            },
+
+            updateUserUI() {
+                const btn = document.getElementById('userBtn');
+                if (!btn) return;
+                if (this.auth.user) {
+                    const name = this.auth.user.email.split('@')[0];
+                    btn.textContent = `👤 ${name}`;
+                    btn.classList.add('logged-in');
+                } else {
+                    btn.textContent = 'Sign in';
+                    btn.classList.remove('logged-in');
+                }
+            },
+
+            openAuthModal(view = 'login') {
+                const modal = document.getElementById('authModal');
+                modal.style.display = 'flex';
+                if (this.auth.user) {
+                    document.getElementById('profileEmail').textContent = this.auth.user.email;
+                    this.showAuthView('profile');
+                } else {
+                    this.showAuthView(view);
+                }
+            },
+
+            closeAuthModal() {
+                document.getElementById('authModal').style.display = 'none';
+            },
+
+            showAuthView(view) {
+                ['login', 'register', 'profile'].forEach(v => {
+                    document.getElementById(v + 'View').style.display = 'none';
+                });
+                document.getElementById(view + 'View').style.display = 'block';
+            },
+
+            async login() {
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                const errEl = document.getElementById('loginError');
+                errEl.style.display = 'none';
+                try {
+                    const res = await fetch('/api/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) { errEl.textContent = data.error; errEl.style.display = 'block'; return; }
+                    this.auth.token = data.token;
+                    this.auth.user = { email: data.email, hasApiKey: data.hasApiKey };
+                    localStorage.setItem('rfo-auth-token', data.token);
+                    this.updateUserUI();
+                    this.closeAuthModal();
+                    if (!data.hasApiKey) setTimeout(() => { this.openAuthModal('profile'); }, 200);
+                } catch { errEl.textContent = 'Login failed. Check your connection.'; errEl.style.display = 'block'; }
+            },
+
+            async register() {
+                const email = document.getElementById('registerEmail').value.trim();
+                const password = document.getElementById('registerPassword').value;
+                const errEl = document.getElementById('registerError');
+                errEl.style.display = 'none';
+                try {
+                    const res = await fetch('/api/auth/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) { errEl.textContent = data.error; errEl.style.display = 'block'; return; }
+                    this.auth.token = data.token;
+                    this.auth.user = { email: data.email, hasApiKey: false };
+                    localStorage.setItem('rfo-auth-token', data.token);
+                    this.updateUserUI();
+                    this.showAuthView('profile');
+                    document.getElementById('profileEmail').textContent = data.email;
+                } catch { errEl.textContent = 'Registration failed. Check your connection.'; errEl.style.display = 'block'; }
+            },
+
+            async logout() {
+                if (this.auth.token) {
+                    fetch('/api/auth/logout', {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${this.auth.token}` }
+                    }).catch(() => {});
+                }
+                this.auth.token = null;
+                this.auth.user = null;
+                localStorage.removeItem('rfo-auth-token');
+                this.updateUserUI();
+                this.closeAuthModal();
+            },
+
+            async saveApiKey() {
+                const apiKey = document.getElementById('profileApiKey').value.trim();
+                const msgEl = document.getElementById('profileMessage');
+                msgEl.style.display = 'none';
+                try {
+                    const res = await fetch('/api/auth/update-key', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.auth.token}` },
+                        body: JSON.stringify({ apiKey })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) { msgEl.className = 'message error'; msgEl.textContent = data.error; msgEl.style.display = 'block'; return; }
+                    if (this.auth.user) this.auth.user.hasApiKey = !!apiKey;
+                    msgEl.className = 'message success';
+                    msgEl.textContent = apiKey ? '✅ API key saved — AI search is now enabled!' : '🗑️ API key removed.';
+                    msgEl.style.display = 'block';
+                    document.getElementById('apiKeyNotice').style.display = 'none';
+                    document.getElementById('profileApiKey').value = '';
+                } catch { msgEl.className = 'message error'; msgEl.textContent = 'Save failed.'; msgEl.style.display = 'block'; }
+            },
+
+            authHeaders() {
+                const h = { 'Content-Type': 'application/json' };
+                if (this.auth.token) h['Authorization'] = `Bearer ${this.auth.token}`;
+                return h;
+            },
+
+            // ── Onboarding ───────────────────────────────────────────────
+            initOnboarding() {
+                const dismissed = localStorage.getItem('rfo-onboarding-dismissed');
+                if (dismissed) document.getElementById('onboardingBanner').style.display = 'none';
+            },
+
+            dismissOnboarding() {
+                localStorage.setItem('rfo-onboarding-dismissed', '1');
+                document.getElementById('onboardingBanner').style.display = 'none';
+            },
+
+            // ── Search progress ──────────────────────────────────────────
+            setProgress(step, label) {
+                const bar = document.getElementById('searchProgress');
+                bar.classList.add('active');
+                for (let i = 1; i <= 4; i++) {
+                    const el = document.getElementById('step' + i);
+                    el.className = 'progress-step' + (i < step ? ' done' : i === step ? ' active' : '');
+                }
+                document.getElementById('progressLabel').textContent = label;
+            },
+
+            clearProgress() {
+                const bar = document.getElementById('searchProgress');
+                bar.classList.add('fading');
+                setTimeout(() => {
+                    bar.classList.remove('active', 'fading');
+                }, 600);
+            },
+
+            // ── Country flag emoji ───────────────────────────────────────
+            countryFlag(countryCode) {
+                if (!countryCode || countryCode.length !== 2) return '';
+                try {
+                    return String.fromCodePoint(...[...countryCode.toUpperCase()].map(c => 127397 + c.charCodeAt(0)));
+                } catch { return ''; }
+            },
+
+            regionClass(idea) {
+                const region = (idea.region || '').toLowerCase();
+                // region strings come from getInternationalRegion: e.g. 'caribbean islands international', 'europe international', 'asia international'
+                if (region.includes('caribbean') || region.includes('islands')) return 'region-caribbean';
+                if (region.includes('europe')) return 'region-europe';
+                if (region.includes('asia') || region.includes('pacific')) return 'region-asia';
+                if (region.includes('africa') || region.includes('middle east') || region.includes('south america')) return 'region-international';
+                if (region.includes('international')) return 'region-international';
+                return 'region-domestic';
+            },
+
+            fillAISuggestion(chipEl) {
+                const text = chipEl.textContent.replace(/^[\p{Emoji}\s]+/u, '').trim();
+                const input = document.getElementById('aiCommandInput');
+                if (input) { input.value = text; input.focus(); }
+            },
+
+            async executeAICommand() {
+                const input = document.getElementById('aiCommandInput');
+                const btn = document.getElementById('aiCommandBtn');
+                const responseDiv = document.getElementById('aiCommandResponse');
+                const message = (input?.value || '').trim();
+                if (!message) { input?.focus(); return; }
+
+                if (btn) btn.disabled = true;
+                if (responseDiv) { responseDiv.style.display = 'block'; responseDiv.innerHTML = '<span class="spinner"></span> Figuring out your search…'; }
+
+                try {
+                    const currentState = {
+                        homeLocation: this.state.homeCity ? `${this.state.homeCity}, ${this.state.homeState || ''}`.trim() : null,
+                        departStart: this.state.departStart || null,
+                        returnEnd: this.state.returnEnd || null,
+                        adults: this.state.adults || 1
+                    };
+
+                    const res = await fetch('/api/intent', {
+                        method: 'POST',
+                        headers: this.authHeaders(),
+                        body: JSON.stringify({ message, currentState })
+                    });
+
+                    const data = await res.json();
+
+                    if (!res.ok) {
+                        if (res.status === 503 || data.error === 'no_api_key') {
+                            if (responseDiv) responseDiv.style.display = 'none';
+                            const notice = document.getElementById('apiKeyNotice');
+                            if (notice) notice.style.display = 'block';
+                        } else {
+                            if (responseDiv) responseDiv.innerHTML = '⚠️ Could not parse that. Try typing in the Search form below.';
+                        }
+                        return;
+                    }
+
+                    const { fields = {}, response = '' } = data;
+
+                    // Apply extracted fields to the form
+                    if (fields.homeLocation) document.getElementById('homeZip').value = fields.homeLocation;
+                    if (fields.destinationTarget) {
+                        document.getElementById('destinationTarget').value = fields.destinationTarget;
+                        const panel = document.getElementById('advancedOptions');
+                        if (!panel.classList.contains('open')) this.toggleAdvancedOptions();
+                    }
+                    if (fields.destinationFilter) {
+                        document.getElementById('destinationFilter').value = fields.destinationFilter;
+                        const panel = document.getElementById('advancedOptions');
+                        if (!panel.classList.contains('open')) this.toggleAdvancedOptions();
+                    }
+                    if (fields.departStart) document.getElementById('departStart').value = fields.departStart;
+                    if (fields.returnEnd) document.getElementById('returnEnd').value = fields.returnEnd;
+                    if (fields.tripDays) document.getElementById('tripDays').value = String(Math.max(1, Math.min(30, parseInt(fields.tripDays) || 5)));
+                    if (fields.adults) document.getElementById('adults').value = String(Math.max(1, Math.min(9, parseInt(fields.adults) || 1)));
+                    if (fields.maxRadius) {
+                        const validRadii = ['1', '1.5', '2.5', '3.5', '5'];
+                        const closest = validRadii.reduce((a, b) => Math.abs(b - fields.maxRadius) < Math.abs(a - fields.maxRadius) ? b : a);
+                        const radiusBtn = document.querySelector(`.radius-btn[data-radius="${closest}"]`);
+                        if (radiusBtn) radiusBtn.click();
+                    }
+
+                    if (responseDiv) responseDiv.innerHTML = response ? `✨ ${this.escapeHtml(response)}` : '✅ Search configured — running now…';
+
+                    // Auto-trigger search if we have a home location
+                    const homeVal = document.getElementById('homeZip')?.value?.trim();
+                    if (homeVal) {
+                        setTimeout(() => this.search(), 400);
+                    } else {
+                        if (responseDiv) responseDiv.innerHTML += '<br><small>📍 Enter your home city below to complete the search.</small>';
+                        document.getElementById('homeZip')?.focus();
+                    }
+                } catch {
+                    if (responseDiv) responseDiv.innerHTML = '⚠️ Network error. Use the search form below.';
+                } finally {
+                    if (btn) btn.disabled = false;
+                }
             },
 
             async runTripAssistant(promptOverride = '') {
@@ -2650,18 +4175,34 @@
 
             // Build Google Flights search URL
             buildGoogleFlightsUrl(result) {
-                const departure = result.airport;
-                const destination = result.destinationCode || this.destinationCodes[result.destination] || result.destination;
-                const dates = result.departDate && result.returnDate ? ` on ${result.departDate} returning ${result.returnDate}` : '';
-                const query = encodeURIComponent(`Flights from ${departure} to ${destination}${dates}`);
-                return `https://www.google.com/travel/flights?q=${query}`;
+                const from = result.airport;
+                const to = result.destinationCode || this.destinationCodes[result.destination] || result.destination;
+                const depart = result.departDate || '';
+                const ret = result.returnDate || '';
+                // Google Flights search query URL — reliably pre-fills origin, destination, and dates
+                const parts = [`flights from ${from} to ${to}`];
+                if (depart) parts.push(`on ${depart}`);
+                if (ret) parts.push(`returning ${ret}`);
+                return `https://www.google.com/travel/flights?q=${encodeURIComponent(parts.join(' '))}`;
+            },
+
+            buildSwUrl(result) {
+                const from = result.airport;
+                const to = result.destinationCode || this.destinationCodes[result.destination] || result.destination;
+                const depart = result.departDate || '';
+                const ret = result.returnDate || '';
+                const pax = this.state.adults || 1;
+                if (from && to) {
+                    return `https://www.southwest.com/air/booking/select.html?originationAirportCode=${from}&destinationAirportCode=${to}&returnAirportCode=${from}&departureDate=${depart}&returnDate=${ret}&adultPassengersCount=${pax}&passengerType=ADULT&tripType=roundtrip&reset=true`;
+                }
+                return `https://www.southwest.com/`;
             },
 
             buildExpediaFlightsUrl(result) {
-                const departure = result.airport;
-                const destination = result.destinationCode || this.destinationCodes[result.destination] || result.destination;
-                const query = encodeURIComponent(`${departure} to ${destination} ${result.departDate || ''} ${result.returnDate || ''}`.trim());
-                return `https://www.expedia.com/Flights-Search?trip=roundtrip&leg1=from:${departure},to:${destination},departure:${result.departDate || ''}TANYT&leg2=from:${destination},to:${departure},departure:${result.returnDate || ''}TANYT&passengers=adults:${this.state.adults || 1},children:${this.state.children || 0}&mode=search&options=sortby:price&search=${query}`;
+                const from = result.airport;
+                const to = result.destinationCode || this.destinationCodes[result.destination] || result.destination;
+                const q = encodeURIComponent(`cheap flights ${from} to ${to} ${result.departDate || ''}`);
+                return `https://www.expedia.com/Flights-Search?trip=roundtrip&leg1=from:${from},to:${to}&passengers=adults:${this.state.adults || 1}&mode=search`;
             },
 
             buildKayakFlightsUrl(result) {
@@ -2685,25 +4226,99 @@
                 return `https://www.google.com/search?q=${query}`;
             },
 
+            getSourceUrl(result, source) {
+                const s = (source || '').toLowerCase();
+                if (s.includes('google')) return this.buildGoogleFlightsUrl(result);
+                if (s.includes('southwest')) return this.buildSwUrl(result);
+                if (s.includes('kayak')) return this.buildKayakFlightsUrl(result);
+                if (s.includes('skyscanner')) return this.buildSkyscannerFlightsUrl(result);
+                if (s.includes('expedia')) return this.buildExpediaFlightsUrl(result);
+                const airlineUrl = this.getAirlineUrl(result.airline);
+                if (airlineUrl) return airlineUrl;
+                return this.buildGoogleFlightsUrl(result);
+            },
+
+            getSiteReason(source) {
+                const s = (source || '').toLowerCase();
+                if (s.includes('google')) return 'Google Flights compares all major airlines with no booking fee — usually the cheapest starting point';
+                if (s.includes('southwest')) return 'Southwest doesn\'t list on Google Flights or Kayak — check them separately, they\'re often cheaper for domestic';
+                if (s.includes('skyscanner')) return 'Skyscanner often finds better international fares and budget airlines not on Google';
+                if (s.includes('kayak')) return 'Kayak\'s price calendar is useful for finding the cheapest day to fly';
+                return 'Book directly with the airline to avoid third-party fees';
+            },
+
             renderDealLinks(result, collection = '', index = -1) {
+                const sources = this.getSuggestedDealSources(result);
+                const [primary, secondary, tertiary] = sources;
+                const primaryUrl = this.getSourceUrl(result, primary);
+                const secondaryUrl = secondary ? this.getSourceUrl(result, secondary) : null;
+                const tertiaryLink = tertiary
+                    ? `<a href="${this.getSourceUrl(result, tertiary)}" target="_blank">${this.escapeHtml(tertiary)}</a>`
+                    : '';
                 const saveButton = collection
-                    ? `<button class="inline-action" onclick="app.saveLiveFareFromResult('${collection}', ${index})">Save lowest fare</button>`
+                    ? `<button class="inline-action" onclick="app.saveLiveFareFromResult('${collection}', ${index})">💾 Save fare</button>`
                     : '';
                 return `
-                    <a href="${this.buildGoogleFlightsUrl(result)}" target="_blank" class="search-link">Google</a>
-                    <a href="${this.buildExpediaFlightsUrl(result)}" target="_blank" class="search-link">Expedia</a>
-                    <a href="${this.buildKayakFlightsUrl(result)}" target="_blank" class="search-link">Kayak</a>
-                    <a href="${this.buildSkyscannerFlightsUrl(result)}" target="_blank" class="search-link">Skyscanner</a>
-                    <a href="${this.buildDealSearchUrl(result, 'Hopper Going flight deals')}" target="_blank" class="search-link">Deals</a>
+                    <a href="${primaryUrl}" target="_blank" class="btn-search-primary">🔍 ${this.escapeHtml(primary)}</a>
+                    ${secondaryUrl ? `<a href="${secondaryUrl}" target="_blank" class="btn-search-secondary">🔍 ${this.escapeHtml(secondary)}</a>` : ''}
+                    ${tertiaryLink ? `<div class="also-check">Also: ${tertiaryLink}</div>` : ''}
                     ${saveButton}
                 `;
             },
 
             buildAirportExploreUrl(airport) {
-                const departStart = this.state.departStart || this.formatDateForInput(new Date());
-                const returnEnd = this.state.returnEnd || this.formatDateForInput(this.addDays(new Date(), this.state.tripDays || 3));
-                const query = encodeURIComponent(`Flights from ${airport.code} between ${departStart} and ${returnEnd}`);
+                const query = encodeURIComponent(`Flights from ${airport.code}`);
                 return `https://www.google.com/travel/flights?q=${query}`;
+            },
+
+            buildKayakExploreUrl(airportCode) {
+                const depart = this.state.departStart || this.formatDateForInput(new Date());
+                const ret = this.state.returnEnd || this.formatDateForInput(this.addDays(new Date(), (this.state.tripDays || 5) + 7));
+                return `https://www.kayak.com/explore/${airportCode}/${depart}/${ret}`;
+            },
+
+            buildSkyscannerEverywhereUrl(airportCode) {
+                const depart = this.state.departStart || this.formatDateForInput(new Date());
+                const ret = this.state.returnEnd || this.formatDateForInput(this.addDays(new Date(), (this.state.tripDays || 5) + 7));
+                const departMonth = depart.slice(0, 7).replace('-', '-');
+                const retMonth = ret.slice(0, 7).replace('-', '-');
+                return `https://www.skyscanner.com/transport/flights/${airportCode.toLowerCase()}/anywhere/${departMonth}/${retMonth}/`;
+            },
+
+            renderAirportExploreCards() {
+                const section = document.getElementById('airportExploreSection');
+                const container = document.getElementById('airportExploreCards');
+                if (!section || !container) return;
+
+                const airports = this.state.reachableAirports;
+                if (!airports || !airports.length) {
+                    section.style.display = 'none';
+                    return;
+                }
+
+                section.style.display = 'block';
+                container.innerHTML = airports.map(airport => {
+                    const driveLabel = airport.driveTime >= 1
+                        ? `${airport.driveTime.toFixed(1)}h drive`
+                        : `${Math.round(airport.driveTime * 60)}min drive`;
+                    const googleUrl = this.buildAirportExploreUrl(airport);
+                    const kayakUrl = this.buildKayakExploreUrl(airport.code);
+                    const skyUrl = this.buildSkyscannerEverywhereUrl(airport.code);
+                    return `
+                        <div class="explore-card">
+                            <div class="explore-card-top">
+                                <div>
+                                    <div class="explore-airport-code">${this.escapeHtml(airport.code)}</div>
+                                    <div class="explore-airport-name">${this.escapeHtml(airport.name || airport.city || '')}</div>
+                                </div>
+                                <span class="explore-drive">🚗 ${driveLabel}</span>
+                            </div>
+                            <a href="${googleUrl}" target="_blank" class="explore-btn explore-btn-google">✈️ Google Flights — explore all</a>
+                            <a href="${kayakUrl}" target="_blank" class="explore-btn explore-btn-kayak">🗺️ Kayak Explore — map view</a>
+                            <a href="${skyUrl}" target="_blank" class="explore-btn explore-btn-sky">🌐 Skyscanner Everywhere</a>
+                        </div>
+                    `;
+                }).join('');
             },
 
             saveLiveFareFromResult(collection, index) {
@@ -2741,8 +4356,21 @@
 
                 this.calculateOptimizedResults(false);
                 this.calculateVacationIdeas();
+                this.upsertDealRecord(this.makeDealRecord(this.state.optimizedResults.find(item =>
+                    item.destination === result.destination &&
+                    item.airport === result.airport &&
+                    item.departDate === result.departDate &&
+                    item.returnDate === result.returnDate
+                ) || {
+                    ...result,
+                    airfare: fare,
+                    totalCost: this.calculateCostDetails(fare, result.parking || 0, result.distance || 0, result.nonstop).totalCost,
+                    fareVerified: true,
+                    fareSource: source
+                }, 'Verified'));
                 this.renderResultsTable();
                 this.renderVacationOptimizer();
+                this.renderDealRepository();
                 this.saveData();
                 this.showMessage(`Saved ${source} fare for ${result.airport} to ${result.destination}: $${fare.toFixed(0)} per person.`, 'info');
             },
@@ -2814,6 +4442,21 @@
                 setTimeout(() => { container.innerHTML = ''; }, 5000);
             },
 
+            clearSavedFares() {
+                if (!confirm('Clear saved/imported fares? This keeps your current search but removes verified fare overrides and saved deals.')) return;
+                this.customFares = {};
+                this.dealRepository = [];
+                if (this.state.destinations.length) {
+                    this.calculateOptimizedResults(false);
+                    this.calculateVacationIdeas();
+                    this.renderResultsTable();
+                    this.renderVacationOptimizer();
+                }
+                this.renderDealRepository();
+                this.saveData();
+                this.showImportMessage('Saved fares and saved deals cleared.', 'success');
+            },
+
             runDiagnostics(silent = false) {
                 const checks = [];
                 const addCheck = (name, pass, detail) => checks.push({ name, pass, detail });
@@ -2822,7 +4465,8 @@
                     const requiredIds = [
                         'homeZip', 'departStart', 'returnEnd', 'flexDays', 'destinationTarget',
                         'destinationFilter', 'groundModePreference', 'resultsTable',
-                        'vacationTable', 'assistantQuestion', 'assistantOutput', 'diagnosticsOutput'
+                        'vacationTable', 'dealRepositoryTable', 'assistantQuestion',
+                        'assistantOutput', 'diagnosticsOutput'
                     ];
                     addCheck(
                         'Required UI elements',
@@ -2874,7 +4518,35 @@
                     this.state = originalState;
 
                     const dealLinks = this.renderDealLinks({ airport: 'MLB', destination: 'Dallas', destinationCode: 'DFW', departDate: '2026-07-15', returnDate: '2026-07-20' });
-                    addCheck('Deal links', ['Google', 'Expedia', 'Kayak', 'Skyscanner', 'Deals'].every(label => dealLinks.includes(label)), 'All fare-check links rendered');
+                    addCheck('Deal links', ['Search', 'Also compare'].every(label => dealLinks.includes(label)), 'Primary search button and secondary links rendered');
+
+                    const originalDeals = this.dealRepository;
+                    this.dealRepository = [];
+                    this.upsertDealRecord(this.makeDealRecord({
+                        destination: 'Dallas',
+                        destinationCode: 'DFW',
+                        airport: 'MCO',
+                        departDate: '2026-07-15',
+                        returnDate: '2026-07-20',
+                        airfare: 250,
+                        totalCost: 350,
+                        groundMode: 'Drive + park',
+                        groundCost: 80,
+                        fareVerified: false,
+                        region: 'domestic'
+                    }));
+                    addCheck('Saved deals', this.dealRepository.length === 1 && this.dealRepository[0].fareSource === 'Google Flights', `${this.dealRepository.length} saved deal retained`);
+                    this.dealRepository = [];
+                    this.updateDealRepositoryFromSearch();
+                    addCheck('Saved-only repository', this.dealRepository.length === 0, `${this.dealRepository.length} unsaved candidates retained`);
+                    this.dealRepository = originalDeals;
+
+                    const originalTarget = this.state.destinationTarget;
+                    this.state.destinationTarget = 'Ho Chi Minh City (SGN)';
+                    const targetRoute = { dest: 'Ho Chi Minh City', destinationCode: 'SGN', country: 'VN', region: 'asia international', airline: 'Live search', tags: 'vietnam asia' };
+                    const wrongTargetRoute = { dest: 'Mexico City', destinationCode: 'MEX', country: 'MX', region: 'mexico international', airline: 'Live search', tags: 'mexico city' };
+                    addCheck('Specific destination target', this.matchesDestinationFilter(targetRoute) && !this.matchesDestinationFilter(wrongTargetRoute), 'SGN target excludes unrelated city routes');
+                    this.state.destinationTarget = originalTarget;
 
                     const originalAirports = this.airports;
                     const mlb = this.airports.find(airport => airport.code === 'MLB');
@@ -2894,6 +4566,36 @@
                     const mcoDallasFare = this.estimateFallbackFare(mco, 'Dallas');
                     const mcoBostonFare = this.estimateFallbackFare(mco, 'Boston');
                     addCheck('Domestic fare regression', mcoDallasFare >= 120 && mcoDallasFare <= 650 && mcoBostonFare >= 120 && mcoBostonFare <= 650, `MCO-DFW $${mcoDallasFare}, MCO-BOS $${mcoBostonFare}`);
+
+                    addCheck('Location input expansion', this.getStateCode('Florida') === 'FL' && !!this.stateLocations.FL, 'State names and abbreviations resolve');
+
+                    const assistantOriginalState = JSON.parse(JSON.stringify(this.state));
+                    this.state.departStart = '2026-07-15';
+                    this.state.returnEnd = '2026-07-20';
+                    this.state.scanStart = '2026-07-01';
+                    this.state.scanEnd = '2026-08-04';
+                    this.state.optimizedResults = [{
+                        destination: 'Dallas',
+                        destinationCode: 'DFW',
+                        airport: 'MCO',
+                        airline: 'American',
+                        departDate: '2026-07-15',
+                        returnDate: '2026-07-20',
+                        totalCost: 400,
+                        totalCostLow: 400,
+                        airfare: 250,
+                        fareLabel: '$250 model',
+                        fareVerified: false,
+                        fareSource: 'Estimate',
+                        groundMode: 'Drive + park',
+                        groundCost: 80,
+                        region: 'domestic'
+                    }];
+                    this.state.vacationIdeas = [];
+                    const assistantAirport = this.buildLocalAssistantAnswer('compare airports');
+                    const assistantDates = this.buildLocalAssistantAnswer('which dates are being searched');
+                    addCheck('Assistant intent variation', assistantAirport !== assistantDates && assistantAirport.includes('Airport read') && assistantDates.includes('Date read'), 'Airport and date prompts produce different answers');
+                    this.state = assistantOriginalState;
                 } catch (error) {
                     addCheck('Diagnostics runtime', false, error.message);
                 }
@@ -2927,8 +4629,9 @@
                 return result;
             },
 
-            exportFeedback() {
+            async exportFeedback() {
                 const feedback = document.getElementById('feedbackNotes').value.trim();
+                const lastDiagnostics = JSON.parse(localStorage.getItem('rfo-lastDiagnostics') || 'null');
                 const payload = {
                     createdAt: new Date().toISOString(),
                     feedback,
@@ -2940,7 +4643,9 @@
                         returnEnd: document.getElementById('returnEnd').value,
                         flexDays: document.getElementById('flexDays').value,
                         groundModePreference: document.getElementById('groundModePreference').value
-                    }
+                    },
+                    diagnostics: lastDiagnostics,
+                    dealRepository: this.dealRepository.slice(0, 20)
                 };
                 const savedFeedback = JSON.parse(localStorage.getItem('rfo-feedback') || '[]');
                 savedFeedback.push(payload);
@@ -2948,7 +4653,22 @@
 
                 const output = document.getElementById('diagnosticsOutput');
                 output.className = 'message info';
-                output.innerHTML = `<p>Feedback saved locally in this browser. It is not sent automatically.</p><pre>${JSON.stringify(payload, null, 2)}</pre>`;
+                if (window.location.protocol === 'file:') {
+                    output.innerHTML = `<p>Feedback saved locally in this browser.</p><pre>${JSON.stringify(payload, null, 2)}</pre>`;
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/feedback', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`Feedback inbox returned ${response.status}`);
+                    output.innerHTML = `<p>Feedback saved locally and sent to the local project feedback inbox.</p><pre>${JSON.stringify(payload, null, 2)}</pre>`;
+                } catch (error) {
+                    output.innerHTML = `<p>Feedback saved locally in this browser. Start the local server to also write it into the project feedback inbox.</p><pre>${JSON.stringify(payload, null, 2)}</pre>`;
+                }
             },
 
             showSavedFeedback() {
@@ -2977,7 +4697,10 @@
                 document.getElementById('destinationFilter').value = '';
                 document.getElementById('groundModePreference').value = 'auto';
                 document.getElementById('zipInfo').style.display = 'none';
+                document.getElementById('zipInfo').textContent = '';
                 document.getElementById('searchMessage').innerHTML = '';
+                const exploreSection = document.getElementById('airportExploreSection');
+                if (exploreSection) exploreSection.style.display = 'none';
                 document.querySelector('.radius-btn').click();
                 this.setDefaultDates();
 
@@ -3023,21 +4746,27 @@
                 document.querySelector('#resultsEmpty p').textContent = 'Run a search to see optimized flight options';
                 document.querySelector('#vacationEmpty h3').textContent = 'No vacation ideas yet';
                 document.querySelector('#vacationEmpty p').textContent = 'Run a search to scan the date window for low-cost vacation ideas';
+                this.saveData();
             },
 
             // Save data to localStorage
             saveData() {
                 localStorage.setItem('rfo-state', JSON.stringify(this.state));
                 localStorage.setItem('rfo-customFares', JSON.stringify(this.customFares));
+                localStorage.setItem('rfo-dealRepository', JSON.stringify(this.dealRepository));
             },
 
             // Load data from localStorage
             loadData() {
                 const saved = localStorage.getItem('rfo-state');
                 const fares = localStorage.getItem('rfo-customFares');
+                const deals = localStorage.getItem('rfo-dealRepository');
                 if (saved) this.state = JSON.parse(saved);
                 if (!Array.isArray(this.state.assistantHistory)) this.state.assistantHistory = [];
                 if (fares) this.customFares = JSON.parse(fares);
+                if (deals) this.dealRepository = JSON.parse(deals);
+                if (!Array.isArray(this.dealRepository)) this.dealRepository = [];
+                this.dealRepository = this.dealRepository.filter(deal => deal.fareVerified);
             }
         };
 

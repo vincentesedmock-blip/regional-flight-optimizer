@@ -8,6 +8,8 @@ yarn-error.log*
 pnpm-debug.log*
 server.out.log
 server.err.log
+feedback-inbox.jsonl
+data/
 *.log
 .DS_Store
 Thumbs.db
